@@ -1,0 +1,154 @@
+// SPDX-License-Identifier: ONEIRO-1.0
+pragma solidity ^0.8.26;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
+
+/**
+ * @title DreamToken ($DREAM)
+ * @author Omega-Prime / The 10X Oneirobot
+ * @notice ERC-20 Token with Dream Mining, AI-Validated Submissions, and Auto-Yield
+ *         Deployed on SKALE Europa Chain — Zero Gas, High Speed
+ *         "Where Sleep Becomes Stake"
+ */
+contract DreamToken is ERC20, Ownable, Pausable {
+
+    // === CONSTANTS ===
+    uint256 public constant MAX_SUPPLY = 1_000_000_000 * 10**18; // 1 Billion $DREAM
+    uint256 public constant DREAM_MINING_REWARD = 1000 * 10**18; // 1,000 $DREAM per valid dream
+    uint256 public constant MINING_COOLDOWN = 4 hours; // One dream per 4h per user
+    uint256 public constant ONEIRO_DAO_SHARE = 200_000_000 * 10**18; // 20%
+
+    // === STORAGE ===
+    address public oneiroDAO;
+    address public aiOracle;
+    uint256 public totalDreamsSubmitted;
+    uint256 public totalDreamers;
+
+    mapping(address => uint256) public lastDreamSubmission;
+    mapping(address => bool) public isTrustedDreamer;
+    mapping(bytes32 => bool) public dreamHashExists;
+    mapping(address => uint256) public dreamCount;
+
+    // Events
+    event DreamSubmitted(address indexed dreamer, bytes32 dreamHash, uint256 timestamp);
+    event DreamValidated(bytes32 dreamHash, address indexed validator, uint256 reward);
+    event DreamRejected(bytes32 dreamHash, string reason);
+    event YieldClaimed(address indexed user, uint256 amount);
+    event AIOracleUpdated(address oldOracle, address newOracle);
+
+    // === MODIFIERS ===
+    modifier onlyAIOracle() {
+        require(msg.sender == aiOracle, "DreamToken: Not AI Oracle");
+        _;
+    }
+
+    // === CONSTRUCTOR ===
+    constructor(address _oneiroDAO, address _aiOracle) ERC20("Dream", "DREAM") {
+        require(_oneiroDAO != address(0), "DreamToken: DAO is zero address");
+        require(_aiOracle != address(0), "DreamToken: Oracle is zero address");
+
+        oneiroDAO = _oneiroDAO;
+        aiOracle = _aiOracle;
+
+        // Mint total supply
+        _mint(address(this), MAX_SUPPLY);
+
+        // Transfer 20% to OneiroDAO (vested)
+        _transfer(address(this), oneiroDAO, ONEIRO_DAO_SHARE);
+
+        // Initial liquidity + team + future dream pools
+        // Remaining 80% stays in contract for mining & yield
+    }
+
+    // === DREAM MINING FUNCTION ===
+    /**
+     * @notice Submit a dream hash for potential validation and reward
+     * @dev Only external. Hash should be keccak256 of encrypted dream journal
+     * @param _dreamHash Keccak256 hash of the dream content (not raw text)
+     */
+    function submitDream(bytes32 _dreamHash) external whenNotPaused {
+        require(_dreamHash != 0, "DreamToken: Invalid dream hash");
+        require(!dreamHashExists[_dreamHash], "DreamToken: Duplicate dream");
+        require(block.timestamp >= lastDreamSubmission[msg.sender] + MINING_COOLDOWN, 
+                "DreamToken: Cooldown active");
+
+        dreamHashExists[_dreamHash] = true;
+        lastDreamSubmission[msg.sender] = block.timestamp;
+        dreamCount[msg.sender]++;
+
+        if (dreamCount[msg.sender] == 1) {
+            totalDreamers++;
+        }
+
+        totalDreamsSubmitted++;
+
+        emit DreamSubmitted(msg.sender, _dreamHash, block.timestamp);
+    }
+
+    // === AI ORACLE VALIDATION ===
+    /**
+     * @notice Called by AI Oracle to validate a dream and mint reward
+     * @param _dreamHash The hash of the dream to validate
+     * @param _dreamer The address of the dreamer
+     * @param _isValid Whether the dream is novel, emotional, and coherent
+     * @param _reason If invalid, the reason (e.g., "low novelty", "duplicate theme")
+     */
+    function validateDream(
+        bytes32 _dreamHash,
+        address _dreamer,
+        bool _isValid,
+        string calldata _reason
+    ) external onlyAIOracle whenNotPaused {
+        require(dreamHashExists[_dreamHash], "DreamToken: Dream not submitted");
+
+        if (_isValid) {
+            require(address(this).balance >= DREAM_MINING_REWARD, "DreamToken: Insufficient contract balance");
+
+            _transfer(address(this), _dreamer, DREAM_MINING_REWARD);
+            emit DreamValidated(_dreamHash, _dreamer, DREAM_MINING_REWARD);
+            emit YieldClaimed(_dreamer, DREAM_MINING_REWARD);
+        } else {
+            emit DreamRejected(_dreamHash, _reason);
+        }
+    }
+
+    // === TRUSTED DREAMER BOOST (DAO-Governed) ===
+    /**
+     * @notice Allow OneiroDAO to mark a user as trusted (faster validation, bonus yield)
+     * @param _user Address to trust
+     * @param _status Whether to trust or untrust
+     */
+    function setTrustedDreamer(address _user, bool _status) external onlyOwner {
+        isTrustedDreamer[_user] = _status;
+    }
+
+    // === EMERGENCY WITHDRAW (DAO SAFETY) ===
+    function withdrawExcessTokens(address _to, uint256 _amount) external onlyOwner {
+        require(_to != address(0), "DreamToken: Cannot send to zero");
+        require(_amount <= balanceOf(address(this)), "DreamToken: Insufficient balance");
+        _transfer(address(this), _to, _amount);
+    }
+
+    // === PAUSING (Security) ===
+    function pause() external onlyOwner {
+        _pause();
+    }
+
+    function unpause() external onlyOwner {
+        _unpause();
+    }
+
+    // === ORACLE MANAGEMENT ===
+    function setAIOracle(address _newOracle) external onlyOwner {
+        require(_newOracle != address(0), "DreamToken: Oracle is zero");
+        emit AIOracleUpdated(aiOracle, _newOracle);
+        aiOracle = _newOracle;
+    }
+
+    // === VIEW: Total Circulating Supply ===
+    function circulatingSupply() external view returns (uint256) {
+        return totalSupply() - balanceOf(address(this));
+    }
+}
