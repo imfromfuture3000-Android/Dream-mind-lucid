@@ -1,0 +1,31 @@
+{
+"project": "Oneiro-Trinity",
+"chain": "SKALE Europa",
+"wallets": {
+"deployer": {
+"address": "0xArchitect...1337",
+"role": "Contract Deployment, Initial Owner",
+"private": true,
+"hardware_wallet": true
+},
+"oneiro_dao": {
+"address": "0x4B1a58A3057d03888510d93B52ABad9Fee9b351d",
+"role": "Hold 20% $DREAM, Future Governance",
+"multisig": false,
+"upgrade_to_safe": "Q3 2025"
+},
+"ai_oracle": {
+"address": "0x3Db4AF42b839Cca28E2C5C9C4EE923c99A2797eE",
+"role": "Call validateDream()",
+"location": "Backend Server (AWS/GCP)",
+"private": true,
+"auto_signer": true
+}
+},
+"users": {
+"any_wallet_allowed": true,
+"gas_cost": 0,
+"note": "Users can use MetaMask, WalletConnect, or dream-enabled wallets"
+},
+"onei_hacker_advice": "Start with 1, scale to 3. Never expose Oracle key."
+}
