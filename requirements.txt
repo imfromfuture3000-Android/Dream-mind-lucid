@@ -1,0 +1,5 @@
+# Dream-Mind-Lucid Python Dependencies
+# SKALE blockchain interaction and smart contract deployment
+
+web3
+py-solc-x
