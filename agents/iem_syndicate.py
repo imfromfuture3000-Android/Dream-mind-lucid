@@ -8,7 +8,13 @@ Copilot: Enhance with IPFS integration and Oneiro-Sphere agent
 
 import os, json, hashlib, argparse, time
 from web3 import Web3
-import ipfshttpclient  # Copilot: Install with `pip install ipfshttpclient`
+
+try:
+    import ipfshttpclient  # Optional: Install with `pip install ipfshttpclient`
+    IPFS_AVAILABLE = True
+except ImportError:
+    IPFS_AVAILABLE = False
+    print("💡 IPFS client not available. Install with: pip install ipfshttpclient")
 
 # ====== CONFIG ======
 RPC = os.getenv("SKALE_RPC", "https://mainnet.skalenodes.com/v1/elated-tan-skat")
@@ -101,7 +107,18 @@ def update_state():
 
 # ====== ONEIROSPHERE (FUTURE) ======
 def interface_dream():  # Copilot: Implement when OneiroSphere.sol is ready
-    pass  # Placeholder for IPFS upload and contract call
+    """Future implementation for IPFS dream storage and OneiroSphere contract interaction"""
+    if not IPFS_AVAILABLE:
+        print("⚠️ IPFS client not available. Install with: pip install ipfshttpclient")
+        print("🌌 OneiroSphere functionality will be available in the future!")
+        return
+    
+    print("🚀 OneiroSphere interface coming in 2089...")
+    print("🌌 Quantum dream network not yet implemented")
+    # Future implementation will include:
+    # - IPFS dream upload
+    # - OneiroSphere.sol contract interaction
+    # - Quantum consciousness bridging
 
 # ====== MAIN ======
 if __name__ == "__main__":

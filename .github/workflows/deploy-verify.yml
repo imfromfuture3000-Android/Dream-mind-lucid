@@ -1,0 +1,133 @@
+name: 🚀 Deploy & Verify Dream Contracts
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'contracts/**'
+      - 'agents/**'
+      - '.github/workflows/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'contracts/**'
+      - 'agents/**'
+  workflow_dispatch:
+    inputs:
+      deploy_to_skale:
+        description: 'Deploy to SKALE Network'
+        required: true
+        default: 'true'
+        type: boolean
+
+env:
+  SKALE_RPC: ${{ secrets.SKALE_RPC }}
+  DEPLOYER_KEY: ${{ secrets.DEPLOYER_KEY }}
+  SKALE_CHAIN_ID: ${{ secrets.SKALE_CHAIN_ID }}
+
+jobs:
+  deploy-verify:
+    runs-on: ubuntu-latest
+    name: 🌌 IEM Syndicate Deployment
+    
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+        
+    - name: 📦 Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: 🔍 Verify Environment
+      run: |
+        echo "🌐 SKALE RPC: ${{ env.SKALE_RPC != '' && 'configured' || 'missing' }}"
+        echo "🔑 Deployer Key: ${{ env.DEPLOYER_KEY != '' && 'configured' || 'missing' }}"
+        echo "⛓️ Chain ID: ${{ env.SKALE_CHAIN_ID != '' && 'configured' || 'missing' }}"
+        python -c "import web3, solcx; print('✅ Core dependencies available')"
+        
+    - name: 🏗️ Deploy IEM Dreams Contract
+      if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy_to_skale == 'true' }} || ${{ github.ref == 'refs/heads/main' }}
+      run: |
+        echo "🚀 Deploying to SKALE Network..."
+        python agents/iem_syndicate.py deploy
+        
+    - name: 🔎 Audit Contract
+      if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy_to_skale == 'true' }} || ${{ github.ref == 'refs/heads/main' }}
+      run: |
+        echo "🔍 Running security audit..."
+        python agents/iem_syndicate.py audit
+        
+    - name: 📡 Update Oracle State
+      if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy_to_skale == 'true' }} || ${{ github.ref == 'refs/heads/main' }}
+      run: |
+        echo "📡 Syncing oracle state..."
+        python agents/iem_syndicate.py oracle
+        
+    - name: 💾 Archive Deployment Artifacts
+      if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy_to_skale == 'true' }} || ${{ github.ref == 'refs/heads/main' }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: dream-deployment-${{ github.sha }}
+        path: |
+          iem_memory.json
+          contracts/
+        retention-days: 30
+        
+    - name: 🎉 Deployment Summary
+      if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy_to_skale == 'true' }} || ${{ github.ref == 'refs/heads/main' }}
+      run: |
+        echo "🌌 Dream-Mind-Lucid deployment completed!"
+        echo "📋 Check iem_memory.json for contract details"
+        if [ -f iem_memory.json ]; then
+          echo "📍 Contract Address: $(cat iem_memory.json | python -c 'import sys,json; data=json.load(sys.stdin); print(data.get("lastDeployed", {}).get("address", "Not found"))')"
+        fi
+        echo "🚀 Ready for The Oneiro-Sphere! Target year: 2089"
+
+  # Test job for PRs and non-main branches
+  test-contracts:
+    runs-on: ubuntu-latest
+    name: 🧪 Test Dream Contracts
+    if: ${{ github.ref != 'refs/heads/main' }}
+    
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+        
+    - name: 📦 Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: 🔍 Syntax Check
+      run: |
+        echo "🔍 Checking Solidity syntax..."
+        python -c "
+        from solcx import compile_standard, install_solc
+        install_solc('0.8.20')
+        with open('contracts/IEMDreams.sol') as f:
+            source = f.read()
+        compiled = compile_standard({
+            'language': 'Solidity',
+            'sources': {'contracts/IEMDreams.sol': {'content': source}},
+            'settings': {'outputSelection': {'*': {'*': ['abi', 'evm.bytecode']}}}
+        }, solc_version='0.8.20')
+        print('✅ Contract compiles successfully')
+        "
+        
+    - name: 🔎 Run Mock Audit
+      run: |
+        echo "🔍 Running contract audit (test mode)..."
+        python agents/iem_syndicate.py audit
