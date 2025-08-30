@@ -20,11 +20,7 @@ w3 = Web3(Web3.HTTPProvider(RPC))
 MEMORY_FILE = "iem_memory.json"
 
 # ====== UTILS ======
-def load_memory():
-    if os.path.exists(MEMORY_FILE):
-        with open(MEMORY_FILE, 'r') as f:
-            return json.load(f)
-    return {"lastDeployed": {}, "dreams": []}
+    return {"lastDeployed": {}}
 
 def save_memory(mem):
     with open(MEMORY_FILE, 'w') as f:
