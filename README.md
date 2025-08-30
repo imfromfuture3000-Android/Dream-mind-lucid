@@ -26,16 +26,50 @@ In the future (2089), this will become **The Oneiro-Sphere**—a giant dream net
 - `.github/workflows/deploy-verify.yml`: Auto-magic that builds stuff on GitHub when you save.
 
 ## 🚧 How to Build It (For Big Kids or Grown-Ups)
-1. **Get Tools**:
-   - Install Git (git-scm.com) and Python (python.org).
-   - In your command window, type: `pip install web3 py-solc-x`.
-2. **Set Up Secrets**:
-   - Go to GitHub Settings > Secrets > Actions.
-   - Add:
-     - `SKALE_RPC`: `https://mainnet.skalenodes.com/v1/elated-tan-skat`
-     - `DEPLOYER_KEY`: Your wallet secret key (keep it super secret!).
-     - `SKALE_CHAIN_ID`: `2046399126`.
-3. **Run the Robots**:
+
+### 📋 Prerequisites
+- Install Git (git-scm.com) and Python (python.org)
+- GitHub account with repository access
+
+### 🔧 Local Development Setup
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/imfromfuture3000-Android/Dream-mind-lucid.git
+   cd Dream-mind-lucid
+   ```
+
+2. **Install Python dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Set up environment variables** (for local testing):
+   ```bash
+   export SKALE_RPC="https://mainnet.skalenodes.com/v1/elated-tan-skat"
+   export DEPLOYER_KEY="your-wallet-secret-key"  # Keep this super secret!
+   export SKALE_CHAIN_ID="2046399126"
+   ```
+
+### 🚀 GitHub Actions Automated Deployment
+
+The repository now includes automated GitHub Actions workflows! Here's how to set them up:
+
+1. **Set Up GitHub Secrets** (Repository Settings > Secrets > Actions):
+   - `SKALE_RPC`: `https://mainnet.skalenodes.com/v1/elated-tan-skat`
+   - `DEPLOYER_KEY`: Your wallet secret key (keep it super secret!)
+   - `SKALE_CHAIN_ID`: `2046399126`
+
+2. **Automatic Deployment**:
+   - Push to `main` branch → Automatically deploys to SKALE
+   - Create Pull Request → Runs tests and validation
+   - Manual deployment available via "Actions" tab
+
+3. **Manual Deployment**:
+   - Go to "Actions" tab in GitHub
+   - Select "🚀 Deploy & Verify Dream Contracts"
+   - Click "Run workflow" → Enable "Deploy to SKALE Network"
+
+### 🛠️ Local Development Commands
    - Go to the folder: `cd Desktop/dream-mind-lucid` (or where you saved it).
    - Deploy: `python agents/iem_syndicate.py deploy` (set `DEPLOYER_KEY` with `export DEPLOYER_KEY='your-secret-key'`).
    - Watch dreams: `python agents/iem_looter.py`.
