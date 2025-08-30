@@ -1,0 +1,375 @@
+name: Deploy and Verify Dream-Mind-Lucid
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      deploy_environment:
+        description: 'Deployment Environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+        - staging
+        - production
+      contracts_to_deploy:
+        description: 'Contracts to deploy (comma-separated or "all")'
+        required: true
+        default: 'all'
+
+env:
+  PYTHON_VERSION: '3.11'
+  NODE_VERSION: '18'
+  SKALE_RPC: 'https://mainnet.skalenodes.com/v1/elated-tan-skat'
+  SKALE_CHAIN_ID: '2046399126'
+  OWNER_ADDRESS: '0x4B1a58A3057d03888510d93B52ABad9Fee9b351d'
+
+jobs:
+  validate:
+    name: Validate and Audit Code
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        
+    - name: Cache Python dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install flake8 black pytest
+        
+    - name: Lint Python code with flake8
+      run: |
+        flake8 agents/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 agents/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        
+    - name: Check Python code formatting with black
+      run: |
+        black --check --diff agents/
+        
+    - name: Validate Solidity contracts
+      run: |
+        python -c "
+        import os
+        from solcx import compile_standard, install_solc
+        install_solc('0.8.20')
+        
+        contracts = ['IEMDreams', 'OneiroSphere', 'SMindToken', 'LucidToken']
+        for contract in contracts:
+            print(f'Validating {contract}.sol...')
+            source = open(f'contracts/{contract}.sol').read()
+            compiled = compile_standard({
+                'language': 'Solidity',
+                'sources': {f'contracts/{contract}.sol': {'content': source}},
+                'settings': {'outputSelection': {'*': {'*': ['abi', 'evm.bytecode']}}}
+            }, solc_version='0.8.20')
+            print(f'✅ {contract}.sol compiled successfully')
+        print('All contracts validated!')
+        "
+        
+    - name: Security audit contracts
+      run: |
+        python agents/iem_syndicate.py audit
+        
+    - name: Upload audit results
+      uses: actions/upload-artifact@v3
+      with:
+        name: audit-results-${{ github.sha }}
+        path: iem_memory.json
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: validate
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-cov
+        
+    - name: Test contract compilation
+      run: |
+        python -c "
+        from agents.iem_syndicate import compile_contract
+        contracts = ['IEMDreams', 'OneiroSphere', 'SMindToken', 'LucidToken']
+        for contract in contracts:
+            result = compile_contract(contract)
+            assert 'abi' in result
+            assert 'bytecode' in result
+            print(f'✅ {contract} compilation test passed')
+        "
+        
+    - name: Test network connectivity
+      run: |
+        python -c "
+        from web3 import Web3
+        import os
+        rpc = os.getenv('SKALE_RPC')
+        w3 = Web3(Web3.HTTPProvider(rpc))
+        assert w3.is_connected(), 'Cannot connect to SKALE network'
+        print(f'✅ Connected to SKALE network: {w3.eth.chain_id}')
+        print(f'Latest block: {w3.eth.block_number}')
+        "
+
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [validate, test]
+    if: github.ref == 'refs/heads/develop' || (github.event_name == 'workflow_dispatch' && github.event.inputs.deploy_environment == 'staging')
+    environment: staging
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Deploy contracts to staging
+      env:
+        DEPLOYER_KEY: ${{ secrets.DEPLOYER_KEY }}
+      run: |
+        echo "🚀 Deploying to SKALE Europa Hub (Staging)..."
+        
+        # Deploy all contracts
+        python agents/iem_syndicate.py deploy-all
+        
+        # Verify deployments
+        python agents/iem_syndicate.py status
+        
+        # Run audit
+        python agents/iem_syndicate.py audit
+        
+    - name: Test deployment
+      env:
+        DEPLOYER_KEY: ${{ secrets.DEPLOYER_KEY }}
+      run: |
+        echo "🧪 Testing deployment..."
+        
+        # Test IPFS connectivity
+        python agents/iem_syndicate.py ipfs-test
+        
+        # Test dream interface
+        python agents/iem_syndicate.py oneirosphere --dream "Automated deployment test dream from GitHub Actions"
+        
+    - name: Upload deployment artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: staging-deployment-${{ github.sha }}
+        path: |
+          iem_memory.json
+          dream_events.json
+
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [validate, test]
+    if: github.ref == 'refs/heads/main' || (github.event_name == 'workflow_dispatch' && github.event.inputs.deploy_environment == 'production')
+    environment: production
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Deploy contracts to production
+      env:
+        DEPLOYER_KEY: ${{ secrets.DEPLOYER_KEY }}
+      run: |
+        echo "🌟 Deploying to SKALE Europa Hub (Production)..."
+        
+        if [[ "${{ github.event.inputs.contracts_to_deploy }}" == "all" ]]; then
+          python agents/iem_syndicate.py deploy-all
+        else
+          IFS=',' read -ra CONTRACTS <<< "${{ github.event.inputs.contracts_to_deploy }}"
+          for contract in "${CONTRACTS[@]}"; do
+            contract=$(echo "$contract" | xargs)  # trim whitespace
+            echo "Deploying $contract..."
+            python agents/iem_syndicate.py deploy-single --contract "$contract"
+          done
+        fi
+        
+    - name: Verify production deployment
+      env:
+        DEPLOYER_KEY: ${{ secrets.DEPLOYER_KEY }}
+      run: |
+        echo "✅ Verifying production deployment..."
+        
+        # Get deployment status
+        python agents/iem_syndicate.py status
+        
+        # Run comprehensive audit
+        python agents/iem_syndicate.py audit
+        
+        # Test network state
+        python agents/iem_syndicate.py oracle
+        
+    - name: Production smoke tests
+      env:
+        DEPLOYER_KEY: ${{ secrets.DEPLOYER_KEY }}
+      run: |
+        echo "🔥 Running production smoke tests..."
+        
+        # Test core functionality
+        python -c "
+        import json
+        from web3 import Web3
+        
+        # Load deployment info
+        mem = json.load(open('iem_memory.json'))
+        w3 = Web3(Web3.HTTPProvider('${{ env.SKALE_RPC }}'))
+        
+        print('📊 Production Deployment Verification:')
+        for contract, deployment in mem.get('deployments', {}).items():
+            addr = deployment['address']
+            code = w3.eth.get_code(addr)
+            print(f'   {contract:15} {addr} ✅' if len(code) > 2 else f'   {contract:15} {addr} ❌')
+        
+        print('🎯 Network Stats:')
+        stats = mem.get('network_stats', {})
+        if stats:
+            print(f'   Block Number: {stats.get(\"block_number\", \"Unknown\")}')
+            print(f'   Chain ID: {stats.get(\"chain_id\", \"Unknown\")}')
+            print(f'   Active Contracts: {len([c for c in stats.get(\"contracts\", {}).values() if c.get(\"active\", False)])}')
+        "
+        
+    - name: Create deployment report
+      run: |
+        echo "📋 Creating deployment report..."
+        
+        cat > deployment-report.md << 'EOF'
+        # Dream-Mind-Lucid Production Deployment Report
+        
+        **Deployment Date:** $(date -u)
+        **Commit Hash:** ${{ github.sha }}
+        **Deployer:** ${{ github.actor }}
+        **Network:** SKALE Europa Hub (Chain ID: ${{ env.SKALE_CHAIN_ID }})
+        
+        ## Deployed Contracts
+        
+        $(python -c "
+        import json
+        try:
+            mem = json.load(open('iem_memory.json'))
+            deployments = mem.get('deployments', {})
+            for contract, deployment in deployments.items():
+                print(f'- **{contract}**: `{deployment[\"address\"]}`')
+        except:
+            print('- Deployment info not available')
+        ")
+        
+        ## Investment Features
+        
+        - ✅ Zero-gas transactions on SKALE
+        - ✅ Dream recording with token rewards
+        - ✅ Staking for yield generation
+        - ✅ Quantum dream network (OneiroSphere)
+        - ✅ Oracle access via LUCID tokens
+        - ✅ Professional auditing and monitoring
+        
+        ## Post-Deployment Steps
+        
+        1. Initialize token distributions
+        2. Configure MindNode operators
+        3. Activate Lucid Gates
+        4. Begin investment operations
+        
+        ---
+        *Powered by SKALE Network | Dream-Mind-Lucid Investment Platform*
+        EOF
+        
+    - name: Upload production artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: production-deployment-${{ github.sha }}
+        path: |
+          iem_memory.json
+          dream_events.json
+          deployment-report.md
+          
+    - name: Notify deployment success
+      run: |
+        echo "🎉 Dream-Mind-Lucid successfully deployed to production!"
+        echo "📡 Contract addresses saved to iem_memory.json"
+        echo "🔍 Monitor with: python agents/iem_looter.py"
+
+  monitor:
+    name: Start Monitoring
+    runs-on: ubuntu-latest
+    needs: [deploy-production]
+    if: always() && (needs.deploy-production.result == 'success')
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Download deployment artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: production-deployment-${{ github.sha }}
+        
+    - name: Start monitoring (background)
+      run: |
+        echo "👁️ Starting post-deployment monitoring..."
+        
+        # Run monitoring for 5 minutes to capture initial events
+        timeout 300 python agents/iem_looter.py || echo "Monitoring completed (timeout)"
+        
+    - name: Upload monitoring results
+      uses: actions/upload-artifact@v3
+      with:
+        name: monitoring-results-${{ github.sha }}
+        path: dream_events.json
