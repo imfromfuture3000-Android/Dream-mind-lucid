@@ -86,7 +86,7 @@ jobs:
         echo "🌌 Dream-Mind-Lucid deployment completed!"
         echo "📋 Check iem_memory.json for contract details"
         if [ -f iem_memory.json ]; then
-          echo "📍 Contract Address: $(cat iem_memory.json | python -c 'import sys,json; data=json.load(sys.stdin); print(data.get("lastDeployed", {}).get("address", "Not found"))')"
+          echo "📍 Contract Address: $(jq -r '.lastDeployed.address // "Not found"' iem_memory.json)"
         fi
         echo "🚀 Ready for The Oneiro-Sphere! Target year: 2089"
 
