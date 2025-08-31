@@ -29,7 +29,6 @@ def load_memory():
 
 def save_memory(mem):
     json.dump(mem, open(MEMORY_FILE, "w"), indent=2)
-
 # ====== DEPLOYER ======
 def deploy_contract():
     from solcx import compile_standard, install_solc
