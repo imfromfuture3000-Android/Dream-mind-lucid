@@ -40,10 +40,10 @@ contract LucidToken is IERC20 {
         _;
     }
 
-    constructor() {
-        owner = 0x4B1a58A3057d03888510d93B52ABad9Fee9b351d;
-        _balances[owner] = _totalSupply;
-        emit Transfer(address(0), owner, _totalSupply);
+    constructor(address owner_) {
+        owner = owner_;
+        _balances[owner_] = _totalSupply;
+        emit Transfer(address(0), owner_, _totalSupply);
     }
 
     function totalSupply() public view override returns (uint256) {
