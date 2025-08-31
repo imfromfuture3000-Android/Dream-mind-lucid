@@ -87,8 +87,8 @@ contract OneiroSphere {
         _;
     }
 
-    constructor(address _smindToken, address _lucidToken) {
-        owner = 0x4B1a58A3057d03888510d93B52ABad9Fee9b351d; // Owner from requirements
+    constructor(address _owner, address _smindToken, address _lucidToken) {
+        owner = _owner;
         smindToken = IERC20(_smindToken);
         lucidToken = IERC20(_lucidToken);
         
