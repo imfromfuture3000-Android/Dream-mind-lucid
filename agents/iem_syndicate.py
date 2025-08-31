@@ -19,12 +19,15 @@ except ImportError:
 RPC = os.getenv("SKALE_RPC", "https://mainnet.skalenodes.com/v1/elated-tan-skat")
 PRIVATE_KEY = os.getenv("DEPLOYER_KEY", "")
 CHAIN_ID = int(os.getenv("SKALE_CHAIN_ID", "2046399126"))  # Europa Hub
-OWNER_ADDRESS = "0x4B1a58A3057d03888510d93B52ABad9Fee9b351d"
+OWNER_ADDRESS = os.getenv("OWNER_ADDRESS", "")
 
 if not PRIVATE_KEY:
     print("❌ DEPLOYER_KEY environment variable required!")
     sys.exit(1)
 
+if not OWNER_ADDRESS:
+    print("❌ OWNER_ADDRESS environment variable required!")
+    sys.exit(1)
 w3 = Web3(Web3.HTTPProvider(RPC))
 if not w3.is_connected():
     print(f"❌ Cannot connect to SKALE RPC: {RPC}")
