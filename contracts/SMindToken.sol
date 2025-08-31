@@ -33,8 +33,9 @@ contract SMindToken is IERC20 {
         _;
     }
 
-    constructor() {
-        owner = 0x4B1a58A3057d03888510d93B52ABad9Fee9b351d;
+    constructor(address owner_) {
+        require(owner_ != address(0), "Owner address cannot be zero");
+        owner = owner_;
         _balances[owner] = _totalSupply;
         emit Transfer(address(0), owner, _totalSupply);
     }
