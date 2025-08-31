@@ -140,16 +140,23 @@ contract IEMDreams is IERC20 {
         emit DreamRecorded(msg.sender, dream, dreamHash, block.timestamp);
     }
 
+    // Dream reward configuration
+    uint256 private constant BASE_REWARD = 10 * 10**18; // 10 DREAM base reward
+    uint256 private constant DETAILED_REWARD = 5 * 10**18; // +5 DREAM for detailed dreams
+    uint256 private constant MEDIUM_REWARD = 3 * 10**18; // +3 DREAM for medium dreams
+    uint256 private constant DETAILED_LENGTH_THRESHOLD = 500;
+    uint256 private constant MEDIUM_LENGTH_THRESHOLD = 200;
+
     function calculateDreamReward(string memory dream) internal pure returns (uint256) {
         uint256 length = bytes(dream).length;
-        uint256 baseReward = 10 * 10**18; // 10 DREAM base reward
+        uint256 baseReward = BASE_REWARD;
         
         // Bonus for longer, more detailed dreams
-        if (length > 500) {
-            baseReward += 5 * 10**18; // +5 DREAM for detailed dreams
+        if (length > DETAILED_LENGTH_THRESHOLD) {
+            baseReward += DETAILED_REWARD;
         }
-        if (length > 200) {
-            baseReward += 3 * 10**18; // +3 DREAM for medium dreams
+        if (length > MEDIUM_LENGTH_THRESHOLD) {
+            baseReward += MEDIUM_REWARD;
         }
         
         return baseReward;
