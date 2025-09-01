@@ -1,0 +1,115 @@
+name: Deploy and Verify Dream-Mind-Lucid
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      contract_name:
+        description: 'Contract to deploy (IEMDreams or OneiroSphere)'
+        required: true
+        default: 'OneiroSphere'
+        type: choice
+        options:
+        - IEMDreams
+        - OneiroSphere
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Install Solidity
+      run: |
+        python -c "from solcx import install_solc; install_solc('0.8.20')"
+    
+    - name: Deploy Contract
+      env:
+        SKALE_RPC: ${{ secrets.SKALE_RPC }}
+        SKALE_CHAIN_ID: ${{ secrets.SKALE_CHAIN_ID }}
+        DEPLOYER_KEY: ${{ secrets.DEPLOYER_KEY }}
+        INFURA_PROJECT_ID: ${{ secrets.INFURA_PROJECT_ID }}
+        BICONOMY_API_KEY: ${{ secrets.BICONOMY_API_KEY }}
+        FORWARDER_ADDRESS: ${{ secrets.FORWARDER_ADDRESS }}
+      run: |
+        CONTRACT_NAME="${{ github.event.inputs.contract_name || 'OneiroSphere' }}"
+        echo "Deploying $CONTRACT_NAME contract..."
+        python agents/iem_syndicate.py deploy $CONTRACT_NAME
+    
+    - name: Audit Deployment
+      env:
+        SKALE_RPC: ${{ secrets.SKALE_RPC }}
+        SKALE_CHAIN_ID: ${{ secrets.SKALE_CHAIN_ID }}
+        DEPLOYER_KEY: ${{ secrets.DEPLOYER_KEY }}
+        INFURA_PROJECT_ID: ${{ secrets.INFURA_PROJECT_ID }}
+      run: |
+        # Get the deployed contract address from memory
+        if [ -f iem_memory.json ]; then
+          CONTRACT_ADDRESS=$(python -c "
+import json
+try:
+    with open('iem_memory.json', 'r') as f:
+        data = json.load(f)
+    if data.get('lastDeployed'):
+        for name, info in data['lastDeployed'].items():
+            print(info['address'])
+            break
+except:
+    pass
+")
+          if [ ! -z "$CONTRACT_ADDRESS" ]; then
+            echo "Auditing contract at $CONTRACT_ADDRESS"
+            python agents/iem_syndicate.py audit $CONTRACT_ADDRESS
+          fi
+        fi
+    
+    - name: Test Dream Recording
+      env:
+        SKALE_RPC: ${{ secrets.SKALE_RPC }}
+        SKALE_CHAIN_ID: ${{ secrets.SKALE_CHAIN_ID }}
+        DEPLOYER_KEY: ${{ secrets.DEPLOYER_KEY }}
+        INFURA_PROJECT_ID: ${{ secrets.INFURA_PROJECT_ID }}
+      run: |
+        # Record a test dream to verify deployment
+        if [ -f iem_memory.json ]; then
+          CONTRACT_ADDRESS=$(python -c "
+import json
+try:
+    with open('iem_memory.json', 'r') as f:
+        data = json.load(f)
+    if data.get('lastDeployed'):
+        for name, info in data['lastDeployed'].items():
+            print(info['address'])
+            break
+except:
+    pass
+")
+          if [ ! -z "$CONTRACT_ADDRESS" ]; then
+            echo "Recording test dream to contract $CONTRACT_ADDRESS"
+            python agents/iem_syndicate.py test "$CONTRACT_ADDRESS" "Test dream from GitHub Actions deployment - $(date)"
+          fi
+        fi
+    
+    - name: Upload Deployment Artifacts
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: deployment-artifacts
+        path: |
+          iem_memory.json
+          *.log
+        retention-days: 30

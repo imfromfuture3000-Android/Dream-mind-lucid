@@ -1,1 +1,6 @@
-<content_of_requirements.txt>
+web3==6.11.0
+py-solc-x==2.0.2
+ipfshttpclient==0.8.0a2
+eth-account==0.10.0
+requests==2.31.0
+python-dotenv==1.0.0
