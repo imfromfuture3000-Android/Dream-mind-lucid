@@ -34,6 +34,8 @@ def deploy_contract():
     from solcx import compile_standard, install_solc
     install_solc("0.8.20")
 
+    # If contracts directory exists, read from file, otherwise use embedded contract
+    contract_source = """
     // SPDX-License-Identifier: MIT
     pragma solidity ^0.8.20;
     
@@ -43,23 +45,38 @@ def deploy_contract():
         function recordDream(string memory dream) external {
             emit DreamRecorded(msg.sender, dream);
         }
-    }    # Compile the contract
-    compiled_sol = compile_standard({
-        "language": "Solidity",
-        "sources": {
-            "IEMDreams.sol": {
-                "content": open("contracts/IEMDreams.sol").read()
-            }
-        },
-        "settings": {
-            "outputSelection": {
-                "*": {
-                    "*": ["*"],
-                    "": ["*"],
+    }
+    """
+    
+    # Compile the contract
+    try:
+        # Try to read from contracts directory first
+        if os.path.exists("contracts/IEMDreams.sol"):
+            with open("contracts/IEMDreams.sol", "r") as f:
+                contract_content = f.read()
+        else:
+            # Use embedded contract source
+            contract_content = contract_source
+            
+        compiled_sol = compile_standard({
+            "language": "Solidity",
+            "sources": {
+                "IEMDreams.sol": {
+                    "content": contract_content
+                }
+            },
+            "settings": {
+                "outputSelection": {
+                    "*": {
+                        "*": ["*"],
+                        "": ["*"],
+                    }
                 }
             }
-        }
-    }, solc_version="0.8.20")
+        }, solc_version="0.8.20")
+    except Exception as e:
+        print(f"❌ Error compiling contract: {e}")
+        return None
 
     abi = compiled_sol["contracts"]["IEMDreams.sol"]["IEMDreams"]["abi"]
     bytecode = compiled_sol["contracts"]["IEMDreams.sol"]["IEMDreams"]["evm"]["bytecode"]["object"]

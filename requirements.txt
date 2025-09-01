@@ -1,28 +1,42 @@
-web3==6.20.1
-eth-account==0.9.0
-eth-abi==4.1.1
-eth-utils==2.3.0
-hexbytes==0.3.1
-requests==2.31.0
-jsonschema==4.19.0
-pytest==7.4.2
-pytest-asyncio==0.21.0
-pytest-cov==4.1.0
-pytest-mock==3.11.1
-mypy==1.3.0
-mypy-extensions==1.0.0
-black==24.9.1
-isort==5.12.0
-flake8==6.1.0
-eth-hash[pycryptodome]==0.5.3
-eth-keyfile==0.5.1
-eth-keys==0.4.4
-eth-rlp==0.3.0
-eth-tester[py-evm]==0.13.2
-lru-dict==1.1.8
-more-itertools==9.1.0
-protobuf==4.24.3
-rlp==3.0.2
-trie==2.2.3
-py-solc-x==2.0.2
-ipfshttpclient==0.8.0a2
+# Core blockchain and web3 dependencies
+web3>=6.20.0
+eth-account>=0.10.0
+eth-abi>=5.0.0
+eth-utils>=2.3.0
+hexbytes>=1.0.0
+py-solc-x>=2.0.2
+
+# HTTP and networking
+requests>=2.31.0
+ipfshttpclient>=0.8.0a2
+
+# Project-specific dependencies from install_dependencies()
+# Note: biconomy-sdk and modelcontextprotocol may not exist in PyPI
+# These are specified in the install_dependencies function but may need to be installed from source
+
+# Testing framework
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.0
+
+# Code quality and formatting
+mypy>=1.5.0
+mypy-extensions>=1.0.0
+black>=24.0.0
+isort>=5.12.0
+flake8>=6.1.0
+
+# Additional utilities
+jsonschema>=4.19.0
+protobuf>=4.24.0
+lru-dict>=1.1.8
+more-itertools>=9.1.0
+
+# Ethereum testing (optional - may have compatibility issues with newer Python)
+eth-hash[pycryptodome]>=0.5.0
+eth-keyfile>=0.6.0
+eth-keys>=0.4.0
+eth-rlp>=0.3.0
+rlp>=3.0.0
+trie>=2.2.0

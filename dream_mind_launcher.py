@@ -35,7 +35,7 @@ server = McpServer("dream_mind_server", "Manages Dream-Mind-Lucid deployment and
 def install_dependencies():
     """Auto-install required dependencies."""
     try:
-        subprocess.run(["pip", "install", "web3.py", "biconomy-sdk", "modelcontextprotocol", "ipfshttpclient", "solcx"], check=True)
+        subprocess.run(["pip", "install", "web3", "biconomy-sdk", "modelcontextprotocol", "ipfshttpclient", "py-solc-x"], check=True)
         install_solc("0.8.20")
         print("✅ Dependencies installed successfully!")
     except subprocess.CalledProcessError as e:
