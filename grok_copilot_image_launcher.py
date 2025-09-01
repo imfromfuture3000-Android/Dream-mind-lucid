@@ -38,12 +38,15 @@ def install_dependencies():
     """Auto-install dependencies with a Grok twist."""
     print("🌌 Installing tools—preparing for image-powered blockchain fun! 🚀")
     try:
-        subprocess.run(["pip", "install", "web3.py", "biconomy-sdk", "modelcontextprotocol", "ipfshttpclient", "solcx"], check=True)
+        # Install from requirements.txt for better dependency management
+        subprocess.run(["pip", "install", "-r", "requirements.txt"], check=True)
         subprocess.run(["sudo", "apt", "install", "libimage-exiftool-perl", "imagemagick"], check=True)  # Adjust for your OS
         install_solc("0.8.20")
         print("✅ Dependencies and tools ready—let’s blast off!")
+        print("ℹ️  Note: If biconomy-sdk fails to install, it may need to be installed separately")
     except subprocess.CalledProcessError as e:
         print(f"❌ Cosmic glitch! Error: {e}")
+        print("💡 Try installing manually: pip install -r requirements.txt")
         exit(1)
 
 def load_memory():

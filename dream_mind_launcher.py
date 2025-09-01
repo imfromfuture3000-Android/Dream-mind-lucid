@@ -42,11 +42,14 @@ server = McpServer("dream_mind_server", "Manages Dream-Mind-Lucid deployment and
 def install_dependencies():
     """Auto-install required dependencies."""
     try:
-        subprocess.run(["pip", "install", "web3.py", "biconomy-sdk", "modelcontextprotocol", "ipfshttpclient", "solcx"], check=True)
+        # Install from requirements.txt for better dependency management
+        subprocess.run(["pip", "install", "-r", "requirements.txt"], check=True)
         install_solc("0.8.20")
         print("✅ Dependencies installed successfully!")
+        print("ℹ️  Note: If biconomy-sdk fails to install, it may need to be installed separately")
     except subprocess.CalledProcessError as e:
         print(f"❌ Error installing dependencies: {e}")
+        print("💡 Try installing manually: pip install -r requirements.txt")
         exit(1)
 
 def load_memory():

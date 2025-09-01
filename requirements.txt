@@ -1,1 +1,27 @@
-<content_of_requirements.txt>
+# Dream-Mind-Lucid Dependencies
+# Python 3.11+ compatible
+# For SKALE blockchain deployment and dream ecosystem management
+
+# Web3 and blockchain interaction
+web3>=6.0.0,<8.0.0
+
+# Solidity compiler
+py-solc-x>=2.0.0
+
+# IPFS client for decentralized storage
+ipfshttpclient>=0.7.0
+
+# Model Context Protocol for MCP server integration
+modelcontextprotocol>=0.1.0
+
+# Image metadata extraction (for grok_copilot_image_launcher.py)
+PyExifTool>=0.5.6
+
+# Note: Biconomy SDK is required but may not be available on PyPI
+# If you get import errors for 'biconomy.client', you may need to:
+# 1. Install from a custom source/repository
+# 2. Use an alternative Web3 integration library
+# 3. Install manually with: pip install biconomy-client-sdk
+# 
+# Uncomment the following line if a compatible biconomy package becomes available:
+# biconomy-client-sdk
