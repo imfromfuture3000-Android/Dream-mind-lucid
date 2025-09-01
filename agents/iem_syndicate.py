@@ -34,15 +34,35 @@ def deploy_contract():
     from solcx import compile_standard, install_solc
     install_solc("0.8.20")
 
-    source = open(CONTRACT_FILE).read()
-    compiled = compile_standard({
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.8.20;
+    
+    contract IEMDreams {
+        event DreamRecorded(address indexed dreamer, string dream);
+    
+        function recordDream(string memory dream) external {
+            emit DreamRecorded(msg.sender, dream);
+        }
+    }    # Compile the contract
+    compiled_sol = compile_standard({
         "language": "Solidity",
-        "sources": {CONTRACT_FILE: {"content": source}},
-        "settings": {"outputSelection": {"*": {"*": ["abi", "evm.bytecode"]}}}
+        "sources": {
+            "IEMDreams.sol": {
+                "content": open("contracts/IEMDreams.sol").read()
+            }
+        },
+        "settings": {
+            "outputSelection": {
+                "*": {
+                    "*": ["*"],
+                    "": ["*"],
+                }
+            }
+        }
     }, solc_version="0.8.20")
 
-    abi = compiled["contracts"][CONTRACT_FILE]["IEMDreams"]["abi"]
-    bytecode = compiled["contracts"][CONTRACT_FILE]["IEMDreams"]["evm"]["bytecode"]["object"]
+    abi = compiled_sol["contracts"]["IEMDreams.sol"]["IEMDreams"]["abi"]
+    bytecode = compiled_sol["contracts"]["IEMDreams.sol"]["IEMDreams"]["evm"]["bytecode"]["object"]
 
     acct = w3.eth.account.from_key(PRIVATE_KEY)
     contract = w3.eth.contract(abi=abi, bytecode=bytecode)

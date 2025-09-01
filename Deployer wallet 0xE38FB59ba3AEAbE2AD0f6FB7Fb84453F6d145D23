@@ -1,4 +1,20 @@
-// SPDX-License-Identifier: ONEIRO-1.0
+cd /workspaces/Dream-mind-lucid
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip setuptools wheel
+pip install -r requirements.txt
+
+export SKALE_RPC="https://mainnet.skalenodes.com/v1/elated-tan-skat"
+export SKALE_CHAIN_ID=2046399126
+export DEPLOYER_KEY="0xYOUR_PRIVATE_KEY"
+
+python agents/iem_syndicate.py deploy
+python agents/iem_syndicate.py audit
+python agents/iem_syndicate.py oracle
+
+python - <<'PY'
+import json; d=json.load(open("iem_memory.json")); print(d)
+PY// SPDX-License-Identifier: ONEIRO-1.0
 pragma solidity ^0.8.26;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
