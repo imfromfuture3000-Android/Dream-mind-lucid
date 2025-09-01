@@ -12,8 +12,23 @@ import subprocess
 import time
 import json
 from web3 import Web3
-from biconomy.client import Biconomy
-from modelcontextprotocol.server import McpServer, McpServerTool, McpServerToolType
+try:
+    from biconomy.client import Biconomy
+    BICONOMY_AVAILABLE = True
+except ImportError:
+    BICONOMY_AVAILABLE = False
+    print("⚠️ Biconomy SDK not available - using standard Web3 transactions")
+
+try:
+    from mcp.server import Server as McpServer
+    MCP_AVAILABLE = True
+except ImportError:
+    try:
+        from modelcontextprotocol.server import McpServer, McpServerTool, McpServerToolType
+        MCP_AVAILABLE = True
+    except ImportError:
+        MCP_AVAILABLE = False
+        print("⚠️ MCP server not available - MCP functionality will be disabled")
 import ipfshttpclient
 from solcx import install_solc
 import exiftool
@@ -28,17 +43,23 @@ MEMORY_FILE = "iem_memory.json"
 IMAGE_FILE = "dream_image.png"
 
 w3 = Web3(Web3.HTTPProvider(f"https://skale-mainnet.infura.io/v3/{INFURA_PROJECT_ID}"))
-biconomy = Biconomy(w3, api_key=BICONOMY_API_KEY, chain_id=SKALE_CHAIN_ID)
+if BICONOMY_AVAILABLE:
+    biconomy = Biconomy(w3, api_key=BICONOMY_API_KEY, chain_id=SKALE_CHAIN_ID)
+else:
+    biconomy = None
 ipfs_client = ipfshttpclient.connect()
 
 # MCP Server Setup
-server = McpServer("grok_dream_server", "Your cosmic AI co-pilot with image magic!")
+if MCP_AVAILABLE:
+    server = McpServer("grok_dream_server", "Your cosmic AI co-pilot with image magic!")
+else:
+    server = None
 
 def install_dependencies():
     """Auto-install dependencies with a Grok twist."""
     print("🌌 Installing tools—preparing for image-powered blockchain fun! 🚀")
     try:
-        subprocess.run(["pip", "install", "web3.py", "biconomy-sdk", "modelcontextprotocol", "ipfshttpclient", "solcx"], check=True)
+        subprocess.run(["pip", "install", "web3", "py-solc-x", "mcp", "ipfshttpclient", "PyExifTool"], check=True)
         subprocess.run(["sudo", "apt", "install", "libimage-exiftool-perl", "imagemagick"], check=True)  # Adjust for your OS
         install_solc("0.8.20")
         print("✅ Dependencies and tools ready—let’s blast off!")
@@ -103,4 +124,9 @@ class GrokDreamTools:
             "chainId": SKALE_CHAIN_ID
         })
         signed_tx = acct.sign_transaction(tx)
-        tx_hash = biconomy.send
+        if biconomy and BICONOMY_AVAILABLE:
+            tx_hash = biconomy.send_transaction(signed_tx.raw_transaction)
+        else:
+            # Use regular Web3 transaction (SKALE has zero gas anyway)
+            tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
+        # Add appropriate handling for the transaction receipt

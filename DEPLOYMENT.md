@@ -19,7 +19,7 @@ This guide will help you deploy the OneiroSphere.sol smart contract to the SKALE
 
 2. **Dependencies**:
    ```bash
-   pip install web3 py-solc-x
+   pip install -r requirements.txt
    ```
 
 ### 🎯 Deployment Commands

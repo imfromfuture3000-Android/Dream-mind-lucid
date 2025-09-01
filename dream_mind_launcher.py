@@ -12,8 +12,23 @@ import subprocess
 import time
 import json
 from web3 import Web3
-from biconomy.client import Biconomy
-from modelcontextprotocol.server import McpServer, McpServerTool, McpServerToolType
+try:
+    from biconomy.client import Biconomy
+    BICONOMY_AVAILABLE = True
+except ImportError:
+    BICONOMY_AVAILABLE = False
+    print("⚠️ Biconomy SDK not available - using standard Web3 transactions")
+
+try:
+    from mcp.server import Server as McpServer
+    MCP_AVAILABLE = True
+except ImportError:
+    try:
+        from modelcontextprotocol.server import McpServer, McpServerTool, McpServerToolType
+        MCP_AVAILABLE = True
+    except ImportError:
+        MCP_AVAILABLE = False
+        print("⚠️ MCP server not available - MCP functionality will be disabled")
 import ipfshttpclient
 from solcx import install_solc
 
@@ -33,16 +48,22 @@ else:
     RPC_URL = SKALE_RPC
 
 w3 = Web3(Web3.HTTPProvider(RPC_URL))
-biconomy = Biconomy(w3, api_key=BICONOMY_API_KEY, chain_id=SKALE_CHAIN_ID)
+if BICONOMY_AVAILABLE:
+    biconomy = Biconomy(w3, api_key=BICONOMY_API_KEY, chain_id=SKALE_CHAIN_ID)
+else:
+    biconomy = None
 ipfs_client = ipfshttpclient.connect()
 
 # MCP Server Setup
-server = McpServer("dream_mind_server", "Manages Dream-Mind-Lucid deployment and dreams")
+if MCP_AVAILABLE:
+    server = McpServer("dream_mind_server", "Manages Dream-Mind-Lucid deployment and dreams")
+else:
+    server = None
 
 def install_dependencies():
     """Auto-install required dependencies."""
     try:
-        subprocess.run(["pip", "install", "web3.py", "biconomy-sdk", "modelcontextprotocol", "ipfshttpclient", "solcx"], check=True)
+        subprocess.run(["pip", "install", "web3", "py-solc-x", "mcp", "ipfshttpclient", "PyExifTool"], check=True)
         install_solc("0.8.20")
         print("✅ Dependencies installed successfully!")
     except subprocess.CalledProcessError as e:
@@ -90,7 +111,11 @@ class DreamTools:
             "chainId": SKALE_CHAIN_ID
         })
         signed_tx = acct.sign_transaction(tx)
-        tx_hash = biconomy.send_transaction(signed_tx.raw_transaction)
+        if biconomy and BICONOMY_AVAILABLE:
+            tx_hash = biconomy.send_transaction(signed_tx.raw_transaction)
+        else:
+            # Use regular Web3 transaction (SKALE has zero gas anyway)
+            tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
         receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
 
         memory = load_memory()
@@ -119,7 +144,11 @@ class DreamTools:
             "chainId": SKALE_CHAIN_ID
         })
         signed_tx = acct.sign_transaction(tx)
-        tx_hash = biconomy.send_transaction(signed_tx.raw_transaction)
+        if biconomy and BICONOMY_AVAILABLE:
+            tx_hash = biconomy.send_transaction(signed_tx.raw_transaction)
+        else:
+            # Use regular Web3 transaction (SKALE has zero gas anyway)
+            tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
         w3.eth.wait_for_transaction_receipt(tx_hash)
 
         ipfs_hash = ipfs_client.add_str(dream)["Hash"]
