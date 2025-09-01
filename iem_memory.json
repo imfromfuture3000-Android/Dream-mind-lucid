@@ -1,0 +1,61 @@
+{
+  "lastDeployed": {
+    "OneiroSphere": {
+      "address": "0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7",
+      "abi": [
+        {
+          "type": "function",
+          "name": "interfaceDream",
+          "inputs": [
+            {
+              "name": "ipfsHash",
+              "type": "string"
+            }
+          ],
+          "outputs": []
+        },
+        {
+          "type": "event",
+          "name": "DreamInterfaced",
+          "inputs": [
+            {
+              "name": "dreamer",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "name": "ipfsHash",
+              "type": "string",
+              "indexed": false
+            }
+          ]
+        }
+      ],
+      "timestamp": 1756730258.7952187,
+      "txHash": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+      "gasUsed": 1500000
+    }
+  },
+  "loot": [
+    {
+      "dreamer": "0xE38FB59ba3AEAbE2AD0f6FB7Fb84453F6d145D23",
+      "dream": "I dreamed of building a quantum dream network on SKALE blockchain",
+      "ipfsHash": "QmTestDreamHash1234567890abcdefghijklmnopqr",
+      "timestamp": 1756730258.79522,
+      "txHash": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
+    }
+  ],
+  "audits": [
+    {
+      "contract": "OneiroSphere",
+      "address": "0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7",
+      "codeHash": "0x9876543210fedcba9876543210fedcba9876543210fedcba9876543210fedcba",
+      "codeSize": 8192,
+      "timestamp": 1756730258.7952209,
+      "checks": {
+        "codeExists": true,
+        "hashMatches": true
+      }
+    }
+  ]
+}

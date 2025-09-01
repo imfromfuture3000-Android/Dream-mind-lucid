@@ -25,7 +25,14 @@ PRIVATE_KEY = os.getenv("DEPLOYER_KEY", "")
 FORWARDER_ADDRESS = os.getenv("FORWARDER_ADDRESS", "0xYOUR_BICONOMY_FORWARDER")
 MEMORY_FILE = "iem_memory.json"
 
-w3 = Web3(Web3.HTTPProvider(f"https://skale-mainnet.infura.io/v3/{INFURA_PROJECT_ID}"))
+# Use Infura RPC if available, otherwise fallback to SKALE RPC
+SKALE_RPC = "https://mainnet.skalenodes.com/v1/elated-tan-skat"
+if INFURA_PROJECT_ID and INFURA_PROJECT_ID != "YOUR_INFURA_API_KEY":
+    RPC_URL = f"https://skale-mainnet.infura.io/v3/{INFURA_PROJECT_ID}"
+else:
+    RPC_URL = SKALE_RPC
+
+w3 = Web3(Web3.HTTPProvider(RPC_URL))
 biconomy = Biconomy(w3, api_key=BICONOMY_API_KEY, chain_id=SKALE_CHAIN_ID)
 ipfs_client = ipfshttpclient.connect()
 
