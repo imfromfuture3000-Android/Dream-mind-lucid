@@ -30,20 +30,49 @@ To deploy and manage the platform as an investment creator:
 
 1. **Prerequisites**:
    - Install Git and Python 3.11+.
-   - Install dependencies: `pip install web3 py-solc-x ipfshttpclient`.
+   - Install dependencies: `pip install -r requirements.txt`.
    - Configure a SKALE-compatible wallet (e.g., MetaMask) with test SKL from https://sfuel.skale.space/europa.
 
 2. **Configuration**:
-   - Set environment variables or GitHub Secrets:
+   - Set environment variables in `.env` file or GitHub Secrets:
      - `SKALE_RPC`: `https://mainnet.skalenodes.com/v1/elated-tan-skat`
+     - `SKALE_CHAIN_ID`: `2046399126`
+     - `INFURA_PROJECT_ID`: Your Infura API key for RPC backup
+     - `BICONOMY_API_KEY`: Your Biconomy API key for gasless transactions
+     - `FORWARDER_ADDRESS`: Your Biconomy forwarder contract address
      - `DEPLOYER_KEY`: Your private key for deployment (securely stored).
-     - `SKALE_CHAIN_ID`: `2046399126`.
 
-3. **Deployment**:
-   - Navigate to the repository directory: `cd dream-mind-lucid`.
-   - Deploy the contract: `python agents/iem_syndicate.py deploy`.
-   - Audit the deployment: `python agents/iem_syndicate.py audit`.
-   - Monitor events: `python agents/iem_looter.py`.
+3. **Quick Start**:
+   ```bash
+   # Check environment configuration
+   python deployment_example.py check
+   
+   # Deploy OneiroSphere contract
+   python agents/iem_syndicate.py deploy OneiroSphere
+   
+   # Deploy IEMDreams contract  
+   python agents/iem_syndicate.py deploy IEMDreams
+   
+   # Check deployment status
+   python agents/iem_syndicate.py status
+   
+   # Audit deployment
+   python agents/iem_syndicate.py audit <contract_address>
+   
+   # Record test dream
+   python agents/iem_syndicate.py test <contract_address> "My dream"
+   
+   # Monitor events
+   python agents/iem_looter.py <contract_address> 300
+   
+   # Start MCP server
+   python mcp_server.py server
+   ```
+
+4. **Deployment Options**:
+   - **Local**: Use the scripts above with configured environment
+   - **GitHub Actions**: Set secrets and use manual workflow dispatch
+   - **MCP Integration**: Use `mcp_server.py` for external tool integration
 
 4. **Testing and Interaction**:
    - Use Remix (https://remix.ethereum.org) to interact with the deployed contract address (retrieved from `iem_memory.json`).
