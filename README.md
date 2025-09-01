@@ -30,7 +30,7 @@ To deploy and manage the platform as an investment creator:
 
 1. **Prerequisites**:
    - Install Git and Python 3.11+.
-   - Install dependencies: `pip install web3 py-solc-x ipfshttpclient`.
+   - Install dependencies: `pip install -r requirements.txt`.
    - Configure a SKALE-compatible wallet (e.g., MetaMask) with test SKL from https://sfuel.skale.space/europa.
 
 2. **Configuration**:
