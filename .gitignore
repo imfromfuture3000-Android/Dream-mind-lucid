@@ -1,2 +1,13 @@
 __pycache__/
 test_requirements.py
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+venv/
+node_modules/
+.DS_Store
+*.log
+.private_keys
+*.key
