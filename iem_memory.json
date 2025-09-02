@@ -114,6 +114,15 @@
       "timestamp": 1756792504.6733847,
       "txHash": "0xffffffffffffffffffffffffffffffffffffffffffffffff9c8d84060367f71a",
       "gasUsed": 0
+    },
+    {
+      "agent": "MEVMaster",
+      "action": "frontrun",
+      "pool": "WETH/USDC",
+      "profit": 3120,
+      "timestamp": 1756792621.749381,
+      "txHash": "0xffffffffffffffffffffffffffffffffffffffffffffffffa94fdd2fe61dd06e",
+      "gasUsed": 0
     }
   ],
   "audits": [
@@ -173,11 +182,22 @@
       },
       "decision": "Execute MEV strategy on WETH/USDC pool",
       "total_agents": 3
+    },
+    {
+      "cycle": 1,
+      "timestamp": 1756792621.7498538,
+      "profits": {
+        "Looter": 1850,
+        "MEVMaster": 18720,
+        "Arbitrader": 2430
+      },
+      "decision": "Execute MEV strategy on WETH/USDC pool",
+      "total_agents": 3
     }
   ],
   "profits": {
     "Looter": 1850,
-    "MEVMaster": 15600,
+    "MEVMaster": 18720,
     "Arbitrader": 2430
   },
   "test_key": "test_value",
