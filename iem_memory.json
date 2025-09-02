@@ -43,6 +43,77 @@
       "ipfsHash": "QmTestDreamHash1234567890abcdefghijklmnopqr",
       "timestamp": 1756792301.0976024,
       "txHash": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
+    },
+    {
+      "agent": "MEVMaster",
+      "action": "frontrun",
+      "pool": "WETH/USDC",
+      "profit": 3120,
+      "timestamp": 1756792385.2616053,
+      "txHash": "0xffffffffffffffffffffffffffffffffffffffffffffffffda2ecf592408baa4",
+      "gasUsed": 0
+    },
+    {
+      "agent": "Looter",
+      "action": "harvest",
+      "amount": 1850,
+      "timestamp": 1756792476.8588886,
+      "txHash": "0xffffffffffffffffffffffffffffffffffffffffffffffff86553eb0ea744fcf",
+      "gasUsed": 0
+    },
+    {
+      "agent": "MEVMaster",
+      "action": "frontrun",
+      "pool": "TEST/POOL",
+      "profit": 3120,
+      "timestamp": 1756792476.859308,
+      "txHash": "0x00000000000000000000000000000000000000000000000020624d8f5e2c25d7",
+      "gasUsed": 0
+    },
+    {
+      "agent": "Arbitrader",
+      "action": "arbitrage",
+      "token": "DREAM",
+      "profit": 2430,
+      "timestamp": 1756792476.8598728,
+      "txHash": "0xffffffffffffffffffffffffffffffffffffffffffffffffc195c060cf9bea70",
+      "gasUsed": 0
+    },
+    {
+      "agent": "MEVMaster",
+      "action": "frontrun",
+      "pool": "WETH/USDC",
+      "profit": 3120,
+      "timestamp": 1756792476.861158,
+      "txHash": "0x000000000000000000000000000000000000000000000000539401ff5123c48b",
+      "gasUsed": 0
+    },
+    {
+      "agent": "MEVMaster",
+      "action": "frontrun",
+      "pool": "WETH/USDC",
+      "profit": 3120,
+      "timestamp": 1756792498.6706612,
+      "txHash": "0xffffffffffffffffffffffffffffffffffffffffffffffff858a675f3eb35d8b",
+      "gasUsed": 0
+    },
+    {
+      "agent": "MEVMaster",
+      "action": "frontrun",
+      "pool": "WETH/USDC",
+      "profit": 3120,
+      "timestamp": 1756792501.6720123,
+      "txHash": "0x00000000000000000000000000000000000000000000000020164a53b6c7536e",
+      "gasUsed": 0
+    },
+    {
+      "agent": "MEVMaster",
+      "action": "frontrun",
+      "pool": "WETH/USDC",
+      "profit": 3120,
+      "timestamp": 1756792504.6733847,
+      "txHash": "0xffffffffffffffffffffffffffffffffffffffffffffffff9c8d84060367f71a",
+      "gasUsed": 0
     }
   ],
   "audits": [
@@ -57,5 +128,58 @@
         "hashMatches": true
       }
     }
-  ]
+  ],
+  "cycles": [
+    {
+      "cycle": 1,
+      "timestamp": 1756792385.2619565,
+      "profits": {
+        "Looter": 2464,
+        "MEVMaster": 3650,
+        "Arbitrader": 3278
+      },
+      "decision": "Execute MEV strategy on WETH/USDC pool",
+      "total_agents": 3
+    },
+    {
+      "cycle": 1,
+      "timestamp": 1756792498.6710832,
+      "profits": {
+        "Looter": 1850,
+        "MEVMaster": 9360,
+        "Arbitrader": 2430
+      },
+      "decision": "Execute MEV strategy on WETH/USDC pool",
+      "total_agents": 3
+    },
+    {
+      "cycle": 2,
+      "timestamp": 1756792501.6724498,
+      "profits": {
+        "Looter": 1850,
+        "MEVMaster": 12480,
+        "Arbitrader": 2430
+      },
+      "decision": "Execute MEV strategy on WETH/USDC pool",
+      "total_agents": 3
+    },
+    {
+      "cycle": 3,
+      "timestamp": 1756792504.6738493,
+      "profits": {
+        "Looter": 1850,
+        "MEVMaster": 15600,
+        "Arbitrader": 2430
+      },
+      "decision": "Execute MEV strategy on WETH/USDC pool",
+      "total_agents": 3
+    }
+  ],
+  "profits": {
+    "Looter": 1850,
+    "MEVMaster": 15600,
+    "Arbitrader": 2430
+  },
+  "test_key": "test_value",
+  "timestamp": 1756792476.8621738
 }
