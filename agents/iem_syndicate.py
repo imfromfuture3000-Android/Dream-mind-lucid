@@ -20,6 +20,7 @@ INFURA_RPC = os.getenv("INFURA_PROJECT_ID")
 CHAIN_ID = int(os.getenv("SKALE_CHAIN_ID", "2046399126"))
 PRIVATE_KEY = os.getenv("DEPLOYER_KEY", "")
 FORWARDER_ADDRESS = os.getenv("FORWARDER_ADDRESS", "0x0000000000000000000000000000000000000000")
+SIMULATION_MODE = os.getenv("SYNDICATE_SIMULATE", "0") in ("1", "true", "True")
 
 # Use Infura RPC if available, otherwise fallback to SKALE RPC
 if INFURA_RPC and INFURA_RPC != "YOUR_INFURA_API_KEY":
@@ -76,64 +77,70 @@ def compile_contract(contract_name):
 
 def deploy_contract(contract_name):
     """Deploy a contract to SKALE network."""
-    print(f"🚀 Deploying {contract_name} to SKALE Network...")
-    
-    if not PRIVATE_KEY:
-        raise ValueError("DEPLOYER_KEY environment variable not set!")
-    
-    # Compile contract
-    compiled = compile_contract(contract_name)
-    bytecode = compiled["evm"]["bytecode"]["object"]
-    abi = compiled["abi"]
-    
-    # Create account and contract instance
-    account = w3.eth.account.from_key(PRIVATE_KEY)
-    contract = w3.eth.contract(abi=abi, bytecode=bytecode)
-    
-    # Build transaction
-    nonce = w3.eth.get_transaction_count(account.address)
-    
-    # Check if contract requires constructor parameters (OneiroSphere needs forwarder)
-    if contract_name == "OneiroSphere":
-        tx = contract.constructor(FORWARDER_ADDRESS).build_transaction({
-            "from": account.address,
-            "nonce": nonce,
-            "gas": 5_000_000,
-            "gasPrice": 0,  # Zero gas price for SKALE
-            "chainId": CHAIN_ID
-        })
+    print(f"🚀 Deploying {contract_name} to SKALE Network...{' (SIMULATION)' if SIMULATION_MODE else ''}")
+
+    # Simulation path: create deterministic address & stub ABI without on-chain tx
+    if SIMULATION_MODE:
+        import hashlib
+        seed = hashlib.sha256(contract_name.encode()).hexdigest()
+        contract_address = "0x" + seed[:40]
+        if contract_name == "IEMDreams":
+            abi = [
+                {"type": "function", "name": "recordDream", "inputs": [{"name": "dream", "type": "string"}], "outputs": []}
+            ]
+            bytecode = "0xSIM_DREAMS"
+        else:
+            abi = [
+                {"type": "function", "name": "interfaceDream", "inputs": [{"name": "ipfsHash", "type": "string"}], "outputs": []}
+            ]
+            bytecode = "0xSIM_ONEIRO"
+        tx_hash_hex = "0xSIMULATION" + seed[:16]
+        gas_used = 0
     else:
-        tx = contract.constructor().build_transaction({
-            "from": account.address,
-            "nonce": nonce,
-            "gas": 5_000_000,
-            "gasPrice": 0,  # Zero gas price for SKALE
-            "chainId": CHAIN_ID
-        })
-    
-    # Sign and send transaction
-    signed_tx = account.sign_transaction(tx)
-    tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
-    print(f"📡 Transaction sent: {tx_hash.hex()}")
-    
-    # Wait for receipt
-    receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
-    contract_address = receipt.contractAddress
-    
+        if not PRIVATE_KEY:
+            raise ValueError("DEPLOYER_KEY environment variable not set! (or enable SYNDICATE_SIMULATE=1)")
+        # Compile contract (real)
+        compiled = compile_contract(contract_name)
+        bytecode = compiled["evm"]["bytecode"]["object"]
+        abi = compiled["abi"]
+        account = w3.eth.account.from_key(PRIVATE_KEY)
+        contract = w3.eth.contract(abi=abi, bytecode=bytecode)
+        nonce = w3.eth.get_transaction_count(account.address)
+        if contract_name == "OneiroSphere":
+            tx = contract.constructor(FORWARDER_ADDRESS).build_transaction({
+                "from": account.address,
+                "nonce": nonce,
+                "gas": 5_000_000,
+                "gasPrice": 0,
+                "chainId": CHAIN_ID
+            })
+        else:
+            tx = contract.constructor().build_transaction({
+                "from": account.address,
+                "nonce": nonce,
+                "gas": 5_000_000,
+                "gasPrice": 0,
+                "chainId": CHAIN_ID
+            })
+        signed_tx = account.sign_transaction(tx)
+        tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+        print(f"📡 Transaction sent: {tx_hash.hex()}")
+        receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+        contract_address = receipt.contractAddress
+        tx_hash_hex = tx_hash.hex()
+        gas_used = receipt.gasUsed
+
     print(f"✅ {contract_name} deployed at: {contract_address}")
-    
-    # Save to memory
     memory = load_memory()
     memory["lastDeployed"][contract_name] = {
         "address": contract_address,
         "abi": abi,
         "bytecode": bytecode,
         "timestamp": time.time(),
-        "txHash": tx_hash.hex(),
-        "gasUsed": receipt.gasUsed
+        "txHash": tx_hash_hex,
+        "gasUsed": gas_used
     }
     save_memory(memory)
-    
     return contract_address, abi
 
 def audit_contract(contract_name):
@@ -221,6 +228,56 @@ def test_dream_recording():
     print(f"   Transaction: {tx_hash.hex()}")
     print(f"   IPFS Hash: {test_ipfs_hash}")
 
+def record_dream(dream_text: str):
+    """Record an arbitrary dream string using the deployed IEMDreams contract.
+
+    This assumes IEMDreams was deployed via this syndicate (so its ABI & address
+    exist in memory). Stores the dream text IPFS placeholder hash into loot list.
+    """
+    print("🌙 Recording dream to IEMDreams...")
+    memory = load_memory()
+    if "IEMDreams" not in memory["lastDeployed"]:
+        print("❌ IEMDreams not deployed. Deploy it first with: deploy IEMDreams")
+        return
+    deployment = memory["lastDeployed"]["IEMDreams"]
+    if SIMULATION_MODE:
+        tx_hash_hex = deployment.get("txHash", "0xSIM_DREAM_TX")
+        gas_used = 0
+    else:
+        if not PRIVATE_KEY:
+            print("❌ DEPLOYER_KEY not set in environment (or enable SYNDICATE_SIMULATE=1)")
+            return
+        contract = w3.eth.contract(address=deployment["address"], abi=deployment["abi"])
+        account = w3.eth.account.from_key(PRIVATE_KEY)
+        nonce = w3.eth.get_transaction_count(account.address)
+        try:
+            tx = contract.functions.recordDream(dream_text).build_transaction({
+                "from": account.address,
+                "nonce": nonce,
+                "gas": 300_000,
+                "gasPrice": 0,
+                "chainId": CHAIN_ID
+            })
+        except AttributeError:
+            print("❌ Contract ABI missing recordDream function.")
+            return
+        signed_tx = account.sign_transaction(tx)
+        tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+        receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+        tx_hash_hex = tx_hash.hex()
+        gas_used = receipt.gasUsed
+    memory["loot"].append({
+        "dreamer": deployment["address"],  # using contract address or account in simulation
+        "dream": dream_text,
+        "ipfsHash": "placeholder",
+        "timestamp": time.time(),
+        "txHash": tx_hash_hex
+    })
+    save_memory(memory)
+    print("✅ Dream recorded!")
+    print(f"   Tx: {tx_hash_hex}")
+    print(f"   Gas Used: {gas_used}")
+
 def main():
     """Main function to handle command line arguments."""
     if len(sys.argv) < 2:
@@ -233,7 +290,6 @@ def main():
         return
     
     command = sys.argv[1].lower()
-    
     try:
         if command == "deploy":
             if len(sys.argv) < 3:
@@ -241,17 +297,16 @@ def main():
                 return
             contract_name = sys.argv[2]
             deploy_contract(contract_name)
-            
         elif command == "audit":
             contract_name = sys.argv[2] if len(sys.argv) > 2 else "OneiroSphere"
             audit_contract(contract_name)
-            
         elif command == "test":
             test_dream_recording()
-            
+        elif command == "record":
+            dream_text = " ".join(sys.argv[2:]) if len(sys.argv) > 2 else "Test dream from CLI"
+            record_dream(dream_text)
         else:
             print(f"❌ Unknown command: {command}")
-            
     except Exception as e:
         print(f"❌ Error: {e}")
 
