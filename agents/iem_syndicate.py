@@ -3,7 +3,8 @@
 IEM Syndicate - Multi-Agent Deployment System
 ---------------------------------------------
 Handles deployment, auditing, and monitoring of Dream-Mind-Lucid contracts
-Last Updated: September 01, 2025
+Now supports both SKALE (legacy) and Solana with SPL Token 2022
+Last Updated: September 05, 2025
 """
 
 import os
@@ -11,24 +12,63 @@ import sys
 import json
 import time
 import hashlib
+from typing import Optional
+
+# Legacy SKALE support
 from web3 import Web3
 from solcx import compile_standard, install_solc
 
-# Environment Configuration
+# Solana support
+try:
+    from solana.rpc.api import Client as SolanaClient
+    from solana.keypair import Keypair
+    from solana.publickey import PublicKey
+    import base58
+    SOLANA_AVAILABLE = True
+except ImportError:
+    print("⚠️  Solana packages not installed. Run: pip install solana spl-token")
+    SOLANA_AVAILABLE = False
+
+# Environment Configuration - SKALE (Legacy)
 SKALE_RPC = os.getenv("SKALE_RPC", "https://mainnet.skalenodes.com/v1/elated-tan-skat")
 INFURA_RPC = os.getenv("INFURA_PROJECT_ID")
 CHAIN_ID = int(os.getenv("SKALE_CHAIN_ID", "2046399126"))
-PRIVATE_KEY = os.getenv("DEPLOYER_KEY", "")
 FORWARDER_ADDRESS = os.getenv("FORWARDER_ADDRESS", "0x0000000000000000000000000000000000000000")
+
+# Environment Configuration - Solana (New)
+SOLANA_RPC_URL = os.getenv("SOLANA_RPC_URL", "https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5")
+TREASURY_ADDRESS = os.getenv("TREASURY_ADDRESS", "4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a")
+
+# Shared Configuration
+PRIVATE_KEY = os.getenv("DEPLOYER_KEY", "")
 SIMULATION_MODE = os.getenv("SYNDICATE_SIMULATE", "0") in ("1", "true", "True")
+BLOCKCHAIN_MODE = os.getenv("BLOCKCHAIN_MODE", "solana")  # "solana" or "skale"
 
-# Use Infura RPC if available, otherwise fallback to SKALE RPC
-if INFURA_RPC and INFURA_RPC != "YOUR_INFURA_API_KEY":
-    RPC_URL = f"https://skale-mainnet.infura.io/v3/{INFURA_RPC}"
-else:
-    RPC_URL = SKALE_RPC
+# Initialize blockchain clients
+def init_blockchain_clients():
+    """Initialize blockchain clients based on mode"""
+    clients = {}
+    
+    if BLOCKCHAIN_MODE == "skale" or BLOCKCHAIN_MODE == "both":
+        # SKALE/Ethereum client
+        if INFURA_RPC and INFURA_RPC != "YOUR_INFURA_API_KEY":
+            RPC_URL = f"https://skale-mainnet.infura.io/v3/{INFURA_RPC}"
+        else:
+            RPC_URL = SKALE_RPC
+        clients['skale'] = Web3(Web3.HTTPProvider(RPC_URL))
+    
+    if BLOCKCHAIN_MODE == "solana" or BLOCKCHAIN_MODE == "both":
+        # Solana client
+        if SOLANA_AVAILABLE:
+            clients['solana'] = SolanaClient(SOLANA_RPC_URL)
+        else:
+            print("❌ Solana client not available")
+    
+    return clients
 
-w3 = Web3(Web3.HTTPProvider(RPC_URL))
+# Initialize clients
+CLIENTS = init_blockchain_clients()
+w3 = CLIENTS.get('skale')  # Backward compatibility
 MEMORY_FILE = "iem_memory.json"
 
 def load_memory():
@@ -278,20 +318,110 @@ def record_dream(dream_text: str):
     print(f"   Tx: {tx_hash_hex}")
     print(f"   Gas Used: {gas_used}")
 
+# Solana integration functions
+def deploy_solana_tokens():
+    """Deploy SPL Token 2022 tokens on Solana"""
+    if not SOLANA_AVAILABLE:
+        print("❌ Solana packages not available. Install with: pip install solana spl-token")
+        return False
+    
+    print("🚀 Deploying SPL Token 2022 suite on Solana...")
+    
+    # Use the dedicated Solana agent
+    import subprocess
+    try:
+        result = subprocess.run([
+            sys.executable, "agents/solana_dream_agent.py", "deploy_tokens"
+        ], capture_output=True, text=True, cwd=".")
+        
+        if result.returncode == 0:
+            print("✅ Solana tokens deployed successfully!")
+            print(result.stdout)
+            return True
+        else:
+            print("❌ Solana token deployment failed:")
+            print(result.stderr)
+            return False
+    except Exception as e:
+        print(f"❌ Error calling Solana agent: {e}")
+        return False
+
+def record_dream_solana(dream_text: str):
+    """Record a dream on Solana"""
+    if not SOLANA_AVAILABLE:
+        print("❌ Solana packages not available")
+        return False
+    
+    print(f"🌙 Recording dream on Solana: {dream_text[:50]}...")
+    
+    # Use the dedicated Solana agent
+    import subprocess
+    try:
+        result = subprocess.run([
+            sys.executable, "agents/solana_dream_agent.py", "record_dream", dream_text
+        ], capture_output=True, text=True, cwd=".")
+        
+        if result.returncode == 0:
+            print("✅ Dream recorded on Solana!")
+            print(result.stdout)
+            return True
+        else:
+            print("❌ Solana dream recording failed:")
+            print(result.stderr)
+            return False
+    except Exception as e:
+        print(f"❌ Error calling Solana agent: {e}")
+        return False
+
+def get_treasury_status_solana():
+    """Get Solana treasury status"""
+    if not SOLANA_AVAILABLE:
+        print("❌ Solana packages not available")
+        return
+    
+    # Use the dedicated Solana agent
+    import subprocess
+    try:
+        result = subprocess.run([
+            sys.executable, "agents/solana_dream_agent.py", "treasury_status"
+        ], capture_output=True, text=True, cwd=".")
+        
+        print(result.stdout)
+        if result.stderr:
+            print(result.stderr)
+    except Exception as e:
+        print(f"❌ Error calling Solana agent: {e}")
+
 def main():
     """Main function to handle command line arguments."""
     if len(sys.argv) < 2:
-        print("Usage: python iem_syndicate.py [deploy|audit|test] [contract_name]")
-        print("Commands:")
+        print("🌌 IEM Syndicate - Multi-Blockchain Deployment System")
+        print(f"Current mode: {BLOCKCHAIN_MODE.upper()}")
+        print("Usage: python iem_syndicate.py [command] [options]")
+        print("\nLegacy SKALE Commands:")
         print("  deploy IEMDreams    - Deploy IEMDreams contract")
         print("  deploy OneiroSphere - Deploy OneiroSphere contract")
         print("  audit [contract]    - Audit deployed contract")
         print("  test                - Test dream recording")
+        print("  record 'dream text' - Record a dream")
+        print("\nNew Solana Commands:")
+        print("  solana_deploy       - Deploy SPL Token 2022 suite")
+        print("  solana_record 'text'- Record dream on Solana")
+        print("  solana_status       - Check treasury status")
         return
     
     command = sys.argv[1].lower()
     try:
-        if command == "deploy":
+        # Solana commands
+        if command == "solana_deploy":
+            deploy_solana_tokens()
+        elif command == "solana_record":
+            dream_text = " ".join(sys.argv[2:]) if len(sys.argv) > 2 else "Test Solana dream"
+            record_dream_solana(dream_text)
+        elif command == "solana_status":
+            get_treasury_status_solana()
+        # Legacy SKALE commands
+        elif command == "deploy":
             if len(sys.argv) < 3:
                 print("❌ Please specify contract name: IEMDreams or OneiroSphere")
                 return

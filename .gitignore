@@ -11,3 +11,11 @@ node_modules/
 *.log
 .private_keys
 *.key
+
+# Rust build artifacts
+target/
+Cargo.lock
+
+# Memory files (contain simulated data)
+*_memory.json
+solana_dream_memory.json
