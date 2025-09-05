@@ -1,7 +1,7 @@
 # Dream-Mind-Lucid: Decentralized Dream-Mining Investment Platform
 
 ## Overview
-Dream-Mind-Lucid is a blockchain-based platform designed for dream-mining, cognitive staking, and lucidity-based access controls on the SKALE Network. Launched on August 30, 2025, it enables users to record and validate dreams, earn tokens through staking and governance, and access predictive oracles for strategic investment decisions. The project positions itself as a professional investment creator and deployer, leveraging zero-gas transactions on SKALE Europa for efficient scaling. By 2089, it is envisioned to evolve into the Oneiro-Sphere—a quantum-entangled neural network for advanced consciousness interfaces and value exchange in a post-scarcity economy.
+Dream-Mind-Lucid is a blockchain-based platform designed for dream-mining, cognitive staking, and lucidity-based access controls on the SKALE Network. Launched on August 30, 2025, it enables users to record and validate dreams, earn tokens through staking and governance, and access predictive oracles for strategic investment decisions. The project positions itself as a professional investment creator and deployer, leveraging zero-gas transactions on SKALE Europa for efficient scaling. By 2026, it is envisioned to evolve into the Oneiro-Sphere—a quantum-entangled neural network for advanced consciousness interfaces and value exchange in a post-scarcity economy.
 
 ## Tokenomics and Investment Opportunities
 The platform features a triple-token model optimized for investment growth and community governance:
