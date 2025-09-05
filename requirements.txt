@@ -1,9 +1,11 @@
-# Dream-Mind-Lucid Dependencies
-# Core blockchain and Web3 functionality
-web3>=7.0.0,<8.0.0
+# Dream-Mind-Lucid Dependencies - Solana Edition
+# Core Solana functionality
+solana>=0.30.0
+solders>=0.19.0
+anchorpy>=0.19.0
 
-# Solidity compiler support
-py-solc-x>=2.0.0,<3.0.0
+# SPL Token 2022 support
+spl-token>=0.2.0
 
 # IPFS integration for dream storage
 ipfshttpclient>=0.7.0,<1.0.0
@@ -14,6 +16,11 @@ mcp>=1.0.0,<2.0.0
 # Image metadata extraction (for grok_copilot_image_launcher.py)
 PyExifTool>=0.5.0,<1.0.0
 
-# Note: biconomy-sdk is not available on PyPI as of this version
-# If needed, consider implementing gasless transactions using SKALE's native zero-gas feature
-# or find an alternative Biconomy package/implementation
+# Legacy Web3 support (for migration period)
+web3>=7.0.0,<8.0.0
+py-solc-x>=2.0.0,<3.0.0
+
+# Additional utilities
+aiohttp>=3.8.0
+base58>=2.1.0
+construct>=2.10.0
