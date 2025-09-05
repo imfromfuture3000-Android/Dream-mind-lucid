@@ -128,32 +128,6 @@
       "timestamp": 1756792621.749381,
       "txHash": "0xffffffffffffffffffffffffffffffffffffffffffffffffa94fdd2fe61dd06e",
       "gasUsed": 0
-    },
-    {
-      "dreamer": "simulation_dreamer",
-      "dream": "I dreamed of a quantum-entangled neural network on Solana with zero MEV risk",
-      "ipfsHash": "QmTestSolanaDreamHash1234567890abcdefghijklmnopqr",
-      "timestamp": 1757075177.5498405,
-      "txSignature": "dream_tx_1757075177",
-      "platform": "solana"
-    },
-    {
-      "agent": "MEVProtection",
-      "action": "sol_rebate",
-      "backrun_profit": 50000000,
-      "rebate_amount": 1000000,
-      "timestamp": 1757075177.5505683,
-      "txSignature": "rebate_tx_1757075177",
-      "platform": "solana"
-    },
-    {
-      "agent": "MEVProtection",
-      "action": "sol_rebate",
-      "backrun_profit": 50000000,
-      "rebate_amount": 1000000,
-      "timestamp": 1757075427.2637181,
-      "txSignature": "rebate_tx_1757075427",
-      "platform": "solana"
     }
   ],
   "audits": [
@@ -232,15 +206,5 @@
     "Arbitrader": 2430
   },
   "test_key": "test_value",
-  "timestamp": 1756792476.8621738,
-  "solana": {
-    "program_id": "4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a",
-    "treasury": "TreasuryPDA1234567890abcdefghijklmnopqr",
-    "mints": {
-      "DREAM": "DreamTokenMint1234567890abcdefghijklmnopqr",
-      "SMIND": "SmindTokenMint1234567890abcdefghijklmnopqr",
-      "LUCID": "LucidTokenMint1234567890abcdefghijklmnopqr"
-    },
-    "deployment_timestamp": 1757075365.3992965
-  }
+  "timestamp": 1756792476.8621738
 }
