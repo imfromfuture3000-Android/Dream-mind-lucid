@@ -145,6 +145,15 @@
       "timestamp": 1757075177.5505683,
       "txSignature": "rebate_tx_1757075177",
       "platform": "solana"
+    },
+    {
+      "agent": "MEVProtection",
+      "action": "sol_rebate",
+      "backrun_profit": 50000000,
+      "rebate_amount": 1000000,
+      "timestamp": 1757075427.2637181,
+      "txSignature": "rebate_tx_1757075427",
+      "platform": "solana"
     }
   ],
   "audits": [
@@ -232,6 +241,6 @@
       "SMIND": "SmindTokenMint1234567890abcdefghijklmnopqr",
       "LUCID": "LucidTokenMint1234567890abcdefghijklmnopqr"
     },
-    "deployment_timestamp": 1757075168.7568326
+    "deployment_timestamp": 1757075365.3992965
   }
 }
