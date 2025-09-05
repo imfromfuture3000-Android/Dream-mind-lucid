@@ -11,34 +11,3 @@ node_modules/
 *.log
 .private_keys
 *.key
-
-# Solana build artifacts
-target/
-dist/
-.anchor/
-.solana/
-test-ledger/
-
-# Rust build artifacts
-Cargo.lock
-target/
-**/*.rs.bk
-
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS files
-Thumbs.db
-.DS_Store
-
-# Backup files
-*.bak
-*.backup
-
-# Temporary files
-*.tmp
-*.temp
-/tmp/
