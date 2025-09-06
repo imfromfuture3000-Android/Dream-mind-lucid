@@ -1,0 +1,29 @@
+{
+  "name": "Dream-Mind-Lucid SKALE Dev Environment",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    },
+    "ghcr.io/devcontainers-contrib/features/poetry:2": {}
+  },
+  "postCreateCommand": "pip install -r requirements.txt && sudo apt update && sudo apt install -y solc cmake g++-11 libssl-dev libprocps-dev",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "github.copilot",
+        "github.copilot-chat",
+        "ms-python.python",
+        "nomicfoundation.hardhat-solidity",
+        "juanblanco.solidity",
+        "redhat.yaml",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "editor.formatOnSave": true
+      }
+    }
+  }
+}
