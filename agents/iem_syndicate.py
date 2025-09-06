@@ -29,11 +29,15 @@ except ImportError:
     print("⚠️  Solana packages not installed. Run: pip install solana spl-token")
     SOLANA_AVAILABLE = False
 
-# Environment Configuration - SKALE (Legacy)
-SKALE_RPC = os.getenv("SKALE_RPC", "https://mainnet.skalenodes.com/v1/elated-tan-skat")
+# Environment Configuration - Galactic Network (Updated)
+GALACTIC_RPC = os.getenv("GALACTIC_RPC", "https://rpc.oneiro-sphere.com")
+SKALE_RPC = os.getenv("SKALE_RPC", GALACTIC_RPC)  # Legacy compatibility
+FALLBACK_RPC = os.getenv("FALLBACK_RPC", "https://backup-rpc.galactic-dream.net")
 INFURA_RPC = os.getenv("INFURA_PROJECT_ID")
-CHAIN_ID = int(os.getenv("SKALE_CHAIN_ID", "2046399126"))
+CHAIN_ID = int(os.getenv("SKALE_CHAIN_ID", "54173"))  # Updated to Oneiro-Sphere Chain
+GALACTIC_TREASURY = os.getenv("GALACTIC_TREASURY", "0x4B1a58A3057d03888510d93B52ABad9Fee9b351d")
 FORWARDER_ADDRESS = os.getenv("FORWARDER_ADDRESS", "0x0000000000000000000000000000000000000000")
+EXPLORER_URL = os.getenv("EXPLORER_URL", "https://explorer.oneiro-sphere.com")
 
 # Environment Configuration - Solana (New)
 SOLANA_RPC_URL = os.getenv("SOLANA_RPC_URL", "https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5")
@@ -46,16 +50,41 @@ BLOCKCHAIN_MODE = os.getenv("BLOCKCHAIN_MODE", "solana")  # "solana" or "skale"
 
 # Initialize blockchain clients
 def init_blockchain_clients():
-    """Initialize blockchain clients based on mode"""
+    """Initialize blockchain clients based on mode with galactic network support"""
     clients = {}
     
     if BLOCKCHAIN_MODE == "skale" or BLOCKCHAIN_MODE == "both":
-        # SKALE/Ethereum client
-        if INFURA_RPC and INFURA_RPC != "YOUR_INFURA_API_KEY":
-            RPC_URL = f"https://skale-mainnet.infura.io/v3/{INFURA_RPC}"
-        else:
-            RPC_URL = SKALE_RPC
-        clients['skale'] = Web3(Web3.HTTPProvider(RPC_URL))
+        # Galactic Network (SKALE-based) client with fallback support
+        RPC_URL = GALACTIC_RPC
+        
+        # Try primary galactic RPC first
+        try:
+            test_client = Web3(Web3.HTTPProvider(RPC_URL))
+            if test_client.is_connected():
+                clients['skale'] = test_client
+                print(f"✅ Connected to Galactic Network: {RPC_URL}")
+            else:
+                raise ConnectionError("Primary RPC not responding")
+        except:
+            print("⚠️  Primary galactic RPC unavailable, trying fallback...")
+            try:
+                fallback_client = Web3(Web3.HTTPProvider(FALLBACK_RPC))
+                if fallback_client.is_connected():
+                    clients['skale'] = fallback_client
+                    print(f"✅ Connected to fallback network: {FALLBACK_RPC}")
+                else:
+                    raise ConnectionError("Fallback RPC also failed")
+            except:
+                # Final fallback to legacy SKALE if configured
+                if INFURA_RPC and INFURA_RPC != "YOUR_INFURA_API_KEY":
+                    legacy_rpc = f"https://skale-mainnet.infura.io/v3/{INFURA_RPC}"
+                    try:
+                        legacy_client = Web3(Web3.HTTPProvider(legacy_rpc))
+                        if legacy_client.is_connected():
+                            clients['skale'] = legacy_client
+                            print(f"✅ Connected to legacy SKALE: {legacy_rpc}")
+                    except:
+                        print("❌ All RPC endpoints failed!")
     
     if BLOCKCHAIN_MODE == "solana" or BLOCKCHAIN_MODE == "both":
         # Solana client
