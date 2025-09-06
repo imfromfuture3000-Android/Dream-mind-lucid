@@ -206,5 +206,39 @@
     "Arbitrader": 2430
   },
   "test_key": "test_value",
-  "timestamp": 1756792476.8621738
+  "timestamp": 1756792476.8621738,
+  "galactic_explorer_integration": {
+    "timestamp": 1757165829.175575,
+    "config": {
+      "blockscout_enabled": true,
+      "genesis_enabled": true,
+      "primary_explorer": "blockscout",
+      "fallback_explorer": "genesis"
+    },
+    "deployment_data": {
+      "deployments": [
+        {
+          "contract_name": "DREAMToken",
+          "address": "0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7",
+          "transaction_hash": "0x1234567890abcdef1234567890abcdef12345678",
+          "block_number": 1000000
+        },
+        {
+          "contract_name": "SMINDToken",
+          "address": "0x8E8F9B2F4A5D8C7E3A2B1F5E9C6A4D7B3E8F2C9A",
+          "transaction_hash": "0xabcdef1234567890abcdef1234567890abcdef12",
+          "block_number": 1000001
+        },
+        {
+          "contract_name": "LUCIDToken",
+          "address": "0x3C8E7A2D9F1B6E4C8A5F7D2E9B3C6A1D4E7F8B2C",
+          "transaction_hash": "0x567890abcdef1234567890abcdef1234567890ab",
+          "block_number": 1000002
+        }
+      ],
+      "verification_complete": true
+    },
+    "blockscout_url": "https://explorer.oneiro-sphere.com",
+    "genesis_url": "https://genesis.oneiro-sphere.com"
+  }
 }
