@@ -3,7 +3,7 @@ require("dotenv").config();
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const SKALE_RPC = process.env.SKALE_RPC || "https://mainnet.skalenodes.com/v1/elated-tan-skat";
-const SKALE_CHAIN_ID = process.env.SKALE_CHAIN_ID || 2046399126;
+const SKALE_CHAIN_ID = parseInt(process.env.SKALE_CHAIN_ID) || 2046399126;
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
