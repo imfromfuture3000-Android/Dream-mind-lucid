@@ -43,6 +43,7 @@ def status():
     if not any(ok for _, ok in available):
         print("   Tip: pip install -r requirements.txt")
     print(" - Launcher bridging to iem_syndicate & grok_copilot_image_launcher")
+    print(" - 🌙 OneiroBot integration available: try #oneirobot or #summon_oneirobot")
 
 
 def run_syndicate(args):
@@ -82,6 +83,41 @@ def run_syndicate(args):
     return 0
 
 
+def run_oneirobot(args):
+    """Run OneiroBot commands via Copilot integration"""
+    try:
+        copilot_instruction = importlib.import_module("copilot-instruction")
+    except ModuleNotFoundError as e:
+        print(f"❌ Could not import copilot-instruction: {e}")
+        return 1
+
+    if not args:
+        print("Usage: oneirobot summon|status|scan|optimize|fix|help")
+        return 1
+
+    # Map command shortcuts to full commands
+    command_map = {
+        'summon': 'summon_oneirobot',
+        'status': 'oneirobot_status', 
+        'scan': 'oneirobot_scan',
+        'optimize': 'oneirobot_optimize',
+        'fix': 'oneirobot_fix',
+        'help': 'oneirobot_help'
+    }
+    
+    cmd = args[0].lower().lstrip('#')
+    full_command = command_map.get(cmd, cmd)
+    
+    try:
+        # Use the handle_copilot_command function directly
+        result = copilot_instruction.handle_copilot_command(full_command, args[1:])
+        print(f"✅ OneiroBot command '{cmd}' executed successfully")
+        return 0
+    except Exception as exc:
+        print(f"❌ Error executing OneiroBot command: {exc}")
+        return 1
+
+
 def main():
     if len(sys.argv) == 1:
         status()
@@ -92,6 +128,9 @@ def main():
     sub = sub.lstrip('#')
     if sub in {"deploy", "audit", "test", "record", "deploy_contract", "record_dream"}:
         return run_syndicate(sys.argv[1:])
+    elif sub in {"oneirobot", "oneiro", "summon_oneirobot", "oneirobot_status", "oneirobot_scan", 
+                 "oneirobot_optimize", "oneirobot_fix", "oneirobot_help"}:
+        return run_oneirobot(sys.argv[1:])
     elif sub == "image":
         # Lazy run of the heavier image launcher
         try:
