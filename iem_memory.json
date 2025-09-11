@@ -163,6 +163,180 @@
       "timestamp": 1757622087.984899,
       "txHash": "0xffffffffffffffffffffffffffffffffffffffffffffffff9af84fc75fe806b7",
       "gasUsed": 0
+    },
+    {
+      "agent": "MEVMaster",
+      "action": "frontrun",
+      "pool": "WETH/USDC",
+      "profit": 3120,
+      "timestamp": 1757622245.374057,
+      "txHash": "0xffffffffffffffffffffffffffffffffffffffffffffffffa5d696cbe9533948",
+      "gasUsed": 0
+    },
+    {
+      "agent": "MEVMaster",
+      "action": "frontrun",
+      "pool": "WETH/USDC",
+      "profit": 3120,
+      "timestamp": 1757622305.3755903,
+      "txHash": "0x000000000000000000000000000000000000000000000000533214da7fca934a",
+      "gasUsed": 0
+    },
+    {
+      "agent": "MEVMaster",
+      "action": "frontrun",
+      "pool": "WETH/USDC",
+      "profit": 3120,
+      "timestamp": 1757622365.3771827,
+      "txHash": "0x00000000000000000000000000000000000000000000000026a7d44e69df3c7e",
+      "gasUsed": 0
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "monitor_dreams",
+      "dreams_detected": 2,
+      "consensus_state": "STABLE",
+      "timestamp": 1757622393.290984,
+      "status": "healthy"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "mcp_health_check",
+      "servers_checked": 2,
+      "health_score": "GOOD",
+      "timestamp": 1757622400.4256053,
+      "status": "health_check_complete"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "analyze_optimizations",
+      "suggestions_count": 3,
+      "avg_profit": 2875.0,
+      "timestamp": 1757622407.4279506,
+      "status": "optimization_complete"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "propose_fix",
+      "issue_type": "deployment",
+      "fixes_suggested": 3,
+      "timestamp": 1757622414.6481917,
+      "status": "fix_proposed"
+    },
+    {
+      "agent": "Looter",
+      "action": "harvest",
+      "amount": 1850,
+      "timestamp": 1757622530.3825028,
+      "txHash": "0x0000000000000000000000000000000000000000000000005022ce36b43c2f72",
+      "gasUsed": 0
+    },
+    {
+      "agent": "MEVMaster",
+      "action": "frontrun",
+      "pool": "TEST/POOL",
+      "profit": 3120,
+      "timestamp": 1757622530.383274,
+      "txHash": "0xffffffffffffffffffffffffffffffffffffffffffffffff823060bb6f669397",
+      "gasUsed": 0
+    },
+    {
+      "agent": "Arbitrader",
+      "action": "arbitrage",
+      "token": "DREAM",
+      "profit": 2430,
+      "timestamp": 1757622530.3839056,
+      "txHash": "0x00000000000000000000000000000000000000000000000077c9cdbf88253ab4",
+      "gasUsed": 0
+    },
+    {
+      "agent": "MEVMaster",
+      "action": "frontrun",
+      "pool": "WETH/USDC",
+      "profit": 3120,
+      "timestamp": 1757622530.3858452,
+      "txHash": "0x0000000000000000000000000000000000000000000000000a70540977bc1fde",
+      "gasUsed": 0
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "monitor_dreams",
+      "dreams_detected": 4,
+      "consensus_state": "STABLE",
+      "timestamp": 1757622530.3932424,
+      "status": "healthy"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "analyze_optimizations",
+      "suggestions_count": 3,
+      "avg_profit": 2728.0,
+      "timestamp": 1757622530.393979,
+      "status": "optimization_complete"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "mcp_health_check",
+      "servers_checked": 2,
+      "health_score": "GOOD",
+      "timestamp": 1757622530.3946087,
+      "status": "health_check_complete"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "propose_fix",
+      "issue_type": "deployment",
+      "fixes_suggested": 3,
+      "timestamp": 1757622530.3952384,
+      "status": "fix_proposed"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "monitor_dreams",
+      "dreams_detected": 5,
+      "consensus_state": "STABLE",
+      "timestamp": 1757622530.3974648,
+      "status": "healthy"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "mcp_health_check",
+      "servers_checked": 2,
+      "health_score": "GOOD",
+      "timestamp": 1757622530.3983204,
+      "status": "health_check_complete"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "monitor_dreams",
+      "dreams_detected": 6,
+      "consensus_state": "STABLE",
+      "timestamp": 1757622530.399027,
+      "status": "healthy"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "analyze_optimizations",
+      "suggestions_count": 3,
+      "avg_profit": 2890.0,
+      "timestamp": 1757622530.3996968,
+      "status": "optimization_complete"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "propose_fix",
+      "issue_type": "performance",
+      "fixes_suggested": 3,
+      "timestamp": 1757622530.4003825,
+      "status": "fix_proposed"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "monitor_dreams",
+      "dreams_detected": 7,
+      "consensus_state": "STABLE",
+      "timestamp": 1757622540.3984523,
+      "status": "healthy"
     }
   ],
   "audits": [
@@ -233,13 +407,46 @@
       },
       "decision": "Execute MEV strategy on WETH/USDC pool",
       "total_agents": 3
+    },
+    {
+      "cycle": 1,
+      "timestamp": 1757622245.3746173,
+      "profits": {
+        "Looter": 1850,
+        "MEVMaster": 6240,
+        "Arbitrader": 2430
+      },
+      "decision": "Execute MEV strategy on WETH/USDC pool",
+      "total_agents": 3
+    },
+    {
+      "cycle": 2,
+      "timestamp": 1757622305.3761768,
+      "profits": {
+        "Looter": 1850,
+        "MEVMaster": 9360,
+        "Arbitrader": 2430
+      },
+      "decision": "Execute MEV strategy on WETH/USDC pool",
+      "total_agents": 3
+    },
+    {
+      "cycle": 3,
+      "timestamp": 1757622365.3778412,
+      "profits": {
+        "Looter": 1850,
+        "MEVMaster": 12480,
+        "Arbitrader": 2430
+      },
+      "decision": "Execute MEV strategy on WETH/USDC pool",
+      "total_agents": 3
     }
   ],
   "profits": {
     "Looter": 1850,
-    "MEVMaster": 18720,
+    "MEVMaster": 12480,
     "Arbitrader": 2430
   },
   "test_key": "test_value",
-  "timestamp": 1757622087.986061
+  "timestamp": 1757622530.3873243
 }
