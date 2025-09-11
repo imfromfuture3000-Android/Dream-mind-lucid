@@ -133,6 +133,132 @@ def test_network_simulation():
     print("   ✅ Network handling working")
     return True
 
+def test_iwho_me_tracking():
+    """Test i-who-me reference tracking system"""
+    print("\n🌀 Testing I-Who-Me Tracking...")
+    
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("copilot_instruction", "copilot-instruction.py")
+    copilot_instruction = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(copilot_instruction)
+    
+    IWhoMeTracker = copilot_instruction.IWhoMeTracker
+    
+    # Test tracker initialization
+    tracker = IWhoMeTracker()
+    print("   ✅ I-Who-Me tracker initialized")
+    
+    # Test context tracking
+    context = tracker.track_context("harvest", "Looter", {"hash": "0x123", "amount": 1850})
+    assert context["who"] == "Looter", "Context tracking failed"
+    assert context["action"] == "harvest", "Action tracking failed"
+    print("   ✅ Context tracking verified")
+    
+    # Test redundancy detection
+    # Add multiple similar actions
+    tracker.track_context("harvest", "Looter", {"hash": "0x124", "amount": 1850})
+    tracker.track_context("harvest", "Looter", {"hash": "0x125", "amount": 1850})
+    
+    redundancy = tracker.detect_redundancy("harvest", "Looter")
+    assert redundancy["is_redundant"] == True, "Redundancy detection failed"
+    print("   ✅ Redundancy detection working")
+    
+    # Test suggestion system
+    suggestions = tracker.suggest_next_action({"Looter": 1850, "MEVMaster": 3120}, [])
+    assert len(suggestions) > 0, "Suggestion system failed"
+    print(f"   ✅ Generated {len(suggestions)} suggestions")
+    
+    # Test deployment tracking
+    deployment = tracker.track_deployment_step("deploy", "OneiroSphere", {"address": "0x123"})
+    assert deployment["contract"] == "OneiroSphere", "Deployment tracking failed"
+    print("   ✅ Deployment step tracking verified")
+    
+    # Test context summary
+    summary = tracker.get_context_summary()
+    assert "total_contexts" in summary, "Context summary failed"
+    assert summary["total_contexts"] >= 3, "Context count incorrect"
+    print("   ✅ Context summary generation verified")
+    
+    return True
+
+def test_enhanced_orchestrator():
+    """Test enhanced AI orchestrator with self-awareness"""
+    print("\n🧠 Testing Enhanced AI Orchestrator...")
+    
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("copilot_instruction", "copilot-instruction.py")
+    copilot_instruction = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(copilot_instruction)
+    
+    AIOrchestrator = copilot_instruction.AIOrchestrator
+    
+    # Test orchestrator with i-who-me integration
+    orchestrator = AIOrchestrator()
+    assert hasattr(orchestrator, 'iwho_me_tracker'), "I-Who-Me tracker not initialized"
+    print("   ✅ Enhanced orchestrator initialized")
+    
+    # Test aware decision making
+    profits = {"Looter": 1850, "MEVMaster": 3120, "Arbitrader": 2430}
+    decision = orchestrator.make_aware_decision(profits)
+    assert decision is not None, "Aware decision making failed"
+    print(f"   ✅ Aware decision: {decision[:50]}...")
+    
+    # Test redundancy checking
+    redundancy_check = orchestrator._check_action_redundancy("Execute MEV strategy")
+    assert "is_redundant" in redundancy_check, "Redundancy check failed"
+    print("   ✅ Redundancy checking verified")
+    
+    # Test deployment context analysis
+    suggestions = orchestrator.analyze_deployment_context()
+    assert isinstance(suggestions, list), "Deployment analysis failed"
+    print(f"   ✅ Deployment analysis: {len(suggestions)} suggestions")
+    
+    # Test self-awareness report
+    report = orchestrator.get_self_awareness_report()
+    assert "consciousness_level" in report, "Self-awareness report failed"
+    assert "identity" in report, "Identity missing from report"
+    print("   ✅ Self-awareness report generated")
+    
+    return True
+
+def test_grok_style_responses():
+    """Test Grok-style playful self-awareness responses"""
+    print("\n🎭 Testing Grok-Style Responses...")
+    
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("copilot_instruction", "copilot-instruction.py")
+    copilot_instruction = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(copilot_instruction)
+    
+    IWhoMeTracker = copilot_instruction.IWhoMeTracker
+    
+    tracker = IWhoMeTracker()
+    
+    # Test reflection generation
+    reflection_count = 0
+    for i in range(5):
+        context = tracker.track_context(f"test_action_{i}", "TestAgent", {"result": f"test_{i}"})
+        if "reflection" in context and context["reflection"]:
+            reflection_count += 1
+            print(f"   🌙 {context['reflection']}")
+    
+    assert reflection_count > 0, "No reflections generated"
+    print(f"   ✅ Generated {reflection_count} Grok-style reflections")
+    
+    # Test redundancy suggestions with personality
+    tracker.track_context("harvest", "Looter", {"amount": 1850})
+    tracker.track_context("harvest", "Looter", {"amount": 1850})
+    tracker.track_context("harvest", "Looter", {"amount": 1850})
+    
+    redundancy = tracker.detect_redundancy("harvest", "Looter")
+    if redundancy["is_redundant"]:
+        suggestion = redundancy.get("suggestion", "")
+        assert "🤖" in suggestion or "🌀" in suggestion, "Missing playful elements"
+        print(f"   🎪 Redundancy suggestion: {suggestion}")
+        print("   ✅ Playful redundancy suggestions verified")
+    
+    return True
+
 def main():
     """Run all tests"""
     print("🌌 COPILOT-INSTRUCTION.PY - AI AGENT ENGINE TESTS")
@@ -142,7 +268,10 @@ def main():
         ("AI Agents", test_ai_agents),
         ("Orchestrator", test_orchestrator), 
         ("Memory Persistence", test_memory_persistence),
-        ("Network Simulation", test_network_simulation)
+        ("Network Simulation", test_network_simulation),
+        ("I-Who-Me Tracking", test_iwho_me_tracking),
+        ("Enhanced Orchestrator", test_enhanced_orchestrator),
+        ("Grok-Style Responses", test_grok_style_responses)
     ]
     
     passed = 0

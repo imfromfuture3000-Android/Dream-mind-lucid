@@ -28,7 +28,7 @@ Dream-Mind-Lucid is a cutting-edge **autonomous AI agent ecosystem** that revolu
 
 | Feature | Technology Stack | Innovation Level |
 |---------|------------------|-----------------|
-| **🤖 AI Agent Orchestra** | Python 3.11+, ElizaOS Integration | ⚡ **Autonomous Decision Making** |
+| **🤖 AI Agent Orchestra** | Python 3.11+, ElizaOS Integration, I-Who-Me Tracking | ⚡ **Autonomous Decision Making + Self-Awareness** |
 | **⛽ Zero-Gas Operations** | SKALE Europa Hub, Biconomy Meta-Tx | 🚀 **Gasless Transaction Layer** |
 | **🟣 Solana Integration** | SPL Token 2022, Helius MEV Protection | 🛡️ **Enhanced Security & Performance** |
 | **🌐 Quantum Dream Network** | IPFS, Solidity 0.8.20, OneiroSphere | 🧠 **Neural Interface Protocol** |
@@ -42,6 +42,8 @@ Dream-Mind-Lucid is a cutting-edge **autonomous AI agent ecosystem** that revolu
 - **MEVMaster Agent**: Executes sophisticated MEV strategies (~3,120 tokens/operation)  
 - **Arbitrader Agent**: Cross-chain arbitrage automation (~2,430 tokens/operation)
 - **AI Orchestrator**: Intelligent decision making with profit optimization algorithms
+- **🌀 I-Who-Me Intelligence**: Self-aware context tracking with Grok-style consciousness
+- **🔄 Redundancy Detection**: Pattern recognition and alternative strategy suggestions
 
 ### ⚡ **Zero-Gas Blockchain Operations**
 - **SKALE Europa Hub**: Chain ID `2046399126` with native zero-gas transactions
