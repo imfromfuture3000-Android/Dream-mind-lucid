@@ -75,6 +75,12 @@ def test_orchestrator():
     print(f"   🚀 Executing decision...")
     orchestrator.execute_decision(decision)
     
+    # Test OneiroBot integration in orchestrator
+    print(f"   🌙 Testing OneiroBot integration...")
+    assert orchestrator.oneirobot is not None, "OneiroBot should be available"
+    assert orchestrator.oneirobot.status == "ACTIVE", "OneiroBot should be active"
+    print(f"   ✅ OneiroBot integrated: {orchestrator.oneirobot.name}")
+    
     return True
 
 def test_memory_persistence():

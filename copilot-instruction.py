@@ -471,6 +471,14 @@ class AIOrchestrator:
                 # Get current profits
                 profits = self.get_profits()
                 
+                # OneiroBot periodic monitoring every 5 cycles
+                if cycle % 5 == 0:
+                    print("[🌙] OneiroBot performing periodic health scan...")
+                    health_result = self.oneirobot.check_mcp_health()
+                    optimization_result = self.oneirobot.suggest_optimizations()
+                    print(f"[🌙] {health_result['message']}")
+                    print(f"[🌙] {optimization_result['message']}")
+                
                 # Make AI decision
                 decision = self.make_decision(profits)
                 print(f"[🧠] AI Decision: {decision}")
@@ -696,6 +704,23 @@ def main():
         if command.startswith('#') or command.startswith('oneirobot') or command.startswith('oneiro'):
             result = handle_copilot_command(command, args)
             sys.exit(0)  # Exit after handling command
+        elif command == '--single-cycle':
+            # Single cycle mode for testing
+            print("🔧 Running single test cycle...")
+            bot = AIOrchestrator()
+            
+            # Run one cycle of the orchestrator
+            profits = bot.get_profits()
+            decision = bot.make_decision(profits)
+            print(f"[🧠] AI Decision: {decision}")
+            bot.execute_decision(decision)
+            
+            # OneiroBot health check
+            health_result = bot.oneirobot.check_mcp_health()
+            print(f"[🌙] {health_result['message']}")
+            
+            print("✅ Single cycle test completed!")
+            sys.exit(0)
     
     # Check network connection
     try:
