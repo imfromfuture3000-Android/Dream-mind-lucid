@@ -108,7 +108,7 @@ for key in "${secrets[@]}"; do
   value="${kv[$key]:-}"
   if [ -z "$value" ]; then
     # Hidden input for sensitive names
-    if [[ "$key" =~ KEY|SECRET|MNEMONIC|DEPLOYER|MCP|TOKEN ]]; then
+    if [[ "$key" =~ (KEY|SECRET|MNEMONIC|DEPLOYER|MCP|TOKEN)$ ]]; then
       echo -n "Enter value for $key (hidden; ENTER to skip): "
       read -s input || true
       echo
