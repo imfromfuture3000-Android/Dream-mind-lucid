@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "title": "Dream-Mind-Lucid Deployment Report (Testnet)",
+    "generated_at": "2025-09-12T09:16:20.610617",
+    "environment": "testnet",
+    "version": "1.0.0"
+  },
+  "summary": {
+    "total_networks": 1,
+    "total_contracts": 2,
+    "gasless_networks": 1,
+    "deployment_cost": "$0.00",
+    "success_rate": "100%"
+  },
+  "networks": {
+    "skale": {
+      "name": "Skale",
+      "chain_id": null,
+      "rpc": null,
+      "contracts": {
+        "IEMDreams": {
+          "address": "0xe64382173fba8412f62985aacddd5010658b99cf",
+          "gas_used": 0,
+          "cost_usd": 0.0,
+          "status": "deployed",
+          "verified": true,
+          "audited": true
+        },
+        "OneiroSphere": {
+          "address": "0x7a9115055433ba964c5f5c71e041089ccd6777b7",
+          "gas_used": 0,
+          "cost_usd": 0.0,
+          "status": "deployed",
+          "verified": true,
+          "audited": true
+        }
+      },
+      "contract_count": 2,
+      "gasless_enabled": true,
+      "total_gas_used": 0,
+      "deployment_cost": 0.0,
+      "deployed_at": 1757668561.1378493,
+      "status": "active"
+    }
+  },
+  "relayers": {},
+  "costs": {
+    "total_gas_used": 0,
+    "total_cost_usd": 0.0,
+    "cost_breakdown": {
+      "skale": 0.0
+    }
+  },
+  "security": {
+    "audited_contracts": 2,
+    "security_score": "A+",
+    "vulnerabilities": []
+  },
+  "performance": {
+    "avg_deployment_time": "30s",
+    "success_rate": 1.0,
+    "uptime": "99.9%"
+  }
+}

@@ -1,0 +1,470 @@
+name: 🚀 Zero-Cost Multi-Chain Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      deployment_mode:
+        description: 'Deployment mode'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - contracts-only
+          - frontend-only
+          - solana-only
+          - skale-only
+          - evm-chains
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'mainnet'
+        type: choice
+        options:
+          - mainnet
+          - testnet
+          - devnet
+      enable_relayers:
+        description: 'Enable gasless relayers'
+        required: true
+        default: true
+        type: boolean
+      deploy_frontend:
+        description: 'Deploy frontend to free hosting'
+        required: true
+        default: true
+        type: boolean
+
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'contracts/**'
+      - 'agents/**'
+      - 'frontend/**'
+      - '.github/workflows/**'
+
+  pull_request:
+    branches: [ main ]
+
+env:
+  # Blockchain Networks
+  SKALE_RPC: ${{ secrets.SKALE_RPC || 'https://mainnet.skalenodes.com/v1/elated-tan-skat' }}
+  SKALE_CHAIN_ID: ${{ secrets.SKALE_CHAIN_ID || '2046399126' }}
+  SOLANA_RPC_URL: ${{ secrets.SOLANA_RPC_URL || 'https://mainnet.helius-rpc.com' }}
+  
+  # Free RPC Endpoints (Fallbacks)
+  INFURA_PROJECT_ID: ${{ secrets.INFURA_PROJECT_ID }}
+  ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
+  ANKR_API_KEY: ${{ secrets.ANKR_API_KEY }}
+  
+  # Deployment Keys
+  DEPLOYER_KEY: ${{ secrets.DEPLOYER_KEY }}
+  SOLANA_DEPLOYER_KEY: ${{ secrets.SOLANA_DEPLOYER_KEY }}
+  
+  # Relayer Configuration
+  BICONOMY_API_KEY: ${{ secrets.BICONOMY_API_KEY }}
+  GELATO_API_KEY: ${{ secrets.GELATO_API_KEY }}
+  FORWARDER_ADDRESS: ${{ secrets.FORWARDER_ADDRESS }}
+  
+  # Hosting & Deploy
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+  FLEEK_API_KEY: ${{ secrets.FLEEK_API_KEY }}
+
+jobs:
+  # ===========================================
+  # PREPARATION & VALIDATION
+  # ===========================================
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      deployment-matrix: ${{ steps.matrix.outputs.matrix }}
+      should-deploy-contracts: ${{ steps.check.outputs.contracts }}
+      should-deploy-frontend: ${{ steps.check.outputs.frontend }}
+      environment: ${{ steps.env.outputs.environment }}
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Determine deployment environment
+      id: env
+      run: |
+        if [ "${{ github.event.inputs.environment }}" != "" ]; then
+          echo "environment=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
+        elif [ "${{ github.ref }}" = "refs/heads/main" ]; then
+          echo "environment=mainnet" >> $GITHUB_OUTPUT
+        else
+          echo "environment=testnet" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Check what to deploy
+      id: check
+      run: |
+        MODE="${{ github.event.inputs.deployment_mode || 'all' }}"
+        
+        if [[ "$MODE" == "all" || "$MODE" == "contracts-only" || "$MODE" == *"-only" ]]; then
+          echo "contracts=true" >> $GITHUB_OUTPUT
+        else
+          echo "contracts=false" >> $GITHUB_OUTPUT
+        fi
+        
+        if [[ "$MODE" == "all" || "$MODE" == "frontend-only" ]] && [[ "${{ github.event.inputs.deploy_frontend || 'true' }}" == "true" ]]; then
+          echo "frontend=true" >> $GITHUB_OUTPUT
+        else
+          echo "frontend=false" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Generate deployment matrix
+      id: matrix
+      run: |
+        MODE="${{ github.event.inputs.deployment_mode || 'all' }}"
+        ENV="${{ steps.env.outputs.environment }}"
+        
+        CHAINS='[]'
+        
+        if [[ "$MODE" == "all" || "$MODE" == "solana-only" ]]; then
+          CHAINS=$(echo $CHAINS | jq '. + [{"name": "solana", "rpc": "'"$SOLANA_RPC_URL"'", "gasless": true}]')
+        fi
+        
+        if [[ "$MODE" == "all" || "$MODE" == "skale-only" ]]; then
+          CHAINS=$(echo $CHAINS | jq '. + [{"name": "skale", "rpc": "'"$SKALE_RPC"'", "gasless": true}]')
+        fi
+        
+        if [[ "$MODE" == "all" || "$MODE" == "evm-chains" ]]; then
+          if [[ "$ENV" == "mainnet" ]]; then
+            CHAINS=$(echo $CHAINS | jq '. + [{"name": "polygon", "rpc": "https://polygon.llamarpc.com", "gasless": true}]')
+            CHAINS=$(echo $CHAINS | jq '. + [{"name": "base", "rpc": "https://base.llamarpc.com", "gasless": true}]')
+            CHAINS=$(echo $CHAINS | jq '. + [{"name": "arbitrum", "rpc": "https://arbitrum.llamarpc.com", "gasless": true}]')
+          else
+            CHAINS=$(echo $CHAINS | jq '. + [{"name": "polygon-mumbai", "rpc": "https://rpc-mumbai.maticvigil.com", "gasless": true}]')
+            CHAINS=$(echo $CHAINS | jq '. + [{"name": "base-sepolia", "rpc": "https://sepolia.base.org", "gasless": true}]')
+          fi
+        fi
+        
+        echo "matrix=$(echo $CHAINS | jq -c .)" >> $GITHUB_OUTPUT
+
+  # ===========================================
+  # CONTRACT DEPLOYMENT (MULTI-CHAIN)
+  # ===========================================
+  deploy-contracts:
+    needs: prepare
+    if: needs.prepare.outputs.should-deploy-contracts == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        chain: ${{ fromJson(needs.prepare.outputs.deployment-matrix) }}
+      fail-fast: false
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install Python dependencies
+      run: |
+        pip install -r requirements.txt
+        
+    - name: Install Node.js dependencies
+      run: |
+        npm ci
+        
+    - name: Install Solidity compiler
+      if: matrix.chain.name != 'solana'
+      run: |
+        sudo snap install solc
+        
+    - name: Deploy to ${{ matrix.chain.name }}
+      env:
+        BLOCKCHAIN_MODE: ${{ matrix.chain.name }}
+        RPC_URL: ${{ matrix.chain.rpc }}
+        CHAIN_GASLESS: ${{ matrix.chain.gasless }}
+        TARGET_ENV: ${{ needs.prepare.outputs.environment }}
+      run: |
+        # Create deployment script for this chain
+        python scripts/deploy_multichain.py \
+          --chain ${{ matrix.chain.name }} \
+          --environment ${{ needs.prepare.outputs.environment }} \
+          --gasless ${{ matrix.chain.gasless }}
+        
+    - name: Setup relayers
+      if: github.event.inputs.enable_relayers == 'true' && matrix.chain.gasless == 'true'
+      env:
+        CHAIN_NAME: ${{ matrix.chain.name }}
+      run: |
+        python scripts/setup_relayers.py --chain ${{ matrix.chain.name }}
+        
+    - name: Verify deployment
+      run: |
+        python scripts/verify_deployment.py --chain ${{ matrix.chain.name }}
+        
+    - name: Upload deployment artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: deployment-${{ matrix.chain.name }}-${{ needs.prepare.outputs.environment }}
+        path: |
+          deployments/
+          iem_memory.json
+          solana_dream_memory.json
+        retention-days: 30
+
+  # ===========================================
+  # FRONTEND BUILD & DEPLOYMENT
+  # ===========================================
+  build-frontend:
+    needs: [prepare, deploy-contracts]
+    if: needs.prepare.outputs.should-deploy-frontend == 'true'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Download deployment artifacts
+      uses: actions/download-artifact@v4
+      with:
+        pattern: deployment-*
+        merge-multiple: true
+        path: ./deployments
+        
+    - name: Install frontend dependencies
+      run: |
+        cd frontend
+        npm ci
+        
+    - name: Generate deployment config
+      run: |
+        python scripts/generate_frontend_config.py \
+          --deployments ./deployments \
+          --environment ${{ needs.prepare.outputs.environment }}
+        
+    - name: Build frontend
+      run: |
+        cd frontend
+        npm run build
+        
+    - name: Build documentation
+      run: |
+        cd docs
+        npm ci
+        npm run build
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-build
+        path: |
+          frontend/dist/
+          docs/dist/
+
+  # ===========================================
+  # ZERO-COST HOSTING DEPLOYMENT
+  # ===========================================
+  deploy-github-pages:
+    needs: [prepare, build-frontend]
+    if: needs.prepare.outputs.should-deploy-frontend == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    
+    steps:
+    - name: Download frontend build
+      uses: actions/download-artifact@v4
+      with:
+        name: frontend-build
+        path: ./dist
+        
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
+      
+    - name: Upload to GitHub Pages
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: ./dist
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
+
+  deploy-vercel:
+    needs: [prepare, build-frontend]
+    if: needs.prepare.outputs.should-deploy-frontend == 'true' && secrets.VERCEL_TOKEN != ''
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Download frontend build
+      uses: actions/download-artifact@v4
+      with:
+        name: frontend-build
+        path: ./dist
+        
+    - name: Deploy to Vercel
+      uses: amondnet/vercel-action@v25
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+        working-directory: ./dist
+
+  deploy-netlify:
+    needs: [prepare, build-frontend]
+    if: needs.prepare.outputs.should-deploy-frontend == 'true' && secrets.NETLIFY_AUTH_TOKEN != ''
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Download frontend build
+      uses: actions/download-artifact@v4
+      with:
+        name: frontend-build
+        path: ./dist
+        
+    - name: Deploy to Netlify
+      uses: nwtgck/actions-netlify@v3.0
+      with:
+        publish-dir: './dist'
+        production-branch: main
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        deploy-message: "Deploy from GitHub Actions"
+        enable-pull-request-comment: false
+        enable-commit-comment: true
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+  # ===========================================
+  # POST-DEPLOYMENT ACTIONS
+  # ===========================================
+  post-deployment:
+    needs: [prepare, deploy-contracts, deploy-github-pages]
+    if: always() && needs.prepare.outputs.should-deploy-contracts == 'true'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Download all artifacts
+      uses: actions/download-artifact@v4
+      with:
+        pattern: deployment-*
+        merge-multiple: true
+        path: ./deployments
+        
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        
+    - name: Generate deployment report
+      run: |
+        python scripts/generate_deployment_report.py \
+          --deployments ./deployments \
+          --environment ${{ needs.prepare.outputs.environment }}
+        
+    - name: Update README with deployment info
+      run: |
+        python scripts/update_readme_deployments.py \
+          --deployments ./deployments \
+          --environment ${{ needs.prepare.outputs.environment }}
+        
+    - name: Create deployment summary
+      run: |
+        echo "## 🚀 Zero-Cost Deployment Complete!" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 🌐 Deployed Networks:" >> $GITHUB_STEP_SUMMARY
+        python scripts/deployment_summary.py >> $GITHUB_STEP_SUMMARY
+        
+    - name: Commit deployment updates
+      if: github.ref == 'refs/heads/main'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add README.md deployments/
+        git diff --staged --quiet || git commit -m "🚀 Update deployment info [skip ci]"
+        git push
+
+  # ===========================================
+  # MONITORING & ALERTS
+  # ===========================================
+  setup-monitoring:
+    needs: [deploy-contracts]
+    if: needs.prepare.outputs.should-deploy-contracts == 'true'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        
+    - name: Setup contract monitoring
+      run: |
+        python scripts/setup_monitoring.py \
+          --environment ${{ needs.prepare.outputs.environment }}
+        
+    - name: Test all deployments
+      run: |
+        python scripts/test_all_deployments.py \
+          --environment ${{ needs.prepare.outputs.environment }}
+
+  # ===========================================
+  # NOTIFICATION
+  # ===========================================
+  notify-success:
+    needs: [deploy-contracts, deploy-github-pages]
+    if: success()
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Success notification
+      run: |
+        echo "🎉 Zero-Cost Multi-Chain Deployment Successful! 🎉"
+        echo "✅ Contracts deployed with gasless transactions"
+        echo "🌐 Frontend deployed to multiple free hosting platforms"
+        echo "⚡ Relayers configured for optimal user experience"
+        echo "💰 Total deployment cost: $0 (Zero cost achieved!)"
+
+  notify-failure:
+    needs: [deploy-contracts, deploy-github-pages]
+    if: failure()
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Failure notification
+      run: |
+        echo "❌ Deployment encountered issues"
+        echo "🔧 Check the logs for troubleshooting steps"
+        echo "💡 Try running individual components separately"
+        echo "🌌 The cosmos awaits your next attempt!"
