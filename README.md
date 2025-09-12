@@ -139,7 +139,11 @@ For complete migration details, see [SOLANA_MIGRATION.md](./SOLANA_MIGRATION.md)
 # Clone and deploy in under 60 seconds
 git clone https://github.com/imfromfuture3000-Android/Dream-mind-lucid.git
 cd Dream-mind-lucid
-pip install -r requirements.txt
+
+# Install dependencies (choose one method)
+python grok_copilot_launcher.py install  # ⚡ Automated installation
+# OR
+pip install -r requirements.txt         # 📦 Manual installation
 
 # Deploy on Solana (Primary - with MEV protection)
 python agents/solana_dream_agent.py deploy_tokens
@@ -351,9 +355,11 @@ cd Dream-mind-lucid
 # Create feature branch
 git checkout -b feature/quantum-enhancement
 
-# Install development dependencies
-pip install -r requirements.txt
-pip install -r requirements-dev.txt  # If available
+# Install development dependencies (choose one method)
+python grok_copilot_launcher.py install  # ⚡ Automated installation
+# OR
+pip install -r requirements.txt         # 📦 Manual installation
+pip install -r requirements-dev.txt     # If available
 
 # Run tests
 python test_copilot_instruction.py
