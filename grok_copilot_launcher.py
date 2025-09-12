@@ -10,6 +10,7 @@ Use as a friendlier entrypoint around existing tooling in:
 
 Commands:
   (no args)            Show status
+  install              Install all required dependencies
   deploy <Contract>    Deploy contract via iem_syndicate (IEMDreams | OneiroSphere)
   audit <Contract>     Audit deployed contract
   test                 Run dream recording test
@@ -83,6 +84,39 @@ def run_syndicate(args):
     return 0
 
 
+def run_install():
+    """Install all required dependencies."""
+    print("📦 Installing Dream-Mind-Lucid dependencies...")
+    try:
+        import subprocess
+        # Install core dependencies directly without importing dream_mind_launcher first
+        subprocess.run(["pip", "install", "web3", "py-solc-x", "mcp", "ipfshttpclient", "PyExifTool"], check=True)
+        
+        # Install Solidity compiler
+        try:
+            from solcx import install_solc
+            install_solc("0.8.20")
+        except ImportError:
+            print("⚠️ Solidity compiler installation skipped - py-solc-x not available yet")
+        
+        print("✅ Dependencies installed successfully!")
+        
+        # Also install from requirements.txt if available
+        if os.path.exists("requirements.txt"):
+            print("📋 Installing from requirements.txt...")
+            subprocess.run(["pip", "install", "-r", "requirements.txt"], check=True)
+            print("✅ Requirements.txt dependencies installed!")
+        
+        return 0
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Installation failed: {e}")
+        print("💡 Try running manually: pip install -r requirements.txt")
+        return 1
+    except Exception as e:
+        print(f"❌ Installation failed: {e}")
+        print("💡 Try running manually: pip install -r requirements.txt")
+        return 1
+
 def run_oneirobot(args):
     """Run OneiroBot commands via Copilot integration"""
     try:
@@ -131,6 +165,8 @@ def main():
     elif sub in {"oneirobot", "oneiro", "summon_oneirobot", "oneirobot_status", "oneirobot_scan", 
                  "oneirobot_optimize", "oneirobot_fix", "oneirobot_help"}:
         return run_oneirobot(sys.argv[1:])
+    elif sub == "install":
+        return run_install()
     elif sub == "image":
         # Lazy run of the heavier image launcher
         try:
@@ -142,6 +178,7 @@ def main():
         return 0
     else:
         print(f"❌ Unknown subcommand: {sub}")
+        print("💡 Available commands: deploy, audit, test, install, oneirobot, image")
         return 1
 
 if __name__ == "__main__":

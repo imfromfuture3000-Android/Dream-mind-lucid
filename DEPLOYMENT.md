@@ -19,6 +19,10 @@ This guide will help you deploy the OneiroSphere.sol smart contract to the SKALE
 
 2. **Dependencies**:
    ```bash
+   # Automated installation (recommended)
+   python grok_copilot_launcher.py install
+   
+   # OR manual installation
    pip install -r requirements.txt
    ```
 
