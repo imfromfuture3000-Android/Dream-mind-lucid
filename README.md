@@ -140,16 +140,17 @@ For complete migration details, see [SOLANA_MIGRATION.md](./SOLANA_MIGRATION.md)
 git clone https://github.com/imfromfuture3000-Android/Dream-mind-lucid.git
 cd Dream-mind-lucid
 
-# Install dependencies (choose one method)
-python grok_copilot_launcher.py install  # ⚡ Automated installation
-# OR
-pip install -r requirements.txt         # 📦 Manual installation
+# 🚀 ONE-COMMAND SETUP (Install everything and deploy)
+python install_and_deploy.py
 
-# Deploy on Solana (Primary - with MEV protection)
-python agents/solana_dream_agent.py deploy_tokens
+# OR step-by-step installation
+python grok_copilot_launcher.py install      # Install all dependencies
+python grok_copilot_launcher.py deploy-all   # Deploy complete ecosystem
 
-# OR Deploy on SKALE (Legacy - zero gas)
-python agents/iem_syndicate.py deploy
+# OR manual installation (legacy)
+pip install -r requirements.txt              # Manual Python deps only
+python agents/solana_dream_agent.py deploy_tokens  # Solana deployment
+python agents/iem_syndicate.py deploy        # SKALE deployment
 ```
 
 ### 🎮 **Interactive Demo**
