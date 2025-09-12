@@ -47,11 +47,12 @@ if [ -f "$ENV_FILE" ]; then
       val="${BASH_REMATCH[2]}"
       # trim whitespace first
       val="$(trim "$val")"
-      # strip surrounding quotes
-      val="${val%\"}"
-      val="${val#\"}"
-      val="${val%\'}"
-      val="${val#\'}"
+      # strip matching surrounding quotes only
+      if [[ ( "$val" == \"*\" ) && ( "$val" == *\" ) ]]; then
+        val="${val:1:-1}"
+      elif [[ ( "$val" == \'* ) && ( "$val" == *\' ) ]]; then
+        val="${val:1:-1}"
+      fi
       kv["$key"]="$val"
     fi
   done < "$ENV_FILE"
