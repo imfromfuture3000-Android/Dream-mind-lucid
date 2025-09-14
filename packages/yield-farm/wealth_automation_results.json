@@ -1,0 +1,62 @@
+{
+  "timestamp": "2025-09-14T15:57:07.471047",
+  "strategies": {
+    "airdrop_farming": {
+      "monad_actions": 14,
+      "monad_reward": 700,
+      "stacks_staked": 319.4310735293386,
+      "stacks_apy": 35.0,
+      "pi_mining_hours": 24,
+      "pi_reward": 48.0,
+      "total_estimated": 778.6303769137722
+    },
+    "bounty_hunting": {
+      "bounties_found": 4,
+      "bounties_completed": 2,
+      "earnings": 316.0999345738256,
+      "sources": [
+        "ZeroAuth Security",
+        "ImmuneFi",
+        "GitCoin",
+        "X/Twitter Content"
+      ]
+    },
+    "cloud_mining": {
+      "investment": 500.0,
+      "daily_rate": 0.08445685073466269,
+      "daily_return": 42.22842536733135,
+      "roi_percentage": 8.445685073466269,
+      "status": "active"
+    },
+    "defi_strategies": {
+      "multiplifi_stake": 1000.0,
+      "multiplifi_apy": 19.352791222237485,
+      "solana_stake": 500.0,
+      "solana_apy": 8.5,
+      "total_staked": 1500.0,
+      "weighted_apy": 15.735194148158323,
+      "daily_rewards": 0.6466518143078762,
+      "protocols_active": 2
+    },
+    "arbitrage": {
+      "opportunities": 2,
+      "profit_per_trade": 285.6292123835495,
+      "total_profit": 571.258424767099,
+      "chains": [
+        "Solana",
+        "SKALE",
+        "Ethereum"
+      ]
+    }
+  },
+  "metrics": {
+    "total_capital": 10000.0,
+    "daily_earnings": 133.0285040815481,
+    "monthly_apy": 39.90855122446443,
+    "annual_apy": 478.9026146935732,
+    "risk_score": 3.2,
+    "target_range": "15-30%",
+    "status": "OPTIMIZATION NEEDED"
+  },
+  "mode": "simulation"
+}
