@@ -1,0 +1,36 @@
+
+# OneiRobot Syndicate Dream Archive
+# GitHub Pages Configuration
+
+name: dream-archive
+description: OneiRobot Syndicate Dream Archives - Quantum consciousness documentation
+url: https://oneirosyndicate.github.io/dream-archive
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# Collections
+collections:
+  dreams:
+    output: true
+    permalink: /dreams/:name/
+  deployments:
+    output: true
+    permalink: /deployments/:name/
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Theme
+theme: minima
+
+# Custom variables
+oneirosyndicate:
+  tagline: "Where Dreams Meet Quantum Reality"
+  syndicate_motto: "Deploy with echoed courage"
+  quantum_level: "TRANSCENDENT"
