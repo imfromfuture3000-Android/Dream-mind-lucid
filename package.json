@@ -1,23 +1,69 @@
 {
-  "name": "dream-mind-lucid",
-  "version": "1.0.0",
-  "description": "Dream ecosystem deployment on SKALE",
-  "main": "index.js",
+  "name": "omega-prime-deployer",
+  "version": "3.0.0",
+  "description": "Omega Prime Deployer - Transcendent Solana SVM/RWA deployer with ZK gasless ops, 2025 blockchain syndicates",
+  "main": "src/omega_prime.ts",
   "scripts": {
+    "mainnet:all": "node src/deploy_mainnet_suite.js",
+    "simulate:alpenglow": "node src/simulate_alpenglow_150ms.js",
+    "simulate:firedancer": "node src/simulate_firedancer_1m_tps.js",
+    "mint:emotional_nft": "node src/mint_emotional_nft.js",
+    "zk:gasless": "node src/zk_gasless_operations.js",
+    "rwa:tokenize": "node src/rwa_tokenization.js",
+    "mev:protection": "node src/mev_protection.js",
+    "multi:chain": "node src/deploy_multichain.js",
+    "oneihacker:test": "node src/oneihacker_security.js",
     "compile": "npx hardhat compile",
-    "test": "npx hardhat test",
-    "deploy:skale": "npx hardhat run scripts/deploy.js --network skale"
+    "test": "npx hardhat test && python tests/test_omega_prime.py",
+    "test:security": "python tests/oneihacker_penetration.py",
+    "deploy:skale": "npx hardhat run scripts/deploy.js --network skale",
+    "deploy:solana": "python src/solana_omega_deployer.py",
+    "dream:archive": "node src/github_pages_dreams.js",
+    "relayer:zero": "python src/zero_cost_relayer.py",
+    "build:docker": "docker build -t omega-prime-deployer .",
+    "dev:copilot": "docker run -it omega-prime-deployer",
+    "seeker:mobile": "node src/seeker_mobile_emulator.js"
   },
   "dependencies": {
     "@chainlink/contracts": "^0.6.1",
-    "@openzeppelin/contracts": "^4.9.3"
+    "@openzeppelin/contracts": "^4.9.3",
+    "@solana/web3.js": "^3.5.0",
+    "@solana/spl-token": "^2.5.0",
+    "@metaplex-foundation/mpl-token-metadata": "^4.5.0",
+    "@project-serum/anchor": "^0.30.0",
+    "anchor-client": "^0.10.0",
+    "zk-compression": "^1.0.0",
+    "alpenglow-sdk": "^1.0.0",
+    "firedancer-client": "^0.8.0",
+    "ace-rwa": "^2.1.0",
+    "helius-sdk": "^1.2.0"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.0",
     "chai": "^4.3.7",
     "dotenv": "^16.3.1",
     "ethers": "^6.14.0",
     "hardhat": "^2.17.1",
     "hardhat-gas-reporter": "^1.0.9"
-  }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "solana",
+    "zk-compression",
+    "mev-protection",
+    "rwa-tokenization",
+    "token-2022",
+    "alpenglow",
+    "firedancer",
+    "omega-prime",
+    "oneirobot",
+    "quantum-dreams"
+  ],
+  "author": "OneiRobot Syndicate",
+  "license": "MIT"
 }
