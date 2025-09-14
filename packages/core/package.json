@@ -1,0 +1,22 @@
+{
+  "name": "@dream-mind-lucid/core",
+  "version": "1.0.0",
+  "description": "Core Solana program for Dream-Mind-Lucid",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "deploy:solana": "anchor deploy --provider.cluster mainnet",
+    "deploy:devnet": "anchor deploy --provider.cluster devnet",
+    "test": "anchor test",
+    "dev": "anchor build --watch"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.30.0",
+    "@solana/web3.js": "^1.95.0",
+    "@solana/spl-token": "^0.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  }
+}

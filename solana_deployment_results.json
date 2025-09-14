@@ -1,0 +1,37 @@
+{
+  "timestamp": 1757865419.9714835,
+  "mode": "simulation",
+  "tokens": {
+    "DREAM": {
+      "name": "Dream Token",
+      "symbol": "DREAM",
+      "mint_address": "39d64e3b1c06529e76f9d76dfd84fb1d39fb752c8bce",
+      "supply": 777777777000000000,
+      "decimals": 9,
+      "program": "SPL Token 2022",
+      "tx_signature": "sim_39d64e3b1c06529e",
+      "mev_protected": true
+    },
+    "SMIND": {
+      "name": "SMIND Token",
+      "symbol": "SMIND",
+      "mint_address": "9176f8d375fd7e13204fefb07d1a2bb278d024595ed5",
+      "supply": 777777777000000000,
+      "decimals": 9,
+      "program": "SPL Token 2022",
+      "tx_signature": "sim_9176f8d375fd7e13",
+      "mev_protected": true
+    },
+    "LUCID": {
+      "name": "LUCID Token",
+      "symbol": "LUCID",
+      "mint_address": "80f24553348aff741f0233405ad1a34b5e8116f8b3a7",
+      "supply": 333333333000000000,
+      "decimals": 9,
+      "program": "SPL Token 2022",
+      "tx_signature": "sim_80f24553348aff74",
+      "mev_protected": true
+    }
+  },
+  "deployer": "SIM_7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA"
+}
