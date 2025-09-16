@@ -1,0 +1,71 @@
+{
+  "manifest_version": 3,
+  "name": "OneirobotNFT Viewer - AI Gene Deployer",
+  "version": "1.0.0",
+  "description": "View OneirobotNFT collections on OpenSea (SKALE) and Magic Eden (Solana) with real-time attributes",
+  
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://opensea.io/*",
+    "https://magiceden.io/*",
+    "https://elated-tan-skat.explorer.mainnet.skalenodes.com/*",
+    "https://solscan.io/*",
+    "https://api.opensea.io/*",
+    "https://api-mainnet.magiceden.dev/*"
+  ],
+
+  "host_permissions": [
+    "https://opensea.io/*",
+    "https://magiceden.io/*",
+    "https://api.opensea.io/*",
+    "https://api-mainnet.magiceden.dev/*"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://opensea.io/collection/*",
+        "https://magiceden.io/marketplace/*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "OneirobotNFT Viewer",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png", 
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*.png", "oneirobot-widget.html"],
+      "matches": ["https://opensea.io/*", "https://magiceden.io/*"]
+    }
+  ],
+
+  "externally_connectable": {
+    "matches": [
+      "https://opensea.io/*",
+      "https://magiceden.io/*"
+    ]
+  }
+}

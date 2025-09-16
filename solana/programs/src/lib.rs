@@ -1,3 +1,5 @@
+pub mod oneirobot_nft;
+
 use solana_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint,
@@ -10,10 +12,10 @@ use solana_program::{
 };
 use borsh::{BorshDeserialize, BorshSerialize};
 
-// Program entrypoint
+// Program entrypoint for legacy dream functionality
 entrypoint!(process_instruction);
 
-// Program ID - will be set during deployment
+// Original Program ID for dream recording (maintained for compatibility)
 solana_program::declare_id!("11111111111111111111111111111111");
 
 #[derive(BorshSerialize, BorshDeserialize, Debug)]
