@@ -35,22 +35,35 @@
   },
   "dependencies": {
     "@chainlink/contracts": "^0.8.0",
-    "@openzeppelin/contracts": "^5.0.0",
-    "@solana/web3.js": "^1.95.0",
-    "@solana/spl-token": "^0.4.0",
     "@coral-xyz/anchor": "^0.30.0",
+    "@openzeppelin/contracts": "^5.0.0",
+    "@solana/spl-token": "^0.4.0",
+    "@solana/web3.js": "^1.95.0",
     "concurrently": "^8.2.0"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^2.1.0",
+    "@nomicfoundation/hardhat-ethers": "^3.1.0",
+    "@nomicfoundation/hardhat-ignition": "^0.15.13",
+    "@nomicfoundation/hardhat-ignition-ethers": "^0.15.14",
+    "@nomicfoundation/hardhat-network-helpers": "^1.1.0",
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@nomicfoundation/hardhat-verify": "^2.1.1",
+    "@nomicfoundation/ignition-core": "^0.15.13",
+    "@typechain/ethers-v6": "^0.5.1",
+    "@typechain/hardhat": "^9.1.0",
+    "@types/chai": "^4.3.20",
+    "@types/mocha": "^10.0.10",
     "@types/node": "^20.0.0",
-    "typescript": "^5.0.0",
-    "ts-node": "^10.9.0",
     "chai": "^4.3.7",
     "dotenv": "^16.3.1",
     "ethers": "^6.14.0",
     "hardhat": "^2.22.0",
-    "hardhat-gas-reporter": "^2.0.0"
+    "hardhat-gas-reporter": "^2.0.0",
+    "solidity-coverage": "^0.8.16",
+    "ts-node": "^10.9.0",
+    "typechain": "^8.3.2",
+    "typescript": "^5.0.0"
   },
   "engines": {
     "node": ">=18.0.0"
