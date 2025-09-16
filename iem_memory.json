@@ -36,8 +36,28 @@
         }
       ],
       "bytecode": "0xSIM_DREAMS",
-      "timestamp": 1756859686.6893916,
+      "timestamp": 1757984605.1287732,
       "txHash": "0xSIMULATIONe64382173fba8412",
+      "gasUsed": 0
+    },
+    "--contract": {
+      "address": "0x9fd634d697b62645eac4a342daf71728bb1386e1",
+      "abi": [
+        {
+          "type": "function",
+          "name": "interfaceDream",
+          "inputs": [
+            {
+              "name": "ipfsHash",
+              "type": "string"
+            }
+          ],
+          "outputs": []
+        }
+      ],
+      "bytecode": "0xSIM_ONEIRO",
+      "timestamp": 1757984615.7406666,
+      "txHash": "0xSIMULATION9fd634d697b62645",
       "gasUsed": 0
     }
   },
