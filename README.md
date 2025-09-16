@@ -3,22 +3,31 @@
 <div align="center">
 
 ![SKALE Network](https://img.shields.io/badge/SKALE-Europa%20Hub-00D4FF?style=for-the-badge&logo=ethereum&logoColor=white)
+![Solana](https://img.shields.io/badge/Solana-Mainnet-9945FF?style=for-the-badge&logo=solana&logoColor=white)
 ![Chain ID](https://img.shields.io/badge/Chain%20ID-2046399126-purple?style=for-the-badge)
+![SPL Token](https://img.shields.io/badge/SPL%20Token-2022-FF6B9D?style=for-the-badge)
 ![Zero Gas](https://img.shields.io/badge/Gas%20Cost-0%20SKL-green?style=for-the-badge)
+![MEV Protection](https://img.shields.io/badge/MEV-Protected-00D4FF?style=for-the-badge)
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Solidity](https://img.shields.io/badge/Solidity-0.8.20-363636?style=for-the-badge&logo=solidity&logoColor=white)
+![Rust](https://img.shields.io/badge/Rust-Programs-CE422B?style=for-the-badge&logo=rust&logoColor=white)
 
-**🚀 Next-Generation Autonomous AI Agent Ecosystem | 🧠 Neural Dream Mining | ⚡ Zero-Gas Blockchain Operations**
+**🚀 Next-Generation Autonomous AI Agent Ecosystem | 🧠 Neural Dream Mining | ⚡ Multi-Blockchain Operations**
 
-*Building the future of consciousness-machine interfaces through quantum dream networks*
+*Building the future of consciousness-machine interfaces through quantum dream networks on SKALE and Solana*
 
 </div>
 
 ---
 
+> **🚨 NEW MAJOR UPDATE!** 🚨  
+> **[📖 Dream-Mind-Lucid v3.0.0 Update Guide](UPDATE_README.md)** - Featuring Omega Prime Deployer, Solana Migration & Multi-Chain Support!
+
+---
+
 ## 🎯 Hackathon Innovation Overview
 
-Dream-Mind-Lucid is a cutting-edge **autonomous AI agent ecosystem** that revolutionizes blockchain interaction through advanced **neural dream mining**, **MEV extraction strategies**, and **cross-chain arbitrage automation**. Built on SKALE Europa Hub with **zero-gas transactions**, it features a multi-agent architecture that autonomously generates wealth while interfacing human consciousness with quantum networks.
+Dream-Mind-Lucid is a cutting-edge **autonomous AI agent ecosystem** that revolutionizes blockchain interaction through advanced **neural dream mining**, **MEV extraction strategies**, and **cross-chain arbitrage automation**. Built on both SKALE Europa Hub with **zero-gas transactions** and Solana Mainnet with **SPL Token 2022** and **MEV protection**, it features a multi-agent architecture that autonomously generates wealth while interfacing human consciousness with quantum networks.
 
 ### 🔥 Core Technical Innovations
 
@@ -26,9 +35,10 @@ Dream-Mind-Lucid is a cutting-edge **autonomous AI agent ecosystem** that revolu
 |---------|------------------|-----------------|
 | **🤖 AI Agent Orchestra** | Python 3.11+, ElizaOS Integration | ⚡ **Autonomous Decision Making** |
 | **⛽ Zero-Gas Operations** | SKALE Europa Hub, Biconomy Meta-Tx | 🚀 **Gasless Transaction Layer** |
+| **🟣 Solana Integration** | SPL Token 2022, Helius MEV Protection | 🛡️ **Enhanced Security & Performance** |
 | **🌐 Quantum Dream Network** | IPFS, Solidity 0.8.20, OneiroSphere | 🧠 **Neural Interface Protocol** |
 | **💎 MEV & Arbitrage Engine** | Web3.py, Cross-chain Bridges | 📈 **Automated Profit Extraction** |
-| **🔗 Multi-Chain Architecture** | Infura + SKALE RPC Fallback | 🌍 **Resilient Network Layer** |
+| **🔗 Multi-Chain Architecture** | Infura + SKALE RPC + Helius RPC | 🌍 **Resilient Network Layer** |
 
 ## 🚀 Revolutionary Features
 
@@ -68,27 +78,62 @@ Dream-Mind-Lucid is a cutting-edge **autonomous AI agent ecosystem** that revolu
 ```
 dream-mind-lucid/
 ├── 🤖 agents/
-│   ├── iem_syndicate.py       # Multi-agent deployment orchestrator
-│   └── iem_looter.py          # Real-time event harvesting engine
+│   ├── iem_syndicate.py         # Multi-agent deployment orchestrator (SKALE + Solana)
+│   ├── solana_dream_agent.py    # Dedicated Solana SPL Token 2022 agent
+│   └── iem_looter.py            # Real-time event harvesting engine
 ├── 📄 contracts/
-│   ├── IEMDreams.sol          # Core dream recording protocol
-│   └── OneiroSphere.sol       # Quantum neural network contract
-├── 🚀 copilot-instruction.py  # AI agent coordination engine
-├── ⚙️ .github/workflows/      # Automated CI/CD deployment
-├── 📊 iem_memory.json         # Persistent agent memory store
-└── 🔧 deployment-config.sh    # Network configuration scripts
+│   ├── IEMDreams.sol            # Core dream recording protocol (SKALE)
+│   └── OneiroSphere.sol         # Quantum neural network contract
+├── 🦀 solana/
+│   └── programs/src/lib.rs      # Rust Solana program for dream storage
+├── 🚀 copilot-instruction.py    # AI agent coordination engine
+├── ⚙️ .github/workflows/        # Automated CI/CD deployment
+├── 📊 iem_memory.json           # Persistent agent memory store (SKALE)
+├── 📊 solana_dream_memory.json  # Solana treasury and token memory
+└── 🔧 deployment-config.sh      # Network configuration scripts
 ```
 
 ### 🌐 **Network Configuration**
 ```yaml
-SKALE Europa Hub:
+SKALE Europa Hub (Legacy):
   Chain ID: 2046399126
   RPC: https://mainnet.skalenodes.com/v1/elated-tan-skat
   Infura Fallback: https://skale-mainnet.infura.io/v3/{PROJECT_ID}
   Gas Price: 0 SKL (Zero-gas network)
   Block Time: ~1 second
   Finality: Instant
+
+Solana Mainnet (Primary):
+  Cluster: mainnet-beta
+  RPC: https://mainnet.helius-rpc.com (MEV Protected)
+  Treasury: 4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a
+  SPL Token: 2022 with extensions
+  MEV Protection: Enabled via Helius
+  Transaction Fees: ~0.000005 SOL + rebates
 ```
+
+## 🔗 Multi-Blockchain Architecture
+
+### 🌟 **Dual-Chain Innovation**
+Dream-Mind-Lucid now operates on both **SKALE Europa Hub** and **Solana Mainnet**, providing users with the best of both ecosystems:
+
+| Feature | SKALE Europa Hub | Solana Mainnet |
+|---------|------------------|----------------|
+| **Gas Costs** | ⚡ **0 SKL** (Zero-gas) | 💰 **~0.000005 SOL** + rebates |
+| **Speed** | 🚀 **~1 second** blocks | ⚡ **~400ms** slots |
+| **Tokens** | 🎭 ERC-20 DREAM/SMIND/LUCID | 🟣 SPL Token 2022 suite |
+| **MEV Protection** | 🛡️ Biconomy meta-transactions | 🛡️ Helius RPC protection |
+| **Use Case** | 🧠 Legacy dream recording | 🚀 Advanced token operations |
+
+### 🚀 **Solana Migration Benefits**
+- **🏃‍♂️ Enhanced Performance**: Faster transaction processing with Solana's high-throughput architecture
+- **🛡️ MEV Protection**: Built-in protection against MEV attacks via Helius RPC
+- **💎 Advanced Token Features**: SPL Token 2022 with extensions and enhanced metadata
+- **🌐 DeFi Integration**: Native compatibility with Solana's vibrant DeFi ecosystem
+- **📈 Cost Efficiency**: MEV rebates program provides transaction cost optimization
+
+### 🔄 **Migration Guide**
+For complete migration details, see [SOLANA_MIGRATION.md](./SOLANA_MIGRATION.md)
 
 ---
 
@@ -99,8 +144,18 @@ SKALE Europa Hub:
 # Clone and deploy in under 60 seconds
 git clone https://github.com/imfromfuture3000-Android/Dream-mind-lucid.git
 cd Dream-mind-lucid
-pip install -r requirements.txt
-python agents/iem_syndicate.py deploy
+
+# 🚀 ONE-COMMAND SETUP (Install everything and deploy)
+python install_and_deploy.py
+
+# OR step-by-step installation
+python grok_copilot_launcher.py install      # Install all dependencies
+python grok_copilot_launcher.py deploy-all   # Deploy complete ecosystem
+
+# OR manual installation (legacy)
+pip install -r requirements.txt              # Manual Python deps only
+python agents/solana_dream_agent.py deploy_tokens  # Solana deployment
+python agents/iem_syndicate.py deploy        # SKALE deployment
 ```
 
 ### 🎮 **Interactive Demo**
@@ -111,14 +166,21 @@ python copilot-instruction.py
 # Monitor real-time dream harvesting  
 python agents/iem_looter.py
 
+# Launch Solana dream agent
+python agents/solana_dream_agent.py treasury_status
+
 # Launch quantum dream interface
 python dream_mind_launcher.py
 ```
 
 ### 🔑 **Environment Setup**
 ```bash
-# Set your configuration
-export DEPLOYER_KEY="your_private_key_here"
+# Solana Configuration (Primary)
+export SOLANA_RPC_URL="https://mainnet.helius-rpc.com/?api-key=your-api-key"
+export TREASURY_ADDRESS="4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a"
+export DEPLOYER_KEY="your_solana_private_key_here"
+
+# SKALE Configuration (Legacy Support)
 export SKALE_RPC="https://mainnet.skalenodes.com/v1/elated-tan-skat"
 export SKALE_CHAIN_ID="2046399126"
 export INFURA_PROJECT_ID="your_infura_key"  # Optional fallback
@@ -130,10 +192,19 @@ export INFURA_PROJECT_ID="your_infura_key"  # Optional fallback
 
 ### 🚀 **Smart Contract Deployment**
 ```python
-# Deploy IEMDreams contract
+# Deploy SPL Token 2022 suite on Solana
+python agents/solana_dream_agent.py deploy_tokens
+
+# Record dreams with MEV protection on Solana
+python agents/solana_dream_agent.py record_dream "Your dream here"
+
+# Check Solana treasury status
+python agents/solana_dream_agent.py treasury_status
+
+# Legacy SKALE deployment (backward compatibility)
 python agents/iem_syndicate.py deploy
 
-# Deploy OneiroSphere quantum network
+# Deploy OneiroSphere quantum network (SKALE)
 python agents/iem_syndicate.py deploy --contract OneiroSphere
 
 # Verify deployment integrity
@@ -155,7 +226,14 @@ decision = orchestrator.make_decision(profits)
 
 ### 🌐 **Blockchain Integration**
 ```javascript
-// Frontend integration example
+// Solana integration example
+import { Connection, PublicKey } from '@solana/web3.js';
+const connection = new Connection('https://mainnet.helius-rpc.com/?api-key=your-key');
+
+// Record dream on Solana with MEV protection
+await recordDreamSolana(connection, dreamText);
+
+// SKALE integration example (legacy)
 const dreamContract = new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
 
 // Record a dream with zero gas cost
@@ -283,20 +361,24 @@ cd Dream-mind-lucid
 # Create feature branch
 git checkout -b feature/quantum-enhancement
 
-# Install development dependencies
-pip install -r requirements.txt
-pip install -r requirements-dev.txt  # If available
+# Install development dependencies (choose one method)
+python grok_copilot_launcher.py install  # ⚡ Automated installation
+# OR
+pip install -r requirements.txt         # 📦 Manual installation
+pip install -r requirements-dev.txt     # If available
 
 # Run tests
 python test_copilot_instruction.py
 python test_deployment.py
+python test_solana_migration.py  # New Solana migration tests
 ```
 
 ### 📋 **Contribution Guidelines**
 - 🧪 **Testing**: All new features require comprehensive test coverage
 - 📚 **Documentation**: Update technical docs for any API changes
 - 🔒 **Security**: Follow secure coding practices for blockchain components
-- ⚡ **Performance**: Optimize for zero-gas operations on SKALE
+- ⚡ **Performance**: Optimize for both zero-gas SKALE and efficient Solana operations
+- 🌐 **Multi-Chain**: Consider both SKALE and Solana compatibility
 - 🎯 **Innovation**: Focus on advancing the neural-blockchain interface
 
 ### 🎯 **Priority Areas**
@@ -341,7 +423,7 @@ This project is open-source and available for educational, commercial, and hacka
 ![Dream-Mind-Lucid](https://img.shields.io/badge/Dream--Mind--Lucid-Quantum%20Ready-FF6B9D?style=for-the-badge)
 ![The Oneiro-Sphere](https://img.shields.io/badge/The%20Oneiro--Sphere-2089%20Vision-00D4FF?style=for-the-badge)
 
-**🚀 [Deploy Now](https://github.com/imfromfuture3000-Android/Dream-mind-lucid) | 📖 [Documentation](./AI_AGENT_README.md) | 🌐 [Live Demo](./DEPLOYMENT.md)**
+**🚀 [Deploy Now](https://github.com/imfromfuture3000-Android/Dream-mind-lucid) | 📖 [Documentation](./AI_AGENT_README.md) | 🆕 [v3.0.0 Update](./UPDATE_README.md) | 🌐 [Live Demo](./DEPLOYMENT.md)**
 
 </div>
 

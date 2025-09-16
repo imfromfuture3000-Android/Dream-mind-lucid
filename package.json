@@ -1,0 +1,72 @@
+{
+  "name": "dream-mind-lucid-monorepo",
+  "version": "3.0.0",
+  "description": "Dream-Mind-Lucid Unified Monorepo - Multi-chain dream ecosystem with wealth automation",
+  "main": "packages/core/src/index.ts",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm run install:packages",
+    "install:packages": "npm run install:core && npm run install:consensus && npm run install:yield-farm",
+    "install:core": "cd packages/core && npm install",
+    "install:consensus": "cd packages/consensus && npm install",
+    "install:yield-farm": "cd packages/yield-farm && npm install",
+    "build": "npm run build:core && npm run build:consensus && npm run build:yield-farm",
+    "build:core": "cd packages/core && npm run build",
+    "build:consensus": "cd packages/consensus && npm run build",
+    "build:yield-farm": "cd packages/yield-farm && npm run build",
+    "deploy:mainnet": "bash scripts/deploy-mainnet.sh",
+    "deploy:skale": "cd packages/consensus && npm run deploy:skale",
+    "deploy:solana": "cd packages/core && npm run deploy:solana",
+    "deploy:all": "npm run deploy:skale && npm run deploy:solana && npm run setup:bridges",
+    "setup:bridges": "node packages/consensus/src/setup-bridges.js",
+    "wealth:start": "cd packages/yield-farm && npm start",
+    "wealth:simulate": "cd packages/yield-farm && npm run simulate",
+    "test": "npm run test:core && npm run test:consensus && npm run test:yield-farm",
+    "test:core": "cd packages/core && npm test",
+    "test:consensus": "cd packages/consensus && npm test",
+    "test:yield-farm": "cd packages/yield-farm && npm test",
+    "finrobot:setup": "cd packages/yield-farm && python setup_finrobot.py",
+    "dev": "concurrently \"npm run dev:core\" \"npm run dev:consensus\" \"npm run dev:yield-farm\"",
+    "dev:core": "cd packages/core && npm run dev",
+    "dev:consensus": "cd packages/consensus && npm run dev",
+    "dev:yield-farm": "cd packages/yield-farm && npm run dev"
+  },
+  "dependencies": {
+    "@chainlink/contracts": "^0.8.0",
+    "@openzeppelin/contracts": "^5.0.0",
+    "@solana/web3.js": "^1.95.0",
+    "@solana/spl-token": "^0.4.0",
+    "@coral-xyz/anchor": "^0.30.0",
+    "concurrently": "^8.2.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.0",
+    "chai": "^4.3.7",
+    "dotenv": "^16.3.1",
+    "ethers": "^6.14.0",
+    "hardhat": "^2.22.0",
+    "hardhat-gas-reporter": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "dream-mind-lucid",
+    "monorepo",
+    "solana",
+    "skale",
+    "defi",
+    "yield-farming",
+    "mev-protection",
+    "cross-chain",
+    "finrobot",
+    "wealth-automation"
+  ],
+  "author": "Dream-Mind-Lucid Syndicate",
+  "license": "MIT"
+}

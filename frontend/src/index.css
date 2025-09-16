@@ -1,0 +1,119 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
+}
+
+/* Wallet adapter styles */
+.wallet-adapter-button {
+  @apply bg-gradient-to-r from-dream-500 to-lucid-500 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg;
+}
+
+.wallet-adapter-button-trigger {
+  @apply bg-gradient-to-r from-dream-500 to-lucid-500;
+}
+
+.wallet-adapter-modal-wrapper {
+  @apply backdrop-blur-sm;
+}
+
+.wallet-adapter-modal {
+  @apply bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl;
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 5px rgba(168, 85, 247, 0.5); }
+  100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 40px rgba(168, 85, 247, 0.3); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Glass morphism utility */
+.glass {
+  @apply bg-white/10 backdrop-blur-md border border-white/20;
+}
+
+.glass-dark {
+  @apply bg-black/10 backdrop-blur-md border border-white/10;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  @apply bg-gradient-to-r from-dream-400 via-lucid-500 to-quantum-400 bg-clip-text text-transparent;
+}
+
+/* Loading shimmer effect */
+.loading-shimmer {
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0.1) 0%, 
+    rgba(255,255,255,0.3) 50%, 
+    rgba(255,255,255,0.1) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Button hover effects */
+.btn-glow:hover {
+  @apply shadow-lg;
+  box-shadow: 0 10px 25px rgba(168, 85, 247, 0.3);
+}
+
+/* Custom focus styles */
+.focus-visible:focus {
+  @apply outline-none ring-2 ring-lucid-500 ring-opacity-50;
+}
+
+/* Network status indicators */
+.network-online {
+  @apply bg-quantum-500;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+.network-offline {
+  @apply bg-red-500;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+/* Dream card animations */
+.dream-card {
+  @apply transition-all duration-300 hover:scale-105 hover:-rotate-1;
+}
+
+.dream-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .wallet-adapter-modal {
+    @apply mx-4 my-8;
+  }
+  
+  .glass {
+    @apply bg-white/20;
+  }
+}

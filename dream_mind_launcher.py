@@ -156,6 +156,88 @@ class DreamTools:
         save_memory(memory)
         return f"✅ Dream recorded. IPFS Hash: {ipfs_hash}"
 
+    @McpServerTool(description="Summon OneiroBot for dream monitoring and assistance")
+    def summon_oneirobot(self) -> str:
+        """Summon OneiroBot and perform initial health checks."""
+        try:
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("copilot_instruction", "copilot-instruction.py")
+            copilot_instruction = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(copilot_instruction)
+            
+            result = copilot_instruction.handle_copilot_command("summon_oneirobot")
+            return f"🌙 OneiroBot summoned! Status: {result.get('status', {}).get('status', 'UNKNOWN')}"
+        except Exception as e:
+            return f"❌ Failed to summon OneiroBot: {e}"
+
+    @McpServerTool(description="Get OneiroBot status and health check")
+    def oneirobot_status(self) -> str:
+        """Get comprehensive OneiroBot status and health information."""
+        try:
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("copilot_instruction", "copilot-instruction.py")
+            copilot_instruction = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(copilot_instruction)
+            
+            result = copilot_instruction.handle_copilot_command("oneirobot_status")
+            status = result.get('status', {})
+            health = result.get('health', {})
+            
+            return f"🤖 OneiroBot Status: {status.get('status', 'UNKNOWN')} | Activities: {status.get('total_activities', 0)} | MCP Health: {health.get('connectivity', 'UNKNOWN')}"
+        except Exception as e:
+            return f"❌ Failed to get OneiroBot status: {e}"
+
+    @McpServerTool(description="Monitor dream submissions and consensus phases")
+    def oneirobot_scan(self) -> str:
+        """Monitor dream submissions and consensus state."""
+        try:
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("copilot_instruction", "copilot-instruction.py")
+            copilot_instruction = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(copilot_instruction)
+            
+            result = copilot_instruction.handle_copilot_command("oneirobot_scan")
+            scan_result = result.get('result', {})
+            
+            return f"🕵️ Dream Scan Complete | Dreams: {scan_result.get('dreams_detected', 0)} | Consensus: {scan_result.get('consensus_state', 'UNKNOWN')} | Status: {scan_result.get('status', 'UNKNOWN')}"
+        except Exception as e:
+            return f"❌ Dream scan failed: {e}"
+
+    @McpServerTool(description="Get optimization suggestions from OneiroBot")
+    def oneirobot_optimize(self) -> str:
+        """Get OneiroBot's optimization suggestions for the Oneiro-Sphere."""
+        try:
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("copilot_instruction", "copilot-instruction.py")
+            copilot_instruction = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(copilot_instruction)
+            
+            result = copilot_instruction.handle_copilot_command("oneirobot_optimize")
+            suggestions = result.get('suggestions', [])
+            
+            formatted_suggestions = "\n".join([f"  • {suggestion}" for suggestion in suggestions[:5]])  # Limit to 5 suggestions
+            return f"🧠 OneiroBot Optimization Analysis:\n{formatted_suggestions}"
+        except Exception as e:
+            return f"❌ Optimization analysis failed: {e}"
+
+    @McpServerTool(description="Get quick fixes from OneiroBot for specific issues")
+    def oneirobot_fix(self, issue_type: str = "general") -> str:
+        """Get OneiroBot's quick fix suggestions for specific issue types."""
+        try:
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("copilot_instruction", "copilot-instruction.py")
+            copilot_instruction = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(copilot_instruction)
+            
+            result = copilot_instruction.handle_copilot_command("oneirobot_fix", [issue_type])
+            fixes = result.get('fixes', [])
+            test_command = result.get('test_command', '')
+            
+            formatted_fixes = "\n".join([f"  • {fix}" for fix in fixes[:3]])  # Limit to 3 fixes
+            return f"🔧 OneiroBot Quick Fixes for {issue_type}:\n{formatted_fixes}\n\n🧪 Test: {test_command}"
+        except Exception as e:
+            return f"❌ Quick fix generation failed: {e}"
+
 def setup_mcp():
     """Set up MCP server and integrate with Copilot."""
     server.add_tool_class(DreamTools)

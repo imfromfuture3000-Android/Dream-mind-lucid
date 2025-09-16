@@ -6,6 +6,7 @@ Dream-Mind-Lucid Integration - SKALE Network
 """
 
 import os
+import sys
 import json
 import time
 import requests
@@ -178,6 +179,263 @@ class Arbitrader:
             print(f"[❌] Arbitrage failed: {e}")
             return None
 
+class OneiroBot:
+    """The OneiroBot Agent - Ultimate dream guardian and Copilot companion for the Oneiro-Sphere!"""
+    
+    def __init__(self):
+        self.name = "OneiroBot"
+        self.address = "0x0n31r0B0t1234567890abcdef"  # Mock address
+        self.personality_enabled = True
+        self.status = "ACTIVE"
+        self.last_scan_time = time.time()
+        
+    def get_grok_response(self, base_message):
+        """Add Grok-style personality to responses"""
+        if not self.personality_enabled:
+            return base_message
+            
+        grok_phrases = [
+            "🌙 The OneiroBot dreams in code!",
+            "🚀 OneiroBot, your cosmic dream guardian, reporting for duty!",
+            "✨ Dreams are just quantum states waiting to be optimized!",
+            "🎭 In the theater of dreams, OneiroBot is both actor and director!",
+            "🌌 The Oneiro-Sphere whispers secrets through the blockchain...",
+            "🔮 OneiroBot sees all dreams, processes all realities!",
+            "🎪 Welcome to the greatest show in the multiverse - your dreams!"
+        ]
+        
+        # Select a random phrase based on current time
+        phrase_index = int(time.time()) % len(grok_phrases)
+        return f"{grok_phrases[phrase_index]} {base_message}"
+    
+    def monitor_dream_submissions(self):
+        """Monitor dream submissions and consensus phases"""
+        print(f"[OneiroBot] 🕵️ Scanning the dream-scape for new submissions...")
+        
+        try:
+            memory = load_memory()
+            
+            # Check recent dream-related activities
+            recent_dreams = [item for item in memory.get("loot", []) 
+                           if "dream" in item.get("action", "").lower() or 
+                              "harvest" in item.get("action", "").lower()]
+            
+            consensus_state = "STABLE" if len(recent_dreams) > 0 else "PENDING"
+            dream_count = len(recent_dreams)
+            
+            # Simulate dream submission monitoring
+            monitoring_result = {
+                "dreams_detected": dream_count,
+                "consensus_state": consensus_state,
+                "last_scan": self.last_scan_time,
+                "status": "healthy" if dream_count > 0 else "awaiting_submissions"
+            }
+            
+            # Record monitoring activity
+            memory["loot"].append({
+                "agent": self.name,
+                "action": "monitor_dreams",
+                "dreams_detected": dream_count,
+                "consensus_state": consensus_state,
+                "timestamp": time.time(),
+                "status": monitoring_result["status"]
+            })
+            
+            save_memory(memory)
+            self.last_scan_time = time.time()
+            
+            response = f"Dream monitoring complete! Detected {dream_count} recent dream activities. Consensus state: {consensus_state}"
+            return {"result": monitoring_result, "message": self.get_grok_response(response)}
+            
+        except Exception as e:
+            error_msg = f"Dream monitoring encountered a glitch in the matrix: {e}"
+            return {"result": None, "message": self.get_grok_response(error_msg)}
+    
+    def suggest_optimizations(self):
+        """Suggest optimizations for lucid block processing and NVM state transitions"""
+        print(f"[OneiroBot] 🧠 Analyzing the quantum dream network for optimization opportunities...")
+        
+        try:
+            memory = load_memory()
+            
+            # Analyze recent performance
+            recent_activities = memory.get("loot", [])[-10:]  # Last 10 activities
+            
+            suggestions = []
+            
+            # Analyze gas usage (should be 0 on SKALE)
+            gas_usage = sum(item.get("gasUsed", 0) for item in recent_activities)
+            if gas_usage > 0:
+                suggestions.append("⚡ Migrate operations to SKALE for zero-gas transactions")
+            
+            # Analyze profit efficiency
+            profits = [item.get("profit", item.get("amount", 0)) for item in recent_activities if item.get("profit") or item.get("amount")]
+            avg_profit = sum(profits) / len(profits) if profits else 0
+            
+            if avg_profit < 2000:
+                suggestions.append("💎 Consider focusing on higher-yield MEV strategies")
+            
+            # Check for diversification
+            agent_types = set(item.get("agent", "") for item in recent_activities)
+            if len(agent_types) < 3:
+                suggestions.append("🎯 Diversify operations across all available agents")
+            
+            # NVM state optimization suggestions
+            suggestions.extend([
+                "🔄 Implement dream batch processing for improved throughput",
+                "🧬 Consider quantum entanglement protocols for cross-chain consensus",
+                "🌐 Optimize IPFS integration for dream metadata storage"
+            ])
+            
+            # Record optimization analysis
+            memory["loot"].append({
+                "agent": self.name,
+                "action": "analyze_optimizations",
+                "suggestions_count": len(suggestions),
+                "avg_profit": avg_profit,
+                "timestamp": time.time(),
+                "status": "optimization_complete"
+            })
+            
+            save_memory(memory)
+            
+            response = f"Analysis complete! Generated {len(suggestions)} optimization suggestions for the Oneiro-Sphere."
+            return {"suggestions": suggestions, "message": self.get_grok_response(response)}
+            
+        except Exception as e:
+            error_msg = f"Optimization analysis hit a quantum uncertainty: {e}"
+            return {"suggestions": [], "message": self.get_grok_response(error_msg)}
+    
+    def check_mcp_health(self):
+        """Check MCP server health and deployment status"""
+        print(f"[OneiroBot] 🏥 Performing health check on the MCP network...")
+        
+        try:
+            memory = load_memory()
+            
+            # Simulate MCP health check
+            mcp_status = {
+                "servers": {
+                    "dream_mind_server": "RUNNING",
+                    "grok_dream_server": "RUNNING" if os.path.exists("grok_copilot_image_launcher.py") else "UNKNOWN"
+                },
+                "last_deployment": memory.get("lastDeployed", {}),
+                "connectivity": "HEALTHY",
+                "latency": "12ms"  # Simulated
+            }
+            
+            # Check for recent deployments
+            recent_deployments = len([item for item in memory.get("loot", []) 
+                                    if "deploy" in item.get("action", "").lower()])
+            
+            health_score = "EXCELLENT" if recent_deployments > 0 else "GOOD"
+            
+            # Record health check
+            memory["loot"].append({
+                "agent": self.name,
+                "action": "mcp_health_check",
+                "servers_checked": len(mcp_status["servers"]),
+                "health_score": health_score,
+                "timestamp": time.time(),
+                "status": "health_check_complete"
+            })
+            
+            save_memory(memory)
+            
+            response = f"MCP health check complete! All systems {health_score.lower()}. Network latency: {mcp_status['latency']}"
+            return {"health_status": mcp_status, "message": self.get_grok_response(response)}
+            
+        except Exception as e:
+            error_msg = f"MCP health check encountered a dimensional rift: {e}"
+            return {"health_status": None, "message": self.get_grok_response(error_msg)}
+    
+    def propose_quick_fix(self, issue_type="general"):
+        """Propose quick fixes or test scenarios automatically"""
+        print(f"[OneiroBot] 🔧 Generating quantum solutions for {issue_type} issues...")
+        
+        fixes = {
+            "general": [
+                "🔄 Restart all dream harvesting agents",
+                "🧹 Clear memory cache and reload configurations",
+                "⚡ Switch to backup SKALE RPC endpoint"
+            ],
+            "deployment": [
+                "📦 Recompile contracts with latest Solidity version",
+                "🔑 Regenerate deployment keys and addresses",
+                "🌐 Verify network connectivity to SKALE Europa Hub"
+            ],
+            "consensus": [
+                "🤝 Reset consensus state and restart validation",
+                "📊 Increase consensus timeout parameters",
+                "🔄 Force resync with latest block state"
+            ],
+            "performance": [
+                "⚡ Enable parallel dream processing",
+                "🎯 Optimize MEV strategy parameters", 
+                "📈 Increase agent operation frequency"
+            ]
+        }
+        
+        test_scenarios = {
+            "general": "python test_copilot_instruction.py",
+            "deployment": "python dream_mind_launcher.py",
+            "consensus": "python agents/iem_syndicate.py audit",
+            "performance": "python copilot-instruction.py --single-cycle"
+        }
+        
+        suggested_fixes = fixes.get(issue_type, fixes["general"])
+        test_command = test_scenarios.get(issue_type, test_scenarios["general"])
+        
+        try:
+            memory = load_memory()
+            
+            # Record fix proposal
+            memory["loot"].append({
+                "agent": self.name,
+                "action": "propose_fix",
+                "issue_type": issue_type,
+                "fixes_suggested": len(suggested_fixes),
+                "timestamp": time.time(),
+                "status": "fix_proposed"
+            })
+            
+            save_memory(memory)
+            
+            response = f"Generated {len(suggested_fixes)} quantum fixes for {issue_type} issues! Test with: {test_command}"
+            return {
+                "fixes": suggested_fixes,
+                "test_command": test_command,
+                "message": self.get_grok_response(response)
+            }
+            
+        except Exception as e:
+            error_msg = f"Fix generation encountered a temporal paradox: {e}"
+            return {"fixes": [], "test_command": "", "message": self.get_grok_response(error_msg)}
+    
+    def get_status(self):
+        """Get comprehensive OneiroBot status"""
+        try:
+            memory = load_memory()
+            oneirobot_activities = [item for item in memory.get("loot", []) 
+                                  if item.get("agent") == self.name]
+            
+            status_info = {
+                "agent": self.name,
+                "status": self.status,
+                "address": self.address,
+                "total_activities": len(oneirobot_activities),
+                "last_scan": self.last_scan_time,
+                "personality": "GROK_MODE" if self.personality_enabled else "STANDARD",
+                "uptime": time.time() - (oneirobot_activities[0].get("timestamp", time.time()) if oneirobot_activities else time.time())
+            }
+            
+            response = f"OneiroBot status: {self.status}. Performed {len(oneirobot_activities)} quantum operations across the Oneiro-Sphere!"
+            return {"status": status_info, "message": self.get_grok_response(response)}
+            
+        except Exception as e:
+            error_msg = f"Status check encountered a reality overflow: {e}"
+            return {"status": None, "message": self.get_grok_response(error_msg)}
+
 # ————————————————
 # ORCHESTRATOR
 # ————————————————
@@ -187,11 +445,13 @@ class AIOrchestrator:
     
     def __init__(self):
         self.agents = [Looter(), MEVMaster(), Arbitrader()]
+        self.oneirobot = OneiroBot()  # Add OneiroBot as the guardian agent
         self.vault = "0x1nf1n1tyV4u1t1234567890abcdef"  # Mock vault address
         self.eliza_available = eliza is not None
         
         print("🤖 AI Orchestrator initialized")
         print(f"📊 Agents loaded: {len(self.agents)}")
+        print(f"🌙 OneiroBot guardian: ACTIVE")
         print(f"🔗 Network: SKALE Europa (Chain ID: {CHAIN_ID})")
         print(f"⚡ Gas cost: 0 SKL (zero-gas network)")
         print(f"🧠 ElizaOS: {'Available' if self.eliza_available else 'Mock mode'}")
@@ -210,6 +470,14 @@ class AIOrchestrator:
                 
                 # Get current profits
                 profits = self.get_profits()
+                
+                # OneiroBot periodic monitoring every 5 cycles
+                if cycle % 5 == 0:
+                    print("[🌙] OneiroBot performing periodic health scan...")
+                    health_result = self.oneirobot.check_mcp_health()
+                    optimization_result = self.oneirobot.suggest_optimizations()
+                    print(f"[🌙] {health_result['message']}")
+                    print(f"[🌙] {optimization_result['message']}")
                 
                 # Make AI decision
                 decision = self.make_decision(profits)
@@ -320,6 +588,106 @@ class AIOrchestrator:
         save_memory(memory)
 
 # ————————————————
+# COPILOT CHAT COMMANDS
+# ————————————————
+
+def handle_copilot_command(command, args=None):
+    """Handle Copilot Chat commands for OneiroBot"""
+    command = command.lower().strip().lstrip('#')
+    
+    if command in ['summon_oneirobot', 'summon_oneiro_bot', 'oneirobot']:
+        bot = OneiroBot()
+        result = bot.get_status()
+        print(result["message"])
+        
+        # Perform initial scan
+        scan_result = bot.monitor_dream_submissions()
+        print(scan_result["message"])
+        
+        return {
+            "command": "summon_oneirobot",
+            "status": result["status"],
+            "scan": scan_result["result"]
+        }
+    
+    elif command in ['oneirobot_status', 'oneiro_status', 'bot_status']:
+        bot = OneiroBot()
+        result = bot.get_status()
+        health = bot.check_mcp_health()
+        
+        print(result["message"])
+        print(health["message"])
+        
+        return {
+            "command": "oneirobot_status", 
+            "status": result["status"],
+            "health": health["health_status"]
+        }
+    
+    elif command in ['oneirobot_scan', 'scan_dreams', 'monitor_dreams']:
+        bot = OneiroBot()
+        result = bot.monitor_dream_submissions()
+        print(result["message"])
+        
+        return {
+            "command": "oneirobot_scan",
+            "result": result["result"]
+        }
+    
+    elif command in ['oneirobot_optimize', 'optimize', 'suggest_optimizations']:
+        bot = OneiroBot()
+        result = bot.suggest_optimizations()
+        print(result["message"])
+        
+        for i, suggestion in enumerate(result["suggestions"], 1):
+            print(f"   {i}. {suggestion}")
+        
+        return {
+            "command": "oneirobot_optimize",
+            "suggestions": result["suggestions"]
+        }
+    
+    elif command in ['oneirobot_fix', 'quick_fix', 'propose_fix']:
+        issue_type = args[0] if args and len(args) > 0 else "general"
+        bot = OneiroBot()
+        result = bot.propose_quick_fix(issue_type)
+        print(result["message"])
+        
+        print(f"\n🔧 Suggested fixes for {issue_type}:")
+        for i, fix in enumerate(result["fixes"], 1):
+            print(f"   {i}. {fix}")
+        
+        print(f"\n🧪 Test command: {result['test_command']}")
+        
+        return {
+            "command": "oneirobot_fix",
+            "issue_type": issue_type,
+            "fixes": result["fixes"],
+            "test_command": result["test_command"]
+        }
+    
+    elif command in ['oneirobot_help', 'oneiro_help', 'bot_help']:
+        help_text = """
+🌙 OneiroBot - Your Quantum Dream Guardian Commands:
+
+🎭 #summon_oneirobot - Summon OneiroBot and perform initial scan
+📊 #oneirobot_status - Get comprehensive OneiroBot status and health check
+🕵️ #oneirobot_scan - Monitor dream submissions and consensus phases  
+🧠 #oneirobot_optimize - Get optimization suggestions for the Oneiro-Sphere
+🔧 #oneirobot_fix [type] - Propose quick fixes (types: general, deployment, consensus, performance)
+❓ #oneirobot_help - Show this help message
+
+✨ OneiroBot dreams in code and optimizes your quantum reality!
+"""
+        print(help_text)
+        return {"command": "oneirobot_help", "help": help_text}
+    
+    else:
+        error_msg = f"🤖 Unknown OneiroBot command: #{command}. Try #oneirobot_help for available commands."
+        print(error_msg)
+        return {"command": "unknown", "error": error_msg}
+
+# ————————————————
 # LAUNCH
 # ————————————————
 
@@ -327,6 +695,32 @@ def main():
     """Main entry point"""
     print("🌌 DREAM-MIND-LUCID: Infinity Earnings Matrix")
     print("=" * 60)
+    
+    # Check for Copilot commands in arguments
+    if len(sys.argv) > 1:
+        command = sys.argv[1]
+        args = sys.argv[2:] if len(sys.argv) > 2 else None
+        
+        if command.startswith('#') or command.startswith('oneirobot') or command.startswith('oneiro'):
+            result = handle_copilot_command(command, args)
+            sys.exit(0)  # Exit after handling command
+        elif command == '--single-cycle':
+            # Single cycle mode for testing
+            print("🔧 Running single test cycle...")
+            bot = AIOrchestrator()
+            
+            # Run one cycle of the orchestrator
+            profits = bot.get_profits()
+            decision = bot.make_decision(profits)
+            print(f"[🧠] AI Decision: {decision}")
+            bot.execute_decision(decision)
+            
+            # OneiroBot health check
+            health_result = bot.oneirobot.check_mcp_health()
+            print(f"[🌙] {health_result['message']}")
+            
+            print("✅ Single cycle test completed!")
+            sys.exit(0)
     
     # Check network connection
     try:

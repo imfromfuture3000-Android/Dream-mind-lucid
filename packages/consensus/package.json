@@ -1,0 +1,25 @@
+{
+  "name": "@dream-mind-lucid/consensus",
+  "version": "1.0.0",
+  "description": "SKALE consensus and bridge management",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "compile": "npx hardhat compile",
+    "deploy:skale": "npx hardhat run scripts/deploy.js --network skale",
+    "deploy:calypso": "npx hardhat run scripts/deploy.js --network calypso",
+    "test": "npx hardhat test",
+    "dev": "npx hardhat compile --watch"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0",
+    "@chainlink/contracts": "^0.8.0",
+    "ethers": "^6.14.0",
+    "hardhat": "^2.22.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  }
+}

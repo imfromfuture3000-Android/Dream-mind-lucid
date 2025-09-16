@@ -1,0 +1,49 @@
+{
+  "chain": "skale",
+  "environment": "testnet",
+  "config": {},
+  "deployed_at": 1757668561.1378493,
+  "gasless_enabled": true,
+  "contracts": {
+    "IEMDreams": {
+      "address": "0xe64382173fba8412f62985aacddd5010658b99cf",
+      "abi": [
+        {
+          "type": "function",
+          "name": "recordDream",
+          "inputs": [
+            {
+              "name": "dream",
+              "type": "string"
+            }
+          ],
+          "outputs": []
+        }
+      ],
+      "chain": "skale",
+      "environment": "testnet",
+      "gasless": true,
+      "deployed_at": 1757668561.1367874
+    },
+    "OneiroSphere": {
+      "address": "0x7a9115055433ba964c5f5c71e041089ccd6777b7",
+      "abi": [
+        {
+          "type": "function",
+          "name": "interfaceDream",
+          "inputs": [
+            {
+              "name": "ipfsHash",
+              "type": "string"
+            }
+          ],
+          "outputs": []
+        }
+      ],
+      "chain": "skale",
+      "environment": "testnet",
+      "gasless": true,
+      "deployed_at": 1757668561.1377444
+    }
+  }
+}

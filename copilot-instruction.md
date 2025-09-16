@@ -1,4 +1,4 @@
-// Copilot: Generate a complete, deployment-ready Solidity smart contract for IEMDreams.sol in the Dream-Mind-Lucid project
+deploy all// Copilot: Generate a complete, deployment-ready Solidity smart contract for IEMDreams.sol in the Dream-Mind-Lucid project
 // - Target Solidity version: 0.8.20
 // - Implement full ERC-20 standard for DREAM token with 777,777,777 total supply (18 decimals)
 // - Add dream recording functionality with DreamRecorded event

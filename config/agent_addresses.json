@@ -1,0 +1,54 @@
+{
+    "version": "1.0.0",
+    "network": "skale-europa-hub",
+    "chainId": 2046399126,
+    "agents": {
+        "dreamkeeper": {
+            "address": "0x777D7e7777777777777777777777777De7777777",
+            "description": "Primary dream recording and validation agent",
+            "role": "DREAM_KEEPER",
+            "permissions": ["RECORD_DREAMS", "VALIDATE_DREAMS", "UPDATE_METADATA"]
+        },
+        "mindweaver": {
+            "address": "0x5M1ND7e7777777777777777777777777We7777777",
+            "description": "Neural pattern analysis and dream interpretation agent",
+            "role": "MIND_WEAVER",
+            "permissions": ["ANALYZE_PATTERNS", "INTERPRET_DREAMS"]
+        },
+        "lucidgate": {
+            "address": "0xLUC1D7e7777777777777777777777777Ga7777777",
+            "description": "Lucid dream gateway controller",
+            "role": "LUCID_GATE",
+            "permissions": ["OPEN_GATEWAY", "CLOSE_GATEWAY", "VALIDATE_ENTRY"]
+        },
+        "oneirosphere": {
+            "address": "0x0NE1R07e7777777777777777777777770Sp777777",
+            "description": "Quantum dream network coordinator",
+            "role": "ONEIRO_SPHERE",
+            "permissions": ["NETWORK_SYNC", "QUANTUM_INTERFACE"]
+        },
+        "syndicate": {
+            "address": "0x5YND1C7e7777777777777777777777775Yn77777",
+            "description": "Multi-agent coordinator and consensus manager",
+            "role": "SYNDICATE",
+            "permissions": ["COORDINATE_AGENTS", "MANAGE_CONSENSUS"]
+        }
+    },
+    "tokens": {
+        "DREAM": {
+            "address": "0xDREAM7e7777777777777777777777777Dr777777",
+            "totalSupply": "777777777000000000",
+            "decimals": 9
+        },
+        "SMIND": {
+            "address": "0x5M1ND7e7777777777777777777777777Sm777777",
+            "totalSupply": "777777777000000000",
+            "decimals": 9
+        },
+        "LUCID": {
+            "address": "0xLUC1D7e7777777777777777777777777Lu777777",
+            "totalSupply": "333333333000000000",
+            "decimals": 9
+        }
+    }
+}
