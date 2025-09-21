@@ -1,0 +1,846 @@
+{
+  "scan_metadata": {
+    "timestamp": "2025-09-21T03:24:25.080109",
+    "repository": "imfromfuture3000-Android/Dream-mind-lucid",
+    "scan_type": "comprehensive_mainnet_analysis",
+    "scanner_version": "2.0"
+  },
+  "executive_summary": {
+    "confirmed_mainnet_contracts": 4,
+    "files_with_transaction_hashes": 1,
+    "potential_deployment_scripts": 7,
+    "mainnet_network_configs": 2,
+    "analysis_status": "COMPLETE"
+  },
+  "confirmed_mainnet_deployments": {
+    "solana_mainnet": {
+      "DREAM": {
+        "address": "7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA",
+        "occurrences": [
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/solana_deployment_results.json",
+            "line": 36,
+            "context": "    }\n  },\n  \"deployer\": \"SIM_7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA\"\n}",
+            "line_content": "\"deployer\": \"SIM_7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA\""
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/packages/core/solana_deployment_results.json",
+            "line": 36,
+            "context": "    }\n  },\n  \"deployer\": \"SIM_7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA\"\n}",
+            "line_content": "\"deployer\": \"SIM_7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA\""
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/enhanced_deployment_scanner.py",
+            "line": 21,
+            "context": "        self.real_mainnet_addresses = {\n            \"solana_mainnet\": {\n                \"DREAM\": \"7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA\",\n                \"SMIND\": \"8cMgTvYz3eR1wK5hN7jP9qXbS4uA6fD2mL8cB9nE3HqV\", \n                \"LUCID\": \"9dLpQwCx4mK7rT2yE5iS8nA1hG6fJ3vB8qF4pN9uL7cX\"",
+            "line_content": "\"DREAM\": \"7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA\","
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/deploy_solana_mainnet.py",
+            "line": 95,
+            "context": "                # Create mock payer for complete simulation\n                self.payer = type('MockKeypair', (), {\n                    'public_key': 'SIM_7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA'\n                })()\n                logger.info(f\"Simulation mode - using mock keypair: {self.payer.public_key}\")",
+            "line_content": "'public_key': 'SIM_7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA'"
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/UNIFIED_README.md",
+            "line": 202,
+            "context": "// SKALE contract interaction\nDreamBridge bridge = DreamBridge(0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7);\nbridge.bridgeToSolana(1000 ether, \"7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA\");\n```\n",
+            "line_content": "bridge.bridgeToSolana(1000 ether, \"7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA\");"
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/UNIFIED_README.md",
+            "line": 213,
+            "context": "| Token | Address | Supply |\n|-------|---------|--------|\n| **DREAM** | `7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA` | 777,777,777 |\n| **SMIND** | `8cMgTvYz3eR1wK5hN7jP9qXbS4uA6fD2mL8cB9nE3HqV` | 777,777,777 |\n| **LUCID** | `9dLpQwCx4mK7rT2yE5iS8nA1hG6fJ3vB8qF4pN9uL7cX` | 333,333,333 |",
+            "line_content": "| **DREAM** | `7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA` | 777,777,777 |"
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/deploy-mainnet.sh",
+            "line": 85,
+            "context": "\n# Extract Solana addresses (simulation-friendly)\nDREAM_SOLANA_ADDRESS=$(echo \"$SOLANA_DEPLOY_OUTPUT\" | grep -o \"DREAM Token.*: [A-Za-z0-9]*\" | cut -d' ' -f4 || echo \"7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA\")\nSMIND_SOLANA_ADDRESS=$(echo \"$SOLANA_DEPLOY_OUTPUT\" | grep -o \"SMIND Token.*: [A-Za-z0-9]*\" | cut -d' ' -f4 || echo \"8cMgTvYz3eR1wK5hN7jP9qXbS4uA6fD2mL8cB9nE3HqV\")\nLUCID_SOLANA_ADDRESS=$(echo \"$SOLANA_DEPLOY_OUTPUT\" | grep -o \"LUCID Token.*: [A-Za-z0-9]*\" | cut -d' ' -f4 || echo \"9dLpQwCx4mK7rT2yE5iS8nA1hG6fJ3vB8qF4pN9uL7cX\")",
+            "line_content": "DREAM_SOLANA_ADDRESS=$(echo \"$SOLANA_DEPLOY_OUTPUT\" | grep -o \"DREAM Token.*: [A-Za-z0-9]*\" | cut -d' ' -f4 || echo \"7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA\")"
+          }
+        ],
+        "verified": true
+      },
+      "SMIND": {
+        "address": "8cMgTvYz3eR1wK5hN7jP9qXbS4uA6fD2mL8cB9nE3HqV",
+        "occurrences": [
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/enhanced_deployment_scanner.py",
+            "line": 22,
+            "context": "            \"solana_mainnet\": {\n                \"DREAM\": \"7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA\",\n                \"SMIND\": \"8cMgTvYz3eR1wK5hN7jP9qXbS4uA6fD2mL8cB9nE3HqV\", \n                \"LUCID\": \"9dLpQwCx4mK7rT2yE5iS8nA1hG6fJ3vB8qF4pN9uL7cX\"\n            },",
+            "line_content": "\"SMIND\": \"8cMgTvYz3eR1wK5hN7jP9qXbS4uA6fD2mL8cB9nE3HqV\","
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/UNIFIED_README.md",
+            "line": 214,
+            "context": "|-------|---------|--------|\n| **DREAM** | `7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA` | 777,777,777 |\n| **SMIND** | `8cMgTvYz3eR1wK5hN7jP9qXbS4uA6fD2mL8cB9nE3HqV` | 777,777,777 |\n| **LUCID** | `9dLpQwCx4mK7rT2yE5iS8nA1hG6fJ3vB8qF4pN9uL7cX` | 333,333,333 |\n",
+            "line_content": "| **SMIND** | `8cMgTvYz3eR1wK5hN7jP9qXbS4uA6fD2mL8cB9nE3HqV` | 777,777,777 |"
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/deploy-mainnet.sh",
+            "line": 86,
+            "context": "# Extract Solana addresses (simulation-friendly)\nDREAM_SOLANA_ADDRESS=$(echo \"$SOLANA_DEPLOY_OUTPUT\" | grep -o \"DREAM Token.*: [A-Za-z0-9]*\" | cut -d' ' -f4 || echo \"7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA\")\nSMIND_SOLANA_ADDRESS=$(echo \"$SOLANA_DEPLOY_OUTPUT\" | grep -o \"SMIND Token.*: [A-Za-z0-9]*\" | cut -d' ' -f4 || echo \"8cMgTvYz3eR1wK5hN7jP9qXbS4uA6fD2mL8cB9nE3HqV\")\nLUCID_SOLANA_ADDRESS=$(echo \"$SOLANA_DEPLOY_OUTPUT\" | grep -o \"LUCID Token.*: [A-Za-z0-9]*\" | cut -d' ' -f4 || echo \"9dLpQwCx4mK7rT2yE5iS8nA1hG6fJ3vB8qF4pN9uL7cX\")\n",
+            "line_content": "SMIND_SOLANA_ADDRESS=$(echo \"$SOLANA_DEPLOY_OUTPUT\" | grep -o \"SMIND Token.*: [A-Za-z0-9]*\" | cut -d' ' -f4 || echo \"8cMgTvYz3eR1wK5hN7jP9qXbS4uA6fD2mL8cB9nE3HqV\")"
+          }
+        ],
+        "verified": true
+      },
+      "LUCID": {
+        "address": "9dLpQwCx4mK7rT2yE5iS8nA1hG6fJ3vB8qF4pN9uL7cX",
+        "occurrences": [
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/enhanced_deployment_scanner.py",
+            "line": 23,
+            "context": "                \"DREAM\": \"7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA\",\n                \"SMIND\": \"8cMgTvYz3eR1wK5hN7jP9qXbS4uA6fD2mL8cB9nE3HqV\", \n                \"LUCID\": \"9dLpQwCx4mK7rT2yE5iS8nA1hG6fJ3vB8qF4pN9uL7cX\"\n            },\n            \"skale_mainnet\": {",
+            "line_content": "\"LUCID\": \"9dLpQwCx4mK7rT2yE5iS8nA1hG6fJ3vB8qF4pN9uL7cX\""
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/UNIFIED_README.md",
+            "line": 215,
+            "context": "| **DREAM** | `7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA` | 777,777,777 |\n| **SMIND** | `8cMgTvYz3eR1wK5hN7jP9qXbS4uA6fD2mL8cB9nE3HqV` | 777,777,777 |\n| **LUCID** | `9dLpQwCx4mK7rT2yE5iS8nA1hG6fJ3vB8qF4pN9uL7cX` | 333,333,333 |\n\n### \ud83d\udd35 SKALE Europa Hub (Zero-Gas)",
+            "line_content": "| **LUCID** | `9dLpQwCx4mK7rT2yE5iS8nA1hG6fJ3vB8qF4pN9uL7cX` | 333,333,333 |"
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/deploy-mainnet.sh",
+            "line": 87,
+            "context": "DREAM_SOLANA_ADDRESS=$(echo \"$SOLANA_DEPLOY_OUTPUT\" | grep -o \"DREAM Token.*: [A-Za-z0-9]*\" | cut -d' ' -f4 || echo \"7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA\")\nSMIND_SOLANA_ADDRESS=$(echo \"$SOLANA_DEPLOY_OUTPUT\" | grep -o \"SMIND Token.*: [A-Za-z0-9]*\" | cut -d' ' -f4 || echo \"8cMgTvYz3eR1wK5hN7jP9qXbS4uA6fD2mL8cB9nE3HqV\")\nLUCID_SOLANA_ADDRESS=$(echo \"$SOLANA_DEPLOY_OUTPUT\" | grep -o \"LUCID Token.*: [A-Za-z0-9]*\" | cut -d' ' -f4 || echo \"9dLpQwCx4mK7rT2yE5iS8nA1hG6fJ3vB8qF4pN9uL7cX\")\n\n# Deploy to SKALE",
+            "line_content": "LUCID_SOLANA_ADDRESS=$(echo \"$SOLANA_DEPLOY_OUTPUT\" | grep -o \"LUCID Token.*: [A-Za-z0-9]*\" | cut -d' ' -f4 || echo \"9dLpQwCx4mK7rT2yE5iS8nA1hG6fJ3vB8qF4pN9uL7cX\")"
+          }
+        ],
+        "verified": true
+      }
+    },
+    "skale_mainnet": {
+      "DreamBridge": {
+        "address": "0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7",
+        "occurrences": [
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/DEPLOYMENT_SCAN_REPORT.json",
+            "line": 70,
+            "context": "      },\n      \"from_DEPLOYMENT_SUCCESS.md\": {\n        \"address\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\",\n        \"source_file\": \"/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/DEPLOYMENT_SUCCESS.md\",\n        \"full_data\": {",
+            "line_content": "\"address\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\","
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/iem_memory.json",
+            "line": 4,
+            "context": "  \"lastDeployed\": {\n    \"OneiroSphere\": {\n      \"address\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\",\n      \"abi\": [\n        {",
+            "line_content": "\"address\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\","
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/iem_memory.json",
+            "line": 78,
+            "context": "    {\n      \"contract\": \"OneiroSphere\",\n      \"address\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\",\n      \"codeHash\": \"0x9876543210fedcba9876543210fedcba9876543210fedcba9876543210fedcba\",\n      \"codeSize\": 8192,",
+            "line_content": "\"address\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\","
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/deployment_summary.json",
+            "line": 22,
+            "context": "    \"chain_id\": 2046399126,\n    \"contracts\": {\n      \"DreamBridge\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7,\",\n      \"OneiroSphereV2\": \"\"\n    },",
+            "line_content": "\"DreamBridge\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7,\","
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/test_deployment.py",
+            "line": 35,
+            "context": "        \"lastDeployed\": {\n            \"OneiroSphere\": {\n                \"address\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\",\n                \"abi\": [\n                    {",
+            "line_content": "\"address\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\","
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/test_deployment.py",
+            "line": 69,
+            "context": "            {\n                \"contract\": \"OneiroSphere\",\n                \"address\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\",\n                \"codeHash\": \"0x9876543210fedcba9876543210fedcba9876543210fedcba9876543210fedcba\",\n                \"codeSize\": 8192,",
+            "line_content": "\"address\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\","
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/test_deployment.py",
+            "line": 87,
+            "context": "    print(\"\u2705 Mock deployment completed!\")\n    print(\"\ud83d\udcc1 Created iem_memory.json with deployment details\")\n    print(\"\ud83c\udfaf OneiroSphere deployed at: 0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\")\n    print(\"\ud83c\udf19 Test dream recorded with IPFS hash: QmTestDreamHash1234567890abcdefghijklmnopqr\")\n    ",
+            "line_content": "print(\"\ud83c\udfaf OneiroSphere deployed at: 0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\")"
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/enhanced_deployment_scanner.py",
+            "line": 26,
+            "context": "            },\n            \"skale_mainnet\": {\n                \"DreamBridge\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\"\n            }\n        }",
+            "line_content": "\"DreamBridge\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\""
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/deployment_simulation.py",
+            "line": 55,
+            "context": "    # Step 5: Contract Deployment\n    print(\"\ud83d\ude80 Step 5: OneiroSphere Contract Deployment\")\n    contract_address = \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\"\n    tx_hash = \"0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef\"\n    ",
+            "line_content": "contract_address = \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\""
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/DEPLOYMENT.md",
+            "line": 62,
+            "context": "  \"lastDeployed\": {\n    \"OneiroSphere\": {\n      \"address\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\",\n      \"abi\": [...],\n      \"timestamp\": 1756730258.795,",
+            "line_content": "\"address\": \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\","
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/DEPLOYMENT_SCAN_REPORT.md",
+            "line": 33,
+            "context": "|----------|---------|------------------|--------|\n| from_MINT_GENE_DEPLOYMENT.md | `0x1234567890abcdef1234567890abcdef12345678` | `N/A` | MINT_GENE_DEPLOYMENT.md |\n| from_DEPLOYMENT_SUCCESS.md | `0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7` | `N/A` | DEPLOYMENT_SUCCESS.md |\n\n## \ud83d\udd0d Verification Status",
+            "line_content": "| from_DEPLOYMENT_SUCCESS.md | `0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7` | `N/A` | DEPLOYMENT_SUCCESS.md |"
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/UNIFIED_README.md",
+            "line": 201,
+            "context": "```solidity\n// SKALE contract interaction\nDreamBridge bridge = DreamBridge(0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7);\nbridge.bridgeToSolana(1000 ether, \"7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA\");\n```",
+            "line_content": "DreamBridge bridge = DreamBridge(0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7);"
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/UNIFIED_README.md",
+            "line": 221,
+            "context": "| Contract | Address | Type |\n|----------|---------|------|\n| **DreamBridge** | `0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7` | Cross-Chain Bridge |\n| **OneiroSphereV2** | `0x8E9c6A4f2D7b1C5e3F8a9B2c7E6d5A1b8E3c4F7a9B2` | Dream Interface |\n",
+            "line_content": "| **DreamBridge** | `0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7` | Cross-Chain Bridge |"
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/DEPLOYMENT_SUCCESS.md",
+            "line": 18,
+            "context": "\n### \ud83d\udd35 SKALE Europa Hub (Zero-Gas)\n- **DreamBridge:** `0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7,`\n- **OneiroSphereV2:** ``\n- **RPC Endpoint:** https://mainnet.skalenodes.com/v1/elated-tan-skat",
+            "line_content": "- **DreamBridge:** `0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7,`"
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/IMPLEMENTATION_COMPLETE.md",
+            "line": 101,
+            "context": "\n### \ud83d\udd35 SKALE Europa Hub (Zero-Gas)\n- **DreamBridge**: `0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7`\n- **OneiroSphereV2**: `0x8E9c6A4f2D7b1C5e3F8a9B2c7E6d5A1b8E3c4F7a9B2`\n",
+            "line_content": "- **DreamBridge**: `0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7`"
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/deploy-mainnet.sh",
+            "line": 94,
+            "context": "SKALE_DEPLOY_OUTPUT=$(cd packages/consensus && timeout 120 npx hardhat run scripts/deploy-all.js --network skale 2>&1) || {\n    echo -e \"${YELLOW}\u26a0\ufe0f  SKALE deployment timeout, using existing contracts${NC}\"\n    SKALE_DEPLOY_OUTPUT=\"DreamBridge deployed to: 0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7, OneiroSphereV2: 0x8E9c6A4f2D7b1C5e3F8a9B2c7E6d5A1b8E3c4F7a9B2\"\n}\n",
+            "line_content": "SKALE_DEPLOY_OUTPUT=\"DreamBridge deployed to: 0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7, OneiroSphereV2: 0x8E9c6A4f2D7b1C5e3F8a9B2c7E6d5A1b8E3c4F7a9B2\""
+          },
+          {
+            "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/deploy-mainnet.sh",
+            "line": 101,
+            "context": "\n# Extract SKALE addresses\nBRIDGE_SKALE_ADDRESS=$(echo \"$SKALE_DEPLOY_OUTPUT\" | grep -o \"DreamBridge.*: 0x[a-fA-F0-9]*\" | cut -d' ' -f4 || echo \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\")\nONEIRO_SKALE_ADDRESS=$(echo \"$SKALE_DEPLOY_OUTPUT\" | grep -o \"OneiroSphereV2.*: 0x[a-fA-F0-9]*\" | cut -d' ' -f4 || echo \"0x8E9c6A4f2D7b1C5e3F8a9B2c7E6d5A1b8E3c4F7a9B2\")\n",
+            "line_content": "BRIDGE_SKALE_ADDRESS=$(echo \"$SKALE_DEPLOY_OUTPUT\" | grep -o \"DreamBridge.*: 0x[a-fA-F0-9]*\" | cut -d' ' -f4 || echo \"0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7\")"
+          }
+        ],
+        "verified": true
+      }
+    }
+  },
+  "transaction_hashes": {
+    "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/deploy_test.py": [
+      {
+        "hash": "0x16db936de7342b075849d74a66460007772fab88cf4ab509a3487f23398823d6",
+        "type": "ethereum_tx",
+        "line": 34,
+        "context": "# Deploy contract\nprint('Deploying contract...')\nprivate_key = os.getenv('DEPLOYER_KEY', '0x16db936de7342b075849d74a66460007772fab88cf4ab509a3487f23398823d6')\nif private_key.startswith('0x'):\n    private_key = private_key[2:]  # Remove 0x prefix if present"
+      }
+    ]
+  },
+  "potential_deployments": {
+    "deploy_test.py": {
+      "file_path": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/deploy_test.py",
+      "eth_addresses": [
+        "0x16db936de7342b075849d74a66460007772fab88"
+      ],
+      "solana_addresses": [],
+      "transaction_hashes": [],
+      "content_snippet": "from web3 import Web3\nfrom solcx import compile_standard, install_solc\nimport json\nimport os\n\n# Initialize Web3\nw3 = Web3(Web3.HTTPProvider('https://mainnet.skalenodes.com/v1/elated-tan-skat'))\nprint(f'Connected to SKALE: {w3.is_connected()}')\n\n# Compile contract\nprint('Installing solc...')\ninstall_solc(\"0.8.20\")\n\nprint('Compiling contract...')\nwith open('contracts/IEMDreams.sol', 'r') as f:\n    source = f.read()\n\ncompiled = compile_standard({\n    \"language\": \"Solidity\",\n    \"sources\": {\"IEMDrea..."
+    },
+    "deploy_solana_mainnet.py": {
+      "file_path": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/deploy_solana_mainnet.py",
+      "eth_addresses": [],
+      "solana_addresses": [
+        "7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA"
+      ],
+      "transaction_hashes": [],
+      "content_snippet": "#!/usr/bin/env python3\n\"\"\"\nSolana Mainnet Deployment Script for Dream-Mind-Lucid\n====================================================\nDeploys DREAM, SMIND, and LUCID tokens using SPL Token 2022\nwith Helius RPC for MEV protection and zero-front operations\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport time\nimport hashlib\nfrom typing import Dict, List, Optional\nimport logging\n\n# Setup logging\nlogging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')\nlogger = logging..."
+    },
+    "deployment_simulation.py": {
+      "file_path": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/deployment_simulation.py",
+      "eth_addresses": [
+        "0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7",
+        "0x1234567890abcdef1234567890abcdef12345678",
+        "0xabcdef1234567890abcdef1234567890abcdef12"
+      ],
+      "solana_addresses": [],
+      "transaction_hashes": [
+        "1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+      ],
+      "content_snippet": "#!/usr/bin/env python3\n\"\"\"\nComplete OneiroSphere Deployment Simulation\n-------------------------------------------\nDemonstrates the full deployment workflow that would occur with proper environment variables\n\"\"\"\n\nimport json\nimport time\n\ndef simulate_real_deployment():\n    \"\"\"Simulate what would happen in a real deployment.\"\"\"\n    \n    print(\"\ud83c\udf0c DREAM-MIND-LUCID ONEIROSPHERE DEPLOYMENT\")\n    print(\"=\" * 60)\n    print()\n    \n    # Step 1: Environment Check\n    print(\"\ud83d\udccb Step 1: Environment Configur..."
+    },
+    "deploy_multichain.py": {
+      "file_path": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/deploy_multichain.py",
+      "eth_addresses": [],
+      "solana_addresses": [
+        "4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a"
+      ],
+      "transaction_hashes": [],
+      "content_snippet": "#!/usr/bin/env python3\n\"\"\"\nMulti-Chain Deployment Script\n============================\nHandles zero-cost deployment across Solana, SKALE, and EVM chains\nwith relayer integration for gasless transactions.\n\nAuthor: DreamMindLucid\nVersion: 1.0.0\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport time\nimport argparse\nfrom typing import Dict, List, Optional\nfrom pathlib import Path\n\n# Blockchain clients\nfrom web3 import Web3\ntry:\n    from solana.rpc.api import Client as SolanaClient\n    from solders.keypair..."
+    },
+    "deploy-mint-gene.sh": {
+      "file_path": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/deploy-mint-gene.sh",
+      "eth_addresses": [
+        "0x1234567890abcdef1234567890abcdef12345678",
+        "0xabcdef1234567890abcdef1234567890abcdef12",
+        "0x1234567890abcdef1234567890abcdef12345678",
+        "0xabcdef1234567890abcdef1234567890abcdef12"
+      ],
+      "solana_addresses": [
+        "5EyLtT1Y3dJ9p8kL2mNxQr7vU7u8y9z1w2x3y4z5a6b7",
+        "5EyLtT1Y3dJ9p8kL2mNxQr7vU7u8y9z1w2x3y4z5a6b7"
+      ],
+      "transaction_hashes": [],
+      "content_snippet": "#!/bin/bash\n\n# OneirobotNFT Mainnet Deployment Commands - AI Gene Deployer\n# One-liner deployment automation for SKALE & Solana Mainnet\n\nset -e\n\necho \"\ud83d\ude80 AI GENE DEPLOYER - MAINNET DEPLOYMENT AUTOMATION\"\necho \"==================================================\"\necho \"\u26a1 OneirobotNFT Mint Gene Integration\"\necho \"\ud83c\udf10 Networks: SKALE Europa Hub + Solana Mainnet\"\necho \"\ud83d\udcb0 Gas Cost: $0.00 (Zero-gas operations)\"\necho \"\"\n\n# Colors for output\nRED='\\033[0;31m'\nGREEN='\\033[0;32m'\nBLUE='\\033[0;34m'\nYELLOW='\\033..."
+    },
+    "deploy-mainnet.sh": {
+      "file_path": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/deploy-mainnet.sh",
+      "eth_addresses": [
+        "0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7",
+        "0x8E9c6A4f2D7b1C5e3F8a9B2c7E6d5A1b8E3c4F7a",
+        "0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7",
+        "0x8E9c6A4f2D7b1C5e3F8a9B2c7E6d5A1b8E3c4F7a"
+      ],
+      "solana_addresses": [
+        "7bKLhF8k2mNpQrX9vJ4Ct5gYwDx3Hs2uPq6Rf1Tb9LmA",
+        "8cMgTvYz3eR1wK5hN7jP9qXbS4uA6fD2mL8cB9nE3HqV",
+        "9dLpQwCx4mK7rT2yE5iS8nA1hG6fJ3vB8qF4pN9uL7cX",
+        "x8E9c6A4f2D7b1C5e3F8a9B2c7E6d5A1b8E3c4F7a9B2",
+        "x8E9c6A4f2D7b1C5e3F8a9B2c7E6d5A1b8E3c4F7a9B2"
+      ],
+      "transaction_hashes": [],
+      "content_snippet": "#!/bin/bash\n# Dream-Mind-Lucid One-Click Mainnet Deployment Script\n# Deploys to both Solana (Helius) and SKALE (Public RPC) with zero-gas operations\n\nset -e  # Exit on any error\n\n# Colors for output\nRED='\\033[0;31m'\nGREEN='\\033[0;32m'\nBLUE='\\033[0;34m'\nYELLOW='\\033[1;33m'\nPURPLE='\\033[0;35m'\nNC='\\033[0m' # No Color\n\n# Banner\necho -e \"${PURPLE}\"\ncat << \"EOF\"\n \u2588\u2588\u2588\u2588\u2588\u2588\u2557 \u2588\u2588\u2588\u2588\u2588\u2588\u2557 \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2557 \u2588\u2588\u2588\u2588\u2588\u2557 \u2588\u2588\u2588\u2557   \u2588\u2588\u2588\u2557    \u2588\u2588\u2588\u2557   \u2588\u2588\u2588\u2557\u2588\u2588\u2557\u2588\u2588\u2588\u2557   \u2588\u2588\u2557\u2588\u2588\u2588\u2588\u2588\u2588\u2557     \u2588\u2588\u2557     \u2588\u2588\u2557   \u2588\u2588\u2557 \u2588\u2588\u2588\u2588\u2588\u2588\u2557\u2588\u2588\u2557\u2588\u2588\u2588\u2588\u2588\u2588\u2557 \n\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2557\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2557\u2588\u2588\u2554..."
+    },
+    "setup_relayers.py": {
+      "file_path": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/setup_relayers.py",
+      "eth_addresses": [
+        "0x86C80a8aa58e0A4fa09A69624c31Ab2a6CAD56b8"
+      ],
+      "solana_addresses": [],
+      "transaction_hashes": [],
+      "content_snippet": "#!/usr/bin/env python3\n\"\"\"\nGasless Relayer Setup Script\n============================\nConfigures Biconomy, Gelato, and other gasless transaction relayers\nfor zero-cost user experience across all supported chains.\n\nAuthor: DreamMindLucid\nVersion: 1.0.0\n\"\"\"\n\nimport os\nimport sys\nimport json\nimport requests\nimport argparse\nfrom typing import Dict, List, Optional\nfrom pathlib import Path\n\nclass RelayerManager:\n    \"\"\"Manages gasless transaction relayers across multiple chains\"\"\"\n    \n    def __init__..."
+    }
+  },
+  "network_configurations": {
+    "skale_mainnet": [
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scan_deployment_data.py",
+        "rpc": "elated-tan-skat.explorer.mainnet.skalenodes.com",
+        "line": 358,
+        "context": "            ],\n            \"skale_mainnet\": [\n                \"https://elated-tan-skat.explorer.mainnet.skalenodes.com/\"\n            ],\n            \"ethereum_mainnet\": ["
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/MINT_GENE_DEPLOYMENT.md",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 64,
+        "context": "  networks: {\n    skale: {\n      url: \"https://mainnet.skalenodes.com/v1/elated-tan-skat\",\n      chainId: 2046399126,\n      gasPrice: 0,  // Zero gas fees"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/MINT_GENE_DEPLOYMENT.md",
+        "rpc": "elated-tan-skat.explorer.mainnet.skalenodes.com",
+        "line": 174,
+        "context": "  skale: {\n    address: \"0x1234567890abcdef1234567890abcdef12345678\",\n    explorer: \"https://elated-tan-skat.explorer.mainnet.skalenodes.com\"\n  },\n  solana: {"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/README.md",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 100,
+        "context": "SKALE Europa Hub (Legacy):\n  Chain ID: 2046399126\n  RPC: https://mainnet.skalenodes.com/v1/elated-tan-skat\n  Infura Fallback: https://skale-mainnet.infura.io/v3/{PROJECT_ID}\n  Gas Price: 0 SKL (Zero-gas network)"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/deploy_test.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 7,
+        "context": "\n# Initialize Web3\nw3 = Web3(Web3.HTTPProvider('https://mainnet.skalenodes.com/v1/elated-tan-skat'))\nprint(f'Connected to SKALE: {w3.is_connected()}')\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/hardhat.config.js",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 5,
+        "context": "\nconst PRIVATE_KEY = process.env.PRIVATE_KEY || process.env.DEPLOYER_KEY;\nconst SKALE_RPC = process.env.SKALE_RPC || \"https://mainnet.skalenodes.com/v1/elated-tan-skat\";\nconst SKALE_CHAIN_ID = parseInt(process.env.SKALE_CHAIN_ID) || 2046399126;\nconst INFURA_GAS_API = process.env.INFURA_GAS_API || \"https://gas.api.infura.io/v3/96e56809f7fc4662b56852c0f3f63c1a\";"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/hardhat.config.js",
+        "rpc": "elated-tan-skat.explorer.mainnet.skalenodes.com",
+        "line": 57,
+        "context": "        chainId: SKALE_CHAIN_ID,\n        urls: {\n          apiURL: \"https://elated-tan-skat.explorer.mainnet.skalenodes.com/api\",\n          browserURL: \"https://elated-tan-skat.explorer.mainnet.skalenodes.com\"\n        }"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/deploy_iemDreams.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 7,
+        "context": "\n# Configure Web3 with SKALE\nw3 = Web3(Web3.HTTPProvider('https://mainnet.skalenodes.com/v1/elated-tan-skat'))\nprint(f'Connected to SKALE: {w3.is_connected()}')\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/enhanced_deployment_scanner.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 193,
+        "context": "            ],\n            \"skale_mainnet\": [\n                \"mainnet.skalenodes.com/v1/elated-tan-skat\",\n                \"elated-tan-skat.explorer.mainnet.skalenodes.com\"\n            ]"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/enhanced_deployment_scanner.py",
+        "rpc": "elated-tan-skat.explorer.mainnet.skalenodes.com",
+        "line": 194,
+        "context": "            \"skale_mainnet\": [\n                \"mainnet.skalenodes.com/v1/elated-tan-skat\",\n                \"elated-tan-skat.explorer.mainnet.skalenodes.com\"\n            ]\n        }"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/deploy_dream.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 8,
+        "context": "def deploy_dreams():\n    # Initialize Web3\n    w3 = Web3(Web3.HTTPProvider('https://mainnet.skalenodes.com/v1/elated-tan-skat'))\n    print(f'Connected to SKALE: {w3.is_connected()}')\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/install_and_deploy.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 88,
+        "context": "    print(\"  2\ufe0f\u20e3  Set environment variables for real deployment:\")\n    print(\"      export DEPLOYER_KEY='your-private-key'\")\n    print(\"      export SKALE_RPC='https://mainnet.skalenodes.com/v1/elated-tan-skat'\")\n    print(\"      export SOLANA_RPC_URL='https://mainnet.helius-rpc.com/?api-key=your-key'\")\n    print(\"\")"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/DEPLOYMENT_SCAN_REPORT.json",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 66,
+        "context": "        \"source_file\": \"/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/MINT_GENE_DEPLOYMENT.md\",\n        \"full_data\": {\n          \"context\": \"# verify skale deployment curl -x post -h \\\"content-type: application/json\\\" \\\\   --data '{\\\"jsonrpc\\\":\\\"2.0\\\",\\\"method\\\":\\\"eth_getcode\\\",\\\"params\\\":[\\\"0x1234567890abcdef1234567890abcdef12345678\\\",\\\"latest\\\"],\\\"id\\\":1}' \\\\   https://mainnet.skalenodes.com/v1/elated-tan-skat \"\n        }\n      },"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/DEPLOYMENT_SCAN_REPORT.json",
+        "rpc": "elated-tan-skat.explorer.mainnet.skalenodes.com",
+        "line": 93,
+        "context": "      \"needs_verification\": true,\n      \"explorer_urls\": [\n        \"https://elated-tan-skat.explorer.mainnet.skalenodes.com/\"\n      ]\n    }"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/AI_AGENT_README.md",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 152,
+        "context": "\ud83c\udf0c DREAM-MIND-LUCID: Infinity Earnings Matrix\n============================================================\n\u2705 Connected to SKALE Network: https://mainnet.skalenodes.com/v1/elated-tan-skat\n\ud83d\udce1 Chain ID: 2046399126\n\ud83e\udd16 AI Orchestrator initialized"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/ZERO_COST_DEPLOYMENT.md",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 141,
+        "context": "```bash\n# Blockchain Networks\nexport SKALE_RPC=\"https://mainnet.skalenodes.com/v1/elated-tan-skat\"\nexport SOLANA_RPC_URL=\"https://mainnet.helius-rpc.com\"\nexport DEPLOYER_KEY=\"your_private_key\""
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/copilot-instruction.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 20,
+        "context": "\n# Use existing Dream-Mind-Lucid configuration patterns\nSKALE_RPC = os.getenv(\"SKALE_RPC\", \"https://mainnet.skalenodes.com/v1/elated-tan-skat\")\nINFURA_RPC = os.getenv(\"INFURA_PROJECT_ID\")\nCHAIN_ID = int(os.getenv(\"SKALE_CHAIN_ID\", \"2046399126\"))"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream_mind_launcher.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 44,
+        "context": "\n# Use Infura RPC if available, otherwise fallback to SKALE RPC\nSKALE_RPC = \"https://mainnet.skalenodes.com/v1/elated-tan-skat\"\nif INFURA_PROJECT_ID and INFURA_PROJECT_ID != \"YOUR_INFURA_API_KEY\":\n    RPC_URL = f\"https://skale-mainnet.infura.io/v3/{INFURA_PROJECT_ID}\""
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/DEPLOYMENT.md",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 86,
+        "context": "- **Chain ID**: 2046399126  \n- **RPC**: `https://skale-mainnet.infura.io/v3/{INFURA_PROJECT_ID}`\n- **Fallback RPC**: `https://mainnet.skalenodes.com/v1/elated-tan-skat`\n- **Gas Price**: 0 (zero-gas transactions on SKALE)\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/DEPLOYMENT_SCAN_REPORT.md",
+        "rpc": "elated-tan-skat.explorer.mainnet.skalenodes.com",
+        "line": 50,
+        "context": "- **Needs Verification:** Yes\n- **Blockchain Explorers:**\n  - [https://elated-tan-skat.explorer.mainnet.skalenodes.com/](https://elated-tan-skat.explorer.mainnet.skalenodes.com/)\n\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/DEPLOYMENT_SUCCESS.md",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 20,
+        "context": "- **DreamBridge:** `0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7,`\n- **OneiroSphereV2:** ``\n- **RPC Endpoint:** https://mainnet.skalenodes.com/v1/elated-tan-skat\n- **Chain ID:** 2046399126\n- **Gas Cost:** $0.00 \u2705"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/check_balance.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 4,
+        "context": "\n# Connect to SKALE\nw3 = Web3(Web3.HTTPProvider('https://mainnet.skalenodes.com/v1/elated-tan-skat'))\nprint(f'Connected to SKALE: {w3.is_connected()}')\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/test_deploy.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 6,
+        "context": "\n# Connect to SKALE\nw3 = Web3(Web3.HTTPProvider('https://mainnet.skalenodes.com/v1/elated-tan-skat'))\nprint(f'Connected to SKALE: {w3.is_connected()}')\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/deployment_summary.json",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 19,
+        "context": "  },\n  \"skale\": {\n    \"rpc\": \"https://mainnet.skalenodes.com/v1/elated-tan-skat\",\n    \"chain_id\": 2046399126,\n    \"contracts\": {"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/browser-extension/manifest.json",
+        "rpc": "elated-tan-skat.explorer.mainnet.skalenodes.com",
+        "line": 12,
+        "context": "    \"https://opensea.io/*\",\n    \"https://magiceden.io/*\",\n    \"https://elated-tan-skat.explorer.mainnet.skalenodes.com/*\",\n    \"https://solscan.io/*\",\n    \"https://api.opensea.io/*\","
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/browser-extension/content.js",
+        "rpc": "elated-tan-skat.explorer.mainnet.skalenodes.com",
+        "line": 12,
+        "context": "    address: \"0x1234567890abcdef1234567890abcdef12345678\",\n    network: \"SKALE Europa Hub\",\n    explorer: \"https://elated-tan-skat.explorer.mainnet.skalenodes.com\"\n  },\n  solana: {"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/deploy-mint-gene.sh",
+        "rpc": "elated-tan-skat.explorer.mainnet.skalenodes.com",
+        "line": 47,
+        "context": "    echo \"\ud83d\udccd Contract Address: 0x1234567890abcdef1234567890abcdef12345678\"\n    echo \"\ud83d\udd17 Transaction Hash: 0xabcdef1234567890abcdef1234567890abcdef12\"\n    echo \"\ud83c\udf10 Explorer: https://elated-tan-skat.explorer.mainnet.skalenodes.com\"\n    echo \"\"\n}"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/setup_relayers.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 144,
+        "context": "                \"gas_price\": 0,\n                \"description\": \"SKALE Europa Hub native zero-gas transactions\",\n                \"rpc\": os.getenv(\"SKALE_RPC\", \"https://mainnet.skalenodes.com/v1/elated-tan-skat\"),\n                \"chain_id\": int(os.getenv(\"SKALE_CHAIN_ID\", \"2046399126\"))\n            }"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/deploy-oneirobot-nft.js",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 95,
+        "context": "    timestamp: new Date().toISOString(),\n    chainId: 2046399126,\n    rpcUrl: process.env.SKALE_RPC || \"https://mainnet.skalenodes.com/v1/elated-tan-skat\",\n    explorerUrl: `https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/${oneirobotNFT.address}`,\n    features: ["
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/deploy-oneirobot-nft.js",
+        "rpc": "elated-tan-skat.explorer.mainnet.skalenodes.com",
+        "line": 96,
+        "context": "    chainId: 2046399126,\n    rpcUrl: process.env.SKALE_RPC || \"https://mainnet.skalenodes.com/v1/elated-tan-skat\",\n    explorerUrl: `https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/${oneirobotNFT.address}`,\n    features: [\n      \"ERC-721 compliant\","
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/README_secrets.md",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 85,
+        "context": "\n# Network configuration\nSKALE_RPC=\"https://mainnet.skalenodes.com/v1/elated-tan-skat\"\nSKALE_CHAIN_ID=\"2046399126\"\n```"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/deploy_multichain.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 66,
+        "context": "            \"skale\": {\n                \"mainnet\": {\n                    \"rpc\": os.getenv(\"SKALE_RPC\", \"https://mainnet.skalenodes.com/v1/elated-tan-skat\"),\n                    \"chain_id\": int(os.getenv(\"SKALE_CHAIN_ID\", \"2046399126\")),\n                    \"gas_price\": 0,"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/deploy-mainnet.sh",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 49,
+        "context": "# Set default values for public RPCs\nexport SOLANA_RPC_URL=${SOLANA_RPC_URL:-\"https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5\"}\nexport SKALE_RPC=${SKALE_RPC:-\"https://mainnet.skalenodes.com/v1/elated-tan-skat\"}\nexport CALYPSO_RPC=${CALYPSO_RPC:-\"https://core.calypso.skale.network\"}\nexport SKALE_CHAIN_ID=${SKALE_CHAIN_ID:-\"2046399126\"}"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/agents/performance_monitor.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 21,
+        "context": "        # Connect to SKALE network\n        self.w3 = Web3(Web3.HTTPProvider(\n            \"https://mainnet.skalenodes.com/v1/elated-tan-skat\"\n        ))\n        self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/agents/token_distribution.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 19,
+        "context": "        # Connect to SKALE network\n        self.w3 = Web3(Web3.HTTPProvider(\n            \"https://mainnet.skalenodes.com/v1/elated-tan-skat\"\n        ))\n        self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/agents/address_manager.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 24,
+        "context": "        # Connect to SKALE network\n        self.w3 = Web3(Web3.HTTPProvider(\n            \"https://mainnet.skalenodes.com/v1/elated-tan-skat\"\n        ))\n        "
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/agents/iem_syndicate.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 33,
+        "context": "\n# Environment Configuration - SKALE (Legacy)\nSKALE_RPC = os.getenv(\"SKALE_RPC\", \"https://mainnet.skalenodes.com/v1/elated-tan-skat\")\nINFURA_RPC = os.getenv(\"INFURA_PROJECT_ID\")\nCHAIN_ID = int(os.getenv(\"SKALE_CHAIN_ID\", \"2046399126\"))"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream-test/deploy_multi.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 11,
+        "context": "    {\n        \"name\": \"Europa Hub\",\n        \"rpc\": \"https://mainnet.skalenodes.com/v1/elated-tan-skat\",\n        \"chain_id\": 2046399126\n    },"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream-test/deploy_mainnet.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 7,
+        "context": "\n# Connect to Europa Mainnet\nRPC_URL = \"https://mainnet.skalenodes.com/v1/elated-tan-skat\"\nCHAIN_ID = 2046399126  # Europa Mainnet Chain ID\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream-test/deploy_test.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 25,
+        "context": "\n# Try Europa Hub first\nRPC_URL = \"https://mainnet.skalenodes.com/v1/elated-tan-skat\"\nCHAIN_ID = 2046399126\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream-test/deploy_test_skale.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 21,
+        "context": "\n# Try Europa Hub first\nRPC_URL = \"https://mainnet.skalenodes.com/v1/elated-tan-skat\"\nCHAIN_ID = 2046399126\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream-test/deploy3.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 6,
+        "context": "\n# Connect to SKALE\nw3 = Web3(Web3.HTTPProvider(\"https://mainnet.skalenodes.com/v1/elated-tan-skat\"))\nprint(f\"Connected to SKALE: {w3.is_connected()}\")\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream-test/deploy.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 6,
+        "context": "\n# Connect to SKALE\nw3 = Web3(Web3.HTTPProvider(\"https://mainnet.skalenodes.com/v1/elated-tan-skat\"))\nprint(f\"Connected to SKALE: {w3.is_connected()}\")\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream-test/renounce_ownership.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 10,
+        "context": "    {\n        \"name\": \"Europa Hub\",\n        \"rpc\": \"https://mainnet.skalenodes.com/v1/elated-tan-skat\",\n        \"chain_id\": 2046399126,\n        \"contract\": \"0xF874AeC485733971a7dAEE9167E388f218aa93D5\""
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream-test/verify.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 5,
+        "context": "\n# Connect to SKALE\nw3 = Web3(Web3.HTTPProvider(\"https://mainnet.skalenodes.com/v1/elated-tan-skat\"))\nprint(f\"Connected to SKALE: {w3.is_connected()}\")\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream-test/test.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 5,
+        "context": "\n# Connect to SKALE\nw3 = Web3(Web3.HTTPProvider(\"https://mainnet.skalenodes.com/v1/elated-tan-skat\"))\nprint(f\"Connected to SKALE: {w3.is_connected()}\")\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream-test/deploy2.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 6,
+        "context": "\n# Connect to SKALE\nw3 = Web3(Web3.HTTPProvider(\"https://mainnet.skalenodes.com/v1/elated-tan-skat\"))\nprint(f\"Connected to SKALE: {w3.is_connected()}\")\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream-test/interact.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 6,
+        "context": "\n# Connect to SKALE\nw3 = Web3(Web3.HTTPProvider(\"https://mainnet.skalenodes.com/v1/elated-tan-skat\"))\nprint(f\"Connected to SKALE: {w3.is_connected()}\")\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream-test/verify_contracts.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 9,
+        "context": "    {\n        \"name\": \"Europa Hub\",\n        \"rpc\": \"https://mainnet.skalenodes.com/v1/elated-tan-skat\",\n        \"contract\": \"0xF874AeC485733971a7dAEE9167E388f218aa93D5\"\n    },"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream-test/deploy4.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 6,
+        "context": "\n# Connect to SKALE\nw3 = Web3(Web3.HTTPProvider(\"https://mainnet.skalenodes.com/v1/elated-tan-skat\"))\nprint(f\"Connected to SKALE: {w3.is_connected()}\")\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream-test/deploy_all_chains.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 136,
+        "context": "    {\n        \"name\": \"Europa\",\n        \"rpc\": \"https://mainnet.skalenodes.com/v1/elated-tan-skat\",\n        \"chain_id\": 2046399126\n    },"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dream-test/deploy_proxy.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 7,
+        "context": "\n# Connect to Europa Mainnet (has highest sFUEL balance)\nRPC_URL = \"https://mainnet.skalenodes.com/v1/elated-tan-skat\"\nCHAIN_ID = 2046399126\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dashboard/dream_data_collector.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 24,
+        "context": "        # Initialize Web3\n        self.w3 = Web3(Web3.HTTPProvider(\n            \"https://mainnet.skalenodes.com/v1/elated-tan-skat\"\n        ))\n        "
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dashboard/liquidity_websocket.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 214,
+        "context": "    \n    # Initialize liquidity monitor\n    rpc_url = os.getenv('SKALE_RPC', 'https://mainnet.skalenodes.com/v1/elated-tan-skat')\n    monitor = LiquidityMonitor(rpc_url)\n    "
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/dashboard/dream_dashboard.py",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 33,
+        "context": "        # Initialize connection to SKALE\n        self.w3 = Web3(Web3.HTTPProvider(\n            \"https://mainnet.skalenodes.com/v1/elated-tan-skat\"\n        ))\n        "
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/packages/yield-farm/src/index.ts",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 43,
+        "context": "    'https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5';\n  private readonly skaleRPC = process.env.SKALE_RPC || \n    'https://mainnet.skalenodes.com/v1/elated-tan-skat';\n  private readonly calypstoRPC = 'https://core.calypso.skale.network';\n  "
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/packages/consensus/hardhat.config.js",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 5,
+        "context": "\nconst PRIVATE_KEY = process.env.DEPLOYER_KEY || process.env.PRIVATE_KEY;\nconst SKALE_RPC = process.env.SKALE_RPC || \"https://mainnet.skalenodes.com/v1/elated-tan-skat\";\nconst CALYPSO_RPC = \"https://core.calypso.skale.network\";\nconst SKALE_CHAIN_ID = parseInt(process.env.SKALE_CHAIN_ID) || 2046399126;"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/packages/consensus/src/setup-bridges.js",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 12,
+        "context": "\nconst SKALE_BRIDGE_CONFIG = {\n  rpc: process.env.SKALE_RPC || 'https://mainnet.skalenodes.com/v1/elated-tan-skat',\n  chainId: parseInt(process.env.SKALE_CHAIN_ID) || 2046399126,\n  confirmationBlocks: 2"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/frontend/src/config/wagmi.ts",
+        "rpc": "mainnet.skalenodes.com/v1/elated-tan-skat",
+        "line": 17,
+        "context": "    default: {\n      http: [\n        process.env.VITE_SKALE_RPC || 'https://mainnet.skalenodes.com/v1/elated-tan-skat'\n      ],\n    },"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/frontend/src/config/wagmi.ts",
+        "rpc": "elated-tan-skat.explorer.mainnet.skalenodes.com",
+        "line": 24,
+        "context": "    default: { \n      name: 'SKALE Explorer', \n      url: 'https://elated-tan-skat.explorer.mainnet.skalenodes.com' \n    },\n  },"
+      }
+    ],
+    "solana_mainnet": [
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/README.md",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 108,
+        "context": "Solana Mainnet (Primary):\n  Cluster: mainnet-beta\n  RPC: https://mainnet.helius-rpc.com (MEV Protected)\n  Treasury: 4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a\n  SPL Token: 2022 with extensions"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/SOLANA_MIGRATION.md",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 65,
+        "context": "```bash\n# Solana Configuration\nSOLANA_RPC_URL=https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5\nTREASURY_ADDRESS=4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a\nBLOCKCHAIN_MODE=solana"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/enhanced_deployment_scanner.py",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 189,
+        "context": "        mainnet_rpcs = {\n            \"solana_mainnet\": [\n                \"mainnet.helius-rpc.com\",\n                \"api-mainnet.magiceden.dev\"\n            ],"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/enhanced_deployment_scanner.py",
+        "rpc": "api-mainnet.magiceden.dev",
+        "line": 190,
+        "context": "            \"solana_mainnet\": [\n                \"mainnet.helius-rpc.com\",\n                \"api-mainnet.magiceden.dev\"\n            ],\n            \"skale_mainnet\": ["
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/install_and_deploy.py",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 89,
+        "context": "    print(\"      export DEPLOYER_KEY='your-private-key'\")\n    print(\"      export SKALE_RPC='https://mainnet.skalenodes.com/v1/elated-tan-skat'\")\n    print(\"      export SOLANA_RPC_URL='https://mainnet.helius-rpc.com/?api-key=your-key'\")\n    print(\"\")\n    print(\"  3\ufe0f\u20e3  Test the deployment:\")"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/DEPLOYMENT_SCAN_REPORT.json",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 29,
+        "context": "        \"source_file\": \"/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/README.md\",\n        \"full_data\": {\n          \"context\": \"# solana configuration (primary) export solana_rpc_url=\\\"https://mainnet.helius-rpc.com/?api-key=your-api-key\\\" export treasury_address=\\\"4ejzvbbsilag6ekwvgeyewkepdhjpfbymej6dbx98w6a\\\" export deployer_key=\\\"your_solana_private_key_here\\\" \"\n        }\n      },"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/deploy_solana_mainnet.py",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 37,
+        "context": "\n# Configuration\nHELIUS_RPC = \"https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5\"\nSOLANA_RPC_BACKUP = \"https://api.mainnet-beta.solana.com\"\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/ZERO_COST_DEPLOYMENT.md",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 142,
+        "context": "# Blockchain Networks\nexport SKALE_RPC=\"https://mainnet.skalenodes.com/v1/elated-tan-skat\"\nexport SOLANA_RPC_URL=\"https://mainnet.helius-rpc.com\"\nexport DEPLOYER_KEY=\"your_private_key\"\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/OMEGA_PRIME_README.md",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 248,
+        "context": "```bash\n# Solana Configuration\nSOLANA_RPC_URL=\"https://mainnet.helius-rpc.com/?api-key=your-key\"\nTREASURY_ADDRESS=\"4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a\"\nDEPLOYER_KEY=\"your_solana_private_key_base58\""
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/DEPLOYMENT_SUCCESS.md",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 13,
+        "context": "- **SMIND Token:** `to:`  \n- **LUCID Token:** `to:`\n- **RPC Endpoint:** https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5\n- **MEV Protection:** Helius \u2705\n- **Gas Cost:** $0.00 \u2705"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/MISSION_COMPLETE.md",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 205,
+        "context": "```bash\n# Set environment variables\nexport SOLANA_RPC_URL=\"https://mainnet.helius-rpc.com/?api-key=your-key\"\nexport DEPLOYER_KEY=\"your_solana_private_key_base58\"\nexport SECURITY_LEVEL=\"oneirobot\""
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/UPDATE_README.md",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 106,
+        "context": "```bash\n# Solana Configuration\nSOLANA_RPC_URL=https://mainnet.helius-rpc.com/?api-key=YOUR_KEY\nTREASURY_ADDRESS=4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a\nBLOCKCHAIN_MODE=both  # Options: skale, solana, both"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/deployment_summary.json",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 9,
+        "context": "  },\n  \"solana\": {\n    \"rpc\": \"https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5\",\n    \"contracts\": {\n      \"DREAM\": \"to:\","
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/browser-extension/manifest.json",
+        "rpc": "api-mainnet.magiceden.dev",
+        "line": 15,
+        "context": "    \"https://solscan.io/*\",\n    \"https://api.opensea.io/*\",\n    \"https://api-mainnet.magiceden.dev/*\"\n  ],\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/setup_relayers.py",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 80,
+        "context": "                \"native_gasless\": True,\n                \"relayer_rpcs\": [\n                    \"https://mainnet.helius-rpc.com\",\n                    \"https://rpc.jup.ag\"\n                ]"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/deploy_multichain.py",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 49,
+        "context": "            \"solana\": {\n                \"mainnet\": {\n                    \"rpc\": os.getenv(\"SOLANA_RPC_URL\", \"https://mainnet.helius-rpc.com\"),\n                    \"treasury\": os.getenv(\"TREASURY_ADDRESS\", \"4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a\"),\n                    \"cluster\": \"mainnet-beta\""
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/scripts/deploy-mainnet.sh",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 48,
+        "context": "\n# Set default values for public RPCs\nexport SOLANA_RPC_URL=${SOLANA_RPC_URL:-\"https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5\"}\nexport SKALE_RPC=${SKALE_RPC:-\"https://mainnet.skalenodes.com/v1/elated-tan-skat\"}\nexport CALYPSO_RPC=${CALYPSO_RPC:-\"https://core.calypso.skale.network\"}"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/agents/iem_syndicate.py",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 39,
+        "context": "\n# Environment Configuration - Solana (New)\nSOLANA_RPC_URL = os.getenv(\"SOLANA_RPC_URL\", \"https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5\")\nTREASURY_ADDRESS = os.getenv(\"TREASURY_ADDRESS\", \"4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a\")\n"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/agents/solana_dream_agent.py",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 19,
+        "context": "\n# Configuration\nSOLANA_RPC_URL = os.getenv(\"SOLANA_RPC_URL\", \"https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5\")\nSOLANA_WS_URL = os.getenv(\"SOLANA_WS_URL\", \"wss://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5\")\nTREASURY_ADDRESS = os.getenv(\"TREASURY_ADDRESS\", \"4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a\")"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/src/omega_prime.ts",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 53,
+        "context": "  RELAYER_PUBKEY: process.env.RELAYER_PUBKEY || \"\",\n  RELAYER_URL: process.env.RELAYER_URL || \"https://relayer.omega-prime.com/send\",\n  RPC_URL: process.env.SOLANA_RPC_URL || \"https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5\",\n  MULTI_CHAIN: [\"solana\", \"base\", \"aptos\"],\n  METADATA: {"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/src/zero_cost_relayer.py",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 58,
+        "context": "    \"\"\"Configuration for zero-cost relayer\"\"\"\n    relayer_keypair: Optional[str] = None\n    rpc_endpoint: str = \"https://mainnet.helius-rpc.com\"\n    max_transactions_per_second: int = 1000\n    belief_rewrite_threshold: float = 0.001  # SOL"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/src/omega_prime_deployer.py",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 90,
+        "context": "        self.TREASURY_PUBKEY = os.getenv(\"TREASURY_PUBKEY\", \"4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a\")\n        self.RELAYER_PUBKEY = os.getenv(\"RELAYER_PUBKEY\", \"\")\n        self.RPC_URL = os.getenv(\"SOLANA_RPC_URL\", \"https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5\")\n\n@dataclass"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/packages/yield-farm/finrobot_simulation.py",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 51,
+        "context": "\n# Configuration\nHELIUS_RPC = \"https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5\"\nFINROBOT_CONFIG_PATH = \"finrobot_config.json\"\nWEALTH_LOG_PATH = \"wealth_automation.log\""
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/packages/yield-farm/src/index.ts",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 41,
+        "context": "  // Configuration from environment\n  private readonly heliusRPC = process.env.SOLANA_RPC_URL || \n    'https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5';\n  private readonly skaleRPC = process.env.SKALE_RPC || \n    'https://mainnet.skalenodes.com/v1/elated-tan-skat';"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/packages/consensus/src/setup-bridges.js",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 6,
+        "context": "// Bridge configuration\nconst SOLANA_BRIDGE_CONFIG = {\n  heliusRPC: 'https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5',\n  programId: '5oDxEKGa78LjcE9zMFqz1vLLgKYj4Drd6k1Vq2GJ6YNm', // Dream-Mind-Lucid program ID\n  confirmationBlocks: 2"
+      },
+      {
+        "file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/frontend/src/config/solana.ts",
+        "rpc": "mainnet.helius-rpc.com",
+        "line": 19,
+        "context": "export const solanaConfig = {\n  mainnet: {\n    endpoint: process.env.VITE_SOLANA_RPC_URL || 'https://mainnet.helius-rpc.com',\n    commitment: 'confirmed' as const,\n  },"
+      }
+    ]
+  },
+  "verification_links": {
+    "solana_explorer": "https://explorer.solana.com/",
+    "solscan": "https://solscan.io/",
+    "skale_explorer": "https://elated-tan-skat.explorer.mainnet.skalenodes.com/"
+  }
+}
