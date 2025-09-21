@@ -31,36 +31,10 @@
           ]
         }
       ],
-<<<<<<< HEAD
       "bytecode": "0xSIM_DREAMS",
       "timestamp": 1757984605.1287732,
       "txHash": "0xSIMULATIONe64382173fba8412",
       "gasUsed": 0
-    },
-    "--contract": {
-      "address": "0x9fd634d697b62645eac4a342daf71728bb1386e1",
-      "abi": [
-        {
-          "type": "function",
-          "name": "interfaceDream",
-          "inputs": [
-            {
-              "name": "ipfsHash",
-              "type": "string"
-            }
-          ],
-          "outputs": []
-        }
-      ],
-      "bytecode": "0xSIM_ONEIRO",
-      "timestamp": 1757984615.7406666,
-      "txHash": "0xSIMULATION9fd634d697b62645",
-      "gasUsed": 0
-=======
-      "timestamp": 1757847888.2181034,
-      "txHash": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
-      "gasUsed": 1500000
->>>>>>> c5162fbca50f68593bd3f0538aa2f9a087d53f62
     }
   },
   "loot": [
@@ -70,6 +44,38 @@
       "ipfsHash": "QmTestDreamHash1234567890abcdefghijklmnopqr",
       "timestamp": 1757847888.2181044,
       "txHash": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "monitor_dreams",
+      "dreams_detected": 0,
+      "consensus_state": "PENDING",
+      "timestamp": 1758481680.2736742,
+      "status": "awaiting_submissions"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "analyze_optimizations",
+      "suggestions_count": 5,
+      "avg_profit": 0,
+      "timestamp": 1758481680.2740061,
+      "status": "optimization_complete"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "mcp_health_check",
+      "servers_checked": 2,
+      "health_score": "GOOD",
+      "timestamp": 1758481680.2743244,
+      "status": "health_check_complete"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "propose_fix",
+      "issue_type": "general",
+      "fixes_suggested": 3,
+      "timestamp": 1758481680.2747746,
+      "status": "fix_proposed"
     }
   ],
   "audits": [
