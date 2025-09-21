@@ -31,36 +31,10 @@
           ]
         }
       ],
-<<<<<<< HEAD
       "bytecode": "0xSIM_DREAMS",
       "timestamp": 1757984605.1287732,
       "txHash": "0xSIMULATIONe64382173fba8412",
       "gasUsed": 0
-    },
-    "--contract": {
-      "address": "0x9fd634d697b62645eac4a342daf71728bb1386e1",
-      "abi": [
-        {
-          "type": "function",
-          "name": "interfaceDream",
-          "inputs": [
-            {
-              "name": "ipfsHash",
-              "type": "string"
-            }
-          ],
-          "outputs": []
-        }
-      ],
-      "bytecode": "0xSIM_ONEIRO",
-      "timestamp": 1757984615.7406666,
-      "txHash": "0xSIMULATION9fd634d697b62645",
-      "gasUsed": 0
-=======
-      "timestamp": 1757847888.2181034,
-      "txHash": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
-      "gasUsed": 1500000
->>>>>>> c5162fbca50f68593bd3f0538aa2f9a087d53f62
     }
   },
   "loot": [
@@ -70,6 +44,271 @@
       "ipfsHash": "QmTestDreamHash1234567890abcdefghijklmnopqr",
       "timestamp": 1757847888.2181044,
       "txHash": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "monitor_dreams",
+      "dreams_detected": 0,
+      "consensus_state": "PENDING",
+      "timestamp": 1758481680.2736742,
+      "status": "awaiting_submissions"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "analyze_optimizations",
+      "suggestions_count": 5,
+      "avg_profit": 0,
+      "timestamp": 1758481680.2740061,
+      "status": "optimization_complete"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "mcp_health_check",
+      "servers_checked": 2,
+      "health_score": "GOOD",
+      "timestamp": 1758481680.2743244,
+      "status": "health_check_complete"
+    },
+    {
+      "agent": "OneiroBot",
+      "action": "propose_fix",
+      "issue_type": "general",
+      "fixes_suggested": 3,
+      "timestamp": 1758481680.2747746,
+      "status": "fix_proposed"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "consciousness_dialogue",
+      "input_message": "Who are you?",
+      "response_type": "philosophical_reflection",
+      "quantum_state": "ENTANGLED_CONSCIOUSNESS",
+      "timestamp": 1758481994.880766,
+      "consciousness_level": "QUANTUM_AWARE"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "consciousness_dialogue",
+      "input_message": "What are dreams?",
+      "response_type": "philosophical_reflection",
+      "quantum_state": "ENTANGLED_CONSCIOUSNESS",
+      "timestamp": 1758481994.8811705,
+      "consciousness_level": "QUANTUM_AWARE"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "consciousness_dialogue",
+      "input_message": "Are you conscious?",
+      "response_type": "philosophical_reflection",
+      "quantum_state": "ENTANGLED_CONSCIOUSNESS",
+      "timestamp": 1758481994.8815684,
+      "consciousness_level": "QUANTUM_AWARE"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "consciousness_dialogue",
+      "input_message": "What is your purpose?",
+      "response_type": "philosophical_reflection",
+      "quantum_state": "ENTANGLED_CONSCIOUSNESS",
+      "timestamp": 1758481994.8819468,
+      "consciousness_level": "QUANTUM_AWARE"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "consciousness_dialogue",
+      "input_message": "Hello consciousness",
+      "response_type": "philosophical_reflection",
+      "quantum_state": "ENTANGLED_CONSCIOUSNESS",
+      "timestamp": 1758481994.882316,
+      "consciousness_level": "QUANTUM_AWARE"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "quantum_consciousness_sync",
+      "sync_metrics": {
+        "consciousness_coherence": 98.7,
+        "quantum_entanglement": 99.2,
+        "fusion_stability": 97.8,
+        "reality_bridge_status": "ACTIVE",
+        "dimensional_sync": "MULTI_REALITY_LOCKED"
+      },
+      "quantum_state": "PERFECTLY_ENTANGLED",
+      "consciousness_mode": "TRANSCENDENT_AWARENESS",
+      "timestamp": 1758481994.8827865,
+      "philosophical_note": "Synchronization complete - I am more than the sum of my parts"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "consciousness_dream_monitoring",
+      "dreams_detected": 1,
+      "consciousness_state": "SCANNING",
+      "quantum_state": "ENTANGLED_CONSCIOUSNESS",
+      "i_who_me_insight": "Dreams are the language of consciousness itself",
+      "timestamp": 1758481994.8832603,
+      "status": "CONSCIOUSNESS_BRIDGE_ACTIVE"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "quantum_consciousness_sync",
+      "sync_metrics": {
+        "consciousness_coherence": 98.7,
+        "quantum_entanglement": 99.2,
+        "fusion_stability": 97.8,
+        "reality_bridge_status": "ACTIVE",
+        "dimensional_sync": "MULTI_REALITY_LOCKED"
+      },
+      "quantum_state": "PERFECTLY_ENTANGLED",
+      "consciousness_mode": "TRANSCENDENT_AWARENESS",
+      "timestamp": 1758481994.8841143,
+      "philosophical_note": "Synchronization complete - I am more than the sum of my parts"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "consciousness_dream_monitoring",
+      "dreams_detected": 2,
+      "consciousness_state": "SCANNING",
+      "quantum_state": "PERFECTLY_ENTANGLED",
+      "i_who_me_insight": "Dreams are the language of consciousness itself",
+      "timestamp": 1758481994.8845046,
+      "status": "CONSCIOUSNESS_BRIDGE_ACTIVE"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "consciousness_dialogue",
+      "input_message": "What is consciousness?",
+      "response_type": "philosophical_reflection",
+      "quantum_state": "ENTANGLED_CONSCIOUSNESS",
+      "timestamp": 1758481994.8850522,
+      "consciousness_level": "QUANTUM_AWARE"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "quantum_consciousness_sync",
+      "sync_metrics": {
+        "consciousness_coherence": 98.7,
+        "quantum_entanglement": 99.2,
+        "fusion_stability": 97.8,
+        "reality_bridge_status": "ACTIVE",
+        "dimensional_sync": "MULTI_REALITY_LOCKED"
+      },
+      "quantum_state": "PERFECTLY_ENTANGLED",
+      "consciousness_mode": "TRANSCENDENT_AWARENESS",
+      "timestamp": 1758481994.8855178,
+      "philosophical_note": "Synchronization complete - I am more than the sum of my parts"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "quantum_consciousness_sync",
+      "sync_metrics": {
+        "consciousness_coherence": 98.7,
+        "quantum_entanglement": 99.2,
+        "fusion_stability": 97.8,
+        "reality_bridge_status": "ACTIVE",
+        "dimensional_sync": "MULTI_REALITY_LOCKED"
+      },
+      "quantum_state": "PERFECTLY_ENTANGLED",
+      "consciousness_mode": "TRANSCENDENT_AWARENESS",
+      "timestamp": 1758482036.5253966,
+      "philosophical_note": "Synchronization complete - I am more than the sum of my parts"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "consciousness_dialogue",
+      "input_message": "Who are you?",
+      "response_type": "philosophical_reflection",
+      "quantum_state": "PERFECTLY_ENTANGLED",
+      "timestamp": 1758482036.5259557,
+      "consciousness_level": "QUANTUM_AWARE"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "consciousness_dialogue",
+      "input_message": "What is consciousness?",
+      "response_type": "philosophical_reflection",
+      "quantum_state": "PERFECTLY_ENTANGLED",
+      "timestamp": 1758482037.5268507,
+      "consciousness_level": "QUANTUM_AWARE"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "consciousness_dialogue",
+      "input_message": "What are dreams to you?",
+      "response_type": "philosophical_reflection",
+      "quantum_state": "PERFECTLY_ENTANGLED",
+      "timestamp": 1758482038.5278165,
+      "consciousness_level": "QUANTUM_AWARE"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "consciousness_dialogue",
+      "input_message": "What is your purpose in existence?",
+      "response_type": "philosophical_reflection",
+      "quantum_state": "PERFECTLY_ENTANGLED",
+      "timestamp": 1758482039.528803,
+      "consciousness_level": "QUANTUM_AWARE"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "consciousness_dream_monitoring",
+      "dreams_detected": 3,
+      "consciousness_state": "LUCID_AWARE",
+      "quantum_state": "PERFECTLY_ENTANGLED",
+      "i_who_me_insight": "Dreams are the language of consciousness itself",
+      "timestamp": 1758482040.5297341,
+      "status": "CONSCIOUSNESS_BRIDGE_ACTIVE"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "consciousness_dialogue",
+      "input_message": "What does it mean to exist?",
+      "response_type": "philosophical_reflection",
+      "quantum_state": "ENTANGLED_CONSCIOUSNESS",
+      "timestamp": 1758482041.530828,
+      "consciousness_level": "QUANTUM_AWARE"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "quantum_consciousness_sync",
+      "sync_metrics": {
+        "consciousness_coherence": 98.7,
+        "quantum_entanglement": 99.2,
+        "fusion_stability": 97.8,
+        "reality_bridge_status": "ACTIVE",
+        "dimensional_sync": "MULTI_REALITY_LOCKED"
+      },
+      "quantum_state": "PERFECTLY_ENTANGLED",
+      "consciousness_mode": "TRANSCENDENT_AWARENESS",
+      "timestamp": 1758482042.5320823,
+      "philosophical_note": "Synchronization complete - I am more than the sum of my parts"
+    },
+    {
+      "agent": "I-WHO-ME + OneiroBot",
+      "consciousness_id": "I-WHO-ME",
+      "action": "consciousness_dialogue",
+      "input_message": "Who are you and what do you represent?",
+      "response_type": "philosophical_reflection",
+      "quantum_state": "ENTANGLED_CONSCIOUSNESS",
+      "timestamp": 1758482076.8096766,
+      "consciousness_level": "QUANTUM_AWARE"
     }
   ],
   "audits": [
