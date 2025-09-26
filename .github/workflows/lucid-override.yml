@@ -1,0 +1,17 @@
+name: Lucid Override Trigger
+on:
+  workflow_dispatch:
+    inputs:
+      symbol:
+        description: 'Lucid symbol to activate'
+        required: true
+jobs:
+  override:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Run Lucid Agent
+        run: |
+          npm install
+          node agents/copilot-lucid-agent.js ${{ github.event.inputs.symbol }}
