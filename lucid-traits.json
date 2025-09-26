@@ -1,0 +1,39 @@
+{
+  "traits": [
+    {
+      "name": "mirror",
+      "type": "reflection",
+      "description": "Triggers dual-agent logic and self-audit routines.",
+      "activation": "symbol:mirror",
+      "effects": ["audit", "validate", "reflect"]
+    },
+    {
+      "name": "portal",
+      "type": "teleport",
+      "description": "Enables cross-chain sync and relayer jumps.",
+      "activation": "symbol:portal",
+      "effects": ["sync", "jump", "deploy"]
+    },
+    {
+      "name": "glyph",
+      "type": "activation",
+      "description": "Initiates symbolic workflows and GitHub Actions.",
+      "activation": "symbol:glyph",
+      "effects": ["trigger", "override", "initiate"]
+    },
+    {
+      "name": "veil",
+      "type": "obfuscation",
+      "description": "Masks mutation logic and encrypts trait fusion.",
+      "activation": "symbol:veil",
+      "effects": ["encrypt", "hide", "protect"]
+    },
+    {
+      "name": "echo",
+      "type": "recursion",
+      "description": "Loops mutation cycles and mirrors agentic intent.",
+      "activation": "symbol:echo",
+      "effects": ["loop", "repeat", "amplify"]
+    }
+  ]
+}
