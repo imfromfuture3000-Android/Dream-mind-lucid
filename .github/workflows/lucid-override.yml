@@ -1,17 +1,69 @@
-name: Lucid Override Trigger
+name: 🌌 Dream-Mind-Lucid CI/CD
+
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
-    inputs:
-      symbol:
-        description: 'Lucid symbol to activate'
-        required: true
+
+env:
+  INFURA_PROJECT_ID: ${{ secrets.INFURA_PROJECT_ID }}
+  BICONOMY_API_KEY: ${{ secrets.BICONOMY_API_KEY }}
+  DEPLOYER_KEY: ${{ secrets.DEPLOYER_KEY }}
+  FORWARDER_ADDRESS: ${{ secrets.FORWARDER_ADDRESS }}
+
 jobs:
-  override:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Run Lucid Agent
+      - name: 🚀 Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 🧩 Install dependencies (web3, biconomy, solcx, etc.)
         run: |
-          npm install
-          node agents/copilot-lucid-agent.js ${{ github.event.inputs.symbol }}
+          python -m pip install --upgrade pip
+          pip install web3 biconomy-sdk modelcontextprotocol ipfshttpclient py-solc-x
+
+      - name: ☁️ MCP server & VSCode config
+        run: |
+          python grok_copilot_launcher.py &
+          mkdir -p .vscode
+          echo '{"mcp_server":"http://localhost:5000"}' > .vscode/mcp.json
+
+      - name: 🔑 Check secrets
+        run: |
+          test -n "${INFURA_PROJECT_ID}" || (echo "Missing INFURA_PROJECT_ID" && exit 1)
+          test -n "${BICONOMY_API_KEY}" || (echo "Missing BICONOMY_API_KEY" && exit 1)
+          test -n "${DEPLOYER_KEY}" || (echo "Missing DEPLOYER_KEY" && exit 1)
+          test -n "${FORWARDER_ADDRESS}" || (echo "Missing FORWARDER_ADDRESS" && exit 1)
+
+      - name: 🛠️ Deploy IEMDreams and OneiroSphere contracts
+        run: |
+          python scripts/deploy.py --contracts IEMDreams.sol OneiroSphere.sol \
+            --infura $INFURA_PROJECT_ID --biconomy $BICONOMY_API_KEY \
+            --deployer $DEPLOYER_KEY --forwarder $FORWARDER_ADDRESS
+
+      - name: 🌙 Record a test dream
+        run: |
+          python scripts/record_dream.py --dream "Test dream: lucid, mining, cognitive staking!" \
+            --infura $INFURA_PROJECT_ID --biconomy $BICONOMY_API_KEY \
+            --deployer $DEPLOYER_KEY
+
+      - name: 📦 Upload deployment artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-results
+          path: |
+            iem_memory.json
+            deployment_outputs/*
+            logs/*
+          if-no-files-found: ignore
+
+  # Optionally, add test and funding jobs here!
+
+# 🪙 Consider adding a .github/FUNDING.yml with your sponsor/token presale links, hero!
