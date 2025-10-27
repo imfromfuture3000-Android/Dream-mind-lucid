@@ -99,7 +99,7 @@ def extract_biconomy_info():
                     BICONOMY_API_KEY = part.split("=")[1]
                 elif part.startswith("FORWARDER_ADDRESS="):
                     FORWARDER_ADDRESS = part.split("=")[1]
-            print(f"🌠 Extracted Biconomy info: API={BICONOMY_API_KEY[:8]}... ADDR={FORWARDER_ADDRESS[:10]}...")
+            print("🌠 Extracted Biconomy info from image metadata.")
         else:
             print("🛸 No Biconomy info in image—using env vars.")
 
