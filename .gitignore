@@ -102,3 +102,24 @@ temp/
 # Test files
 test_*.py
 *_test.py
+__pycache__/
+test_requirements.py
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+venv/
+node_modules/
+.DS_Store
+*.log
+.private_keys
+*.key
+
+# Rust build artifacts
+target/
+Cargo.lock
+
+# Memory files (contain simulated data)
+*_memory.json
+solana_dream_memory.json

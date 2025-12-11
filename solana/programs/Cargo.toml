@@ -1,0 +1,24 @@
+[package]
+name = "oneirobot-nft"
+version = "0.1.0"
+edition = "2021"
+description = "OneirobotNFT Solana Program - Metaplex NFT Minting with Syndicate Master Allowlist"
+
+[dependencies]
+anchor-lang = "0.30.0"
+anchor-spl = "0.30.0"
+mpl-token-metadata = "4.1.0"
+solana-program = "1.18.0"
+borsh = "1.5.0"
+thiserror = "1.0"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "oneirobot_nft"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []

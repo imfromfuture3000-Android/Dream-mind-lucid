@@ -1,0 +1,102 @@
+{
+  "scan_metadata": {
+    "timestamp": "2025-09-21T03:22:39.033811",
+    "repository": "imfromfuture3000-Android/Dream-mind-lucid",
+    "scan_type": "mainnet_deployments_only",
+    "total_files_scanned": 117
+  },
+  "summary": {
+    "total_mainnet_networks": 2,
+    "total_real_contracts": 8,
+    "networks_with_deployments": [
+      "solana_mainnet",
+      "skale_mainnet"
+    ]
+  },
+  "mainnet_deployments": {
+    "solana_mainnet": {
+      "from_MINT_GENE_DEPLOYMENT.md": {
+        "address": "7841a43ec7721a54d6facb64912eca1f1dc7237e",
+        "source_file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/MINT_GENE_DEPLOYMENT.md",
+        "full_data": {
+          "context": "```toml [provider] cluster = \"https://cosmopolitan-divine-glade.solana-mainnet.quiknode.pro/7841a43ec7721a54d6facb64912eca1f1dc7237e/\"  [programs.mainnet]"
+        }
+      },
+      "from_README.md": {
+        "address": "4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a",
+        "source_file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/README.md",
+        "full_data": {
+          "context": "# solana configuration (primary) export solana_rpc_url=\"https://mainnet.helius-rpc.com/?api-key=your-api-key\" export treasury_address=\"4ejzvbbsilag6ekwvgeyewkepdhjpfbymej6dbx98w6a\" export deployer_key=\"your_solana_private_key_here\" "
+        }
+      },
+      "from_SOLANA_MIGRATION.md": {
+        "address": "4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a",
+        "source_file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/SOLANA_MIGRATION.md",
+        "full_data": {
+          "context": "# solana configuration solana_rpc_url=https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5 treasury_address=4ejzvbbsilag6ekwvgeyewkepdhjpfbymej6dbx98w6a blockchain_mode=solana "
+        }
+      },
+      "from_OMEGA_PRIME_README.md": {
+        "address": "4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a",
+        "source_file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/OMEGA_PRIME_README.md",
+        "full_data": {
+          "context": "# solana configuration solana_rpc_url=\"https://mainnet.helius-rpc.com/?api-key=your-key\" treasury_address=\"4ejzvbbsilag6ekwvgeyewkepdhjpfbymej6dbx98w6a\" deployer_key=\"your_solana_private_key_base58\" "
+        }
+      },
+      "from_IMPLEMENTATION_COMPLETE.md": {
+        "address": "6529e76f9d76dfd84fb1d39fb752c8bce",
+        "source_file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/IMPLEMENTATION_COMPLETE.md",
+        "full_data": {
+          "context": " ### \ud83d\udfe3 solana mainnet (simulation) - **dream token**: `39d64e3b1c06529e76f9d76dfd84fb1d39fb752c8bce` - **smind token**: `9176f8d375fd7e13204fefb07d1a2bb278d024595ed5` - **lucid token**: `80f24553348aff741f0233405ad1a34b5e8116f8b3a7`"
+        }
+      },
+      "from_UPDATE_README.md": {
+        "address": "4eJZVbbsiLAG6EkWvgEYEWKEpdhJPFBYMeJ6DBX98w6a",
+        "source_file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/UPDATE_README.md",
+        "full_data": {
+          "context": "# solana configuration solana_rpc_url=https://mainnet.helius-rpc.com/?api-key=your_key treasury_address=4ejzvbbsilag6ekwvgeyewkepdhjpfbymej6dbx98w6a blockchain_mode=both  # options: skale, solana, both "
+        }
+      }
+    },
+    "skale_mainnet": {
+      "from_MINT_GENE_DEPLOYMENT.md": {
+        "address": "0x1234567890abcdef1234567890abcdef12345678",
+        "source_file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/MINT_GENE_DEPLOYMENT.md",
+        "full_data": {
+          "context": "# verify skale deployment curl -x post -h \"content-type: application/json\" \\   --data '{\"jsonrpc\":\"2.0\",\"method\":\"eth_getcode\",\"params\":[\"0x1234567890abcdef1234567890abcdef12345678\",\"latest\"],\"id\":1}' \\   https://mainnet.skalenodes.com/v1/elated-tan-skat "
+        }
+      },
+      "from_DEPLOYMENT_SUCCESS.md": {
+        "address": "0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7",
+        "source_file": "/home/runner/work/Dream-mind-lucid/Dream-mind-lucid/DEPLOYMENT_SUCCESS.md",
+        "full_data": {
+          "context": " ### \ud83d\udd35 skale europa hub (zero-gas) - **dreambridge:** `0x742d35cc6634c0532925a3b8d5c73d82e5e9f0e7,` - **oneirospherev2:** `` - **rpc endpoint:** https://mainnet.skalenodes.com/v1/elated-tan-skat"
+        }
+      }
+    },
+    "ethereum_mainnet": {},
+    "other_mainnets": {}
+  },
+  "verification_status": {
+    "solana_mainnet": {
+      "contracts_found": 6,
+      "needs_verification": true,
+      "explorer_urls": [
+        "https://explorer.solana.com/",
+        "https://solscan.io/"
+      ]
+    },
+    "skale_mainnet": {
+      "contracts_found": 2,
+      "needs_verification": true,
+      "explorer_urls": [
+        "https://elated-tan-skat.explorer.mainnet.skalenodes.com/"
+      ]
+    }
+  },
+  "recommendations": [
+    "\u2705 Real mainnet deployments detected.",
+    "\ud83d\udd0d Verify all addresses against blockchain explorers.",
+    "\ud83d\udccb Update central documentation with verified deployment information."
+  ]
+}

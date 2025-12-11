@@ -1,0 +1,6 @@
+Placeholder: Implement BLS threshold verification.
+
+Options:
+- Add on-chain BLS verifier contract (e.g., using bls12-381 pairing library compiled to EVM precompile).
+- Use a verifier contract that accepts aggregated public key and signature and performs pairing checks.
+- Alternatively, rely on SKALE precompiles or operator-signed notarization for production.

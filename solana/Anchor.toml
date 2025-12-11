@@ -1,0 +1,43 @@
+[toolchain]
+
+[features]
+seeds = false
+skip-lint = false
+
+[programs.mainnet]
+oneirobot_nft = "Oneir8BotPr0gram1DSynt1cat3M4st3r5"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "https://cosmopolitan-divine-glade.solana-mainnet.quiknode.pro/7841a43ec7721a54d6facb64912eca1f1dc7237e/"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+
+[test]
+startup_wait = 5000
+shutdown_wait = 2000
+validator_args = ["--bpf-program", "Oneir8BotPr0gram1DSynt1cat3M4st3r5", "./target/deploy/oneirobot_nft.so"]
+
+[test.validator]
+url = "https://cosmopolitan-divine-glade.solana-mainnet.quiknode.pro/7841a43ec7721a54d6facb64912eca1f1dc7237e/"
+clone = []
+account = []
+
+[build]
+program = "oneirobot_nft"
+
+# Mainnet-only configuration
+[workspace]
+members = [
+    "programs/*"
+]
+
+# AI Gene Deployer configuration for MAINNET ONLY
+[env]
+ANCHOR_PROVIDER_URL = "https://cosmopolitan-divine-glade.solana-mainnet.quiknode.pro/7841a43ec7721a54d6facb64912eca1f1dc7237e/"
+ANCHOR_WALLET = "~/.config/solana/id.json"
+SOLANA_CLUSTER = "mainnet-beta"

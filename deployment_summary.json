@@ -1,0 +1,39 @@
+{
+  "deployment": {
+    "timestamp": "2025-09-14T15:58:22Z",
+    "status": "completed",
+    "networks": ["solana", "skale"],
+    "mode": "1"
+  },
+  "solana": {
+    "rpc": "https://mainnet.helius-rpc.com/?api-key=16b9324a-5b8c-47b9-9b02-6efa868958e5",
+    "contracts": {
+      "DREAM": "to:",
+      "SMIND": "to:", 
+      "LUCID": "to:"
+    },
+    "mev_protection": "helius",
+    "gas_cost": "./scripts/deploy-mainnet.sh.00"
+  },
+  "skale": {
+    "rpc": "https://mainnet.skalenodes.com/v1/elated-tan-skat",
+    "chain_id": 2046399126,
+    "contracts": {
+      "DreamBridge": "0x742d35Cc6634C0532925a3b8D5c73d82E5e9F0e7,",
+      "OneiroSphereV2": ""
+    },
+    "gas_cost": "./scripts/deploy-mainnet.sh.00"
+  },
+  "wealth_automation": {
+    "finrobot_active": true,
+    "expected_apy": "15-30%",
+    "strategies": [
+      "airdrop_farming",
+      "bounty_hunting", 
+      "cloud_mining",
+      "defi_yield",
+      "cross_chain_arbitrage"
+    ],
+    "risk_level": "medium"
+  }
+}
